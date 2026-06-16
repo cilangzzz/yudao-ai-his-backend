@@ -1,148 +1,175 @@
-# yudao-skill-pro
+# YUDAO-AI-HIS 医院信息系统
 
-> 基于 yudao-vue-pro 的 AI 辅助开发知识库，通过 Skill 文档体系实现标准化代码生成。
+> 基于芋道源码（yudao-vue-pro）框架构建的医院信息系统（Hospital Information System）
 
-## 🎯 项目特色
+## 🏥 项目简介
 
-本分支在芋道源码基础上，构建了一套完整的 **AI Skill 开发规范体系**，让 AI 能够：
+YUDAO-AI-HIS 是一套符合国家标准、满足三级及以上医院信息化建设需求的综合医院信息系统。系统遵循《全国医院信息化建设标准与规范》（国卫规划发〔2018〕4号），基于 HL7 FHIR R4 标准实现数据交换，目标达到 HIMSS EMRAM Stage 5 以上水平。
 
-- 理解项目架构和代码规范
-- 自动生成符合项目标准的 CRUD 代码
-- 遵循设计模式和最佳实践
-- 支持多模块业务场景
+### 核心特性
 
-## 🆚 与上游仓库的区别
+- **全面业务覆盖**：门诊管理、住院管理、电子病历、检验(LIS)、影像(PACS)、药品管理、手术麻醉、财务管理
+- **标准化设计**：遵循 HL7 FHIR R4、ICD-10、DICOM 等国际医疗信息标准
+- **AI 辅助能力**：智能分诊、影像AI辅助诊断、病历质控AI
+- **高可用架构**：基于微服务架构，支持容器化部署
 
-本仓库基于 [YunaiV/ruoyi-vue-pro](https://github.com/YunaiV/ruoyi-vue-pro) 同步代码，在其基础上新增了完整的 AI Skill 知识库体系。上游代码保持原样，以下为本仓库独有的内容：
-
-| 新增内容 | 路径 | 说明 |
-|---------|------|------|
-| **Claude Code 配置** | `.claude/` | Claude Code 工作流配置 |
-| **项目开发规范** | `CLAUDE.md` | 模块索引、命名规范、分层架构、错误码速查 |
-| **模块功能文档** | `docs/` | 15 个模块的完整文档（API、数据模型、踩坑点），共 131 个文件 |
-| **设计规范** | `skills/design/` | 数据库、实体类、API 接口、CRUD 代码生成 4 套规范 |
-| **模块 Skill** | `skills/modules/` | 15 个业务模块的结构化 Skill YAML（架构、表结构、代码模式、扩展指南） |
-| **设计模式** | `skills/patterns/` | 工厂、策略、模板方法 3 种设计模式实现指南 |
-| **使用样例** | `skills/usage/` | 实体类实现、扩展模块、新增模块、改造模块等场景的提示词模板 |
-
-> 同步方式：定期从 upstream/master 拉取最新代码合并，自定义文件始终保留。
-
-## 📁 Skill 体系结构
+## 📊 系统架构
 
 ```
-skills/
-├── design/                    # 设计规范
-│   ├── db-designer.yaml      # 数据库设计规范
-│   ├── entity-designer.yaml  # 实体类设计规范
-│   ├── api-designer.yaml     # API 接口设计规范
-│   └── crud-designer.yaml    # CRUD 代码生成规范
-├── modules/                   # 模块 Skill
-│   ├── system/               # 系统管理模块
-│   ├── infra/                # 基础设施模块
-│   ├── pay/                  # 支付模块
-│   ├── member/               # 会员模块
-│   ├── mall/                 # 商城模块
-│   ├── crm/                  # CRM 模块
-│   ├── erp/                  # ERP 模块
-│   ├── bpm/                  # 工作流模块
-│   ├── ai/                   # AI 模块
-│   ├── iot/                  # 物联网模块
-│   ├── mp/                   # 微信公众号模块
-│   ├── report/               # 报表模块
-│   ├── im/                   # 即时通讯模块
-│   ├── mes/                  # 制造执行模块
-│   └── wms/                  # 仓储管理模块
-├── patterns/                  # 设计模式
-│   ├── factory-pattern.yaml
-│   ├── strategy-pattern.yaml
-│   └── template-method-pattern.yaml
-└── usage/                     # 使用样例
-    ├── entity-implementation.md
-    ├── extend-module.md
-    ├── new-module.md
-    └── ...
+YUDAO-AI-HIS
+├── M01 门诊管理子系统      # 挂号、医生工作站、收费、药房、输液
+├── M02 住院管理子系统      # 入院、医生工作站、护理、床位、出院
+├── M03 电子病历子系统      # 病历文书、质控、临床路径
+├── M04 检验管理子系统(LIS) # 申请、标本、结果、危急值
+├── M05 影像管理子系统(RIS/PACS) # 检查申请、影像采集/存储/查看、报告
+├── M06 药品管理子系统      # 药库、采购、处方审核、特殊药品
+├── M07 手术麻醉子系统      # 手术申请、排期、麻醉记录、计费
+├── M08 财务管理子系统      # 收费项目、医保结算、报表、成本
+├── M09 系统管理子系统      # 用户、角色、权限、字典、日志
+├── M10 集成平台            # EMPI、主数据、消息引擎、工作流
+├── M11 患者服务子系统      # 患者门户、预约、报告查询、缴费
+├── M12 运营管理子系统      # 人力资源、物资、设备、绩效、质量
+└── M13 人工智能辅助子系统  # 智能分诊、影像AI、病历质控AI
 ```
 
-## 🚀 核心能力
+## 📁 模块结构
 
-### 1. 设计规范体系
-
-| 规范 | 说明 |
-|-----|------|
-| 数据库设计 | 建表 SQL、字段命名、索引设计规范 |
-| 实体类设计 | 继承体系、注解规范、命名转换规则 |
-| API 接口设计 | Controller 注解、请求响应格式标准 |
-| CRUD 代码生成 | 各层代码模板、命名规范 |
-
-### 2. 模块化 Skill
-
-每个业务模块都有对应的 Skill 文档，包含：
-- 模块架构说明
-- 核心实体关系
-- 业务流程定义
-- 代码生成规则
-
-### 3. 设计模式支持
-
-内置常用设计模式的实现指南：
-- 工厂模式 - 根据条件创建不同类型的对象
-- 策略模式 - 多种算法或策略间切换
-- 模板方法模式 - 定义算法骨架，子类实现细节
-
-### 4. 自动引用机制
-
-使用样例文档通过 YAML front matter 声明依赖的规范文件，AI 自动加载相关规范：
-
-```yaml
-references:
-  design:
-    - skills/design/db-designer.yaml
-    - skills/design/entity-designer.yaml
-  module_guide:
-    mapping:
-      system: skills/modules/system/skill-system.yaml
 ```
-
-## 📖 使用场景
-
-| 场景 | 说明 | 文档 |
-|-----|------|------|
-| 实体类实现 | 从 SQL 到完整 CRUD 功能 | [usage/entity-implementation.md](skills/usage/entity-implementation.md) |
-| 扩展模块 | 在现有模块添加新功能 | [usage/extend-module.md](skills/usage/extend-module.md) |
-| 新增模块 | 创建全新业务模块 | [usage/new-module.md](skills/usage/new-module.md) |
-| 改造模块 | 修改现有功能或重构 | [usage/refactor-module.md](skills/usage/refactor-module.md) |
-| 设计模式 | 工厂/策略/模板方法模式 | [usage/pattern-usage.md](skills/usage/pattern-usage.md) |
+yudao-ai-his-backend/
+├── yudao-dependencies/      # 依赖管理
+├── yudao-framework/         # 框架核心
+├── yudao-server/            # 主服务启动模块
+│
+├── yudao-module-system/     # ✅ 系统管理（核心）
+│   ├── 用户、角色、权限管理
+│   ├── 组织架构、岗位管理
+│   ├── 数据字典、参数配置
+│   └── 操作日志、登录日志
+│
+├── yudao-module-infra/      # ✅ 基础设施（核心）
+│   ├── 文件存储（MinIO/OSS）
+│   ├── 配置管理
+│   ├── 定时任务
+│   ├── 代码生成
+│   └── 接口监控
+│
+├── yudao-module-bpm/        # 🔄 流程审批（扩展）
+│   └── 用于手术审批、退费审批等医疗流程
+│
+├── yudao-module-pay/        # 🔄 支付模块（扩展）
+│   └── 用于门诊收费、住院预交金、医保结算
+│
+├── yudao-module-mp/         # 🔄 微信公众号（扩展）
+│   └── 用于患者服务：预约挂号、报告查询
+│
+├── yudao-module-report/     # 🔄 报表模块（扩展）
+│   └── 用于运营报表、财务报表、决策支持
+│
+└── yudao-module-ai/         # 🔄 AI模块（扩展）
+    └── 用于智能分诊、影像AI、病历质控AI
+```
 
 ## 🛠️ 技术栈
 
-- **后端**: Spring Boot 2.7.18 / MyBatis Plus / MySQL / Redis
-- **前端**: Vue 3 + Element Plus / Vben(ant-design-vue)
-- **工作流**: Flowable
-- **AI**: Spring AI
+| 类别 | 技术 | 版本 |
+|------|------|------|
+| **核心框架** | Spring Boot | 2.7.18 |
+| **ORM框架** | MyBatis Plus | - |
+| **数据库** | MySQL | 8.0+ |
+| **缓存** | Redis | - |
+| **消息队列** | RabbitMQ / Kafka | - |
+| **文件存储** | MinIO | - |
+| **工作流引擎** | Flowable | - |
+| **容器化** | Docker / Kubernetes | - |
 
-## 📝 命名规范
+## 🚀 快速开始
+
+### 环境要求
+
+- JDK 1.8+
+- MySQL 8.0+
+- Redis 6.0+
+- Maven 3.6+
+
+### 启动步骤
+
+1. **克隆项目**
+   ```bash
+   git clone https://github.com/your-repo/yudao-ai-his-backend.git
+   cd yudao-ai-his-backend
+   ```
+
+2. **初始化数据库**
+   - 创建数据库：`yudao_his`
+   - 执行 SQL 脚本：`sql/mysql/*.sql`
+
+3. **修改配置**
+   - 编辑 `yudao-server/src/main/resources/application-local.yaml`
+   - 配置数据库、Redis 连接信息
+
+4. **启动服务**
+   ```bash
+   mvn clean install -DskipTests
+   cd yudao-server
+   mvn spring-boot:run
+   ```
+
+5. **访问系统**
+   - 后端接口文档：http://localhost:48080/doc.html
+   - 默认账号：admin / admin123
+
+## 📖 开发阶段规划
+
+| 阶段 | 模块 | 预计工期 |
+|------|------|----------|
+| 第一期（MVP） | M09系统管理 + M01门诊核心 + M02住院核心 + M06药品核心 | 4个月 |
+| 第二期 | M03电子病历 + M04检验 + M05影像 + M08财务 | 3个月 |
+| 第三期 | M07手术麻醉 + M10集成平台 + M11患者服务 | 2个月 |
+| 第四期 | M12运营管理 + M13 AI辅助 + 增强功能 | 持续迭代 |
+
+## 📐 设计规范
+
+### 命名规范
 
 | 类型 | 命名规则 | 示例 |
 |------|---------|------|
-| 数据库表 | 小写下划线 | `mes_process` |
-| DO 类 | `XxxDO` | `MesProcessDO` |
-| Mapper | `XxxMapper` | `MesProcessMapper` |
-| Service | `XxxService` | `MesProcessService` |
-| Controller | `XxxController` | `MesProcessController` |
-| VO | `XxxSaveReqVO` / `XxxRespVO` | `MesProcessSaveReqVO` |
+| 数据库表 | 小写下划线，模块前缀 | `his_patient`, `op_register` |
+| DO 类 | `XxxDO` | `HisPatientDO` |
+| Mapper | `XxxMapper` | `HisPatientMapper` |
+| Service | `XxxService` | `HisPatientService` |
+| Controller | `XxxController` | `HisPatientController` |
+| VO | `XxxSaveReqVO` / `XxxRespVO` | `HisPatientSaveReqVO` |
 
-## 📊 项目状态
+### 分层架构
 
-- ✅ 15 个模块 Skill 已完成
-- ✅ 4 个设计规范已定义
-- ✅ 3 个设计模式已文档化
-- ✅ 使用样例和自动引用机制已就绪
+```
+cn.iocoder.yudao.module.{模块}
+├── controller/admin/{功能}/    # Controller + VO
+├── service/{功能}/             # Service 接口 + 实现
+├── dal/dataobject/{功能}/      # DO 实体
+├── dal/mysql/{功能}/           # Mapper
+└── enums/                      # 错误码 + 枚举
+```
+
+## 📚 参考标准
+
+- 《全国医院信息化建设标准与规范》（国卫规划发〔2018〕4号）
+- 《电子病历应用管理规范（试行）》（国卫办医发〔2017〕8号）
+- HL7 FHIR R4 Specification
+- ICD-10 国际疾病分类
+- DICOM 医学数字影像和通信标准
+- HIMSS EMRAM 电子病历采纳模型
 
 ## 🔗 相关链接
 
-- [芋道源码](https://github.com/YunaiV/ruoyi-vue-pro) - 原始项目
-- [开发文档](https://doc.iocoder.cn/) - 芋道官方文档
+- [芋道源码](https://github.com/YunaiV/ruoyi-vue-pro) - 基础框架
+- [芋道官方文档](https://doc.iocoder.cn/) - 开发指南
+- [HL7 FHIR R4](http://hl7.org/fhir/R4/) - 医疗数据交换标准
 
 ## 📄 开源协议
 
 本项目基于 [MIT License](LICENSE) 开源。
+
+---
+
+> **文档维护**：详细需求文档请参阅 `docs/` 目录

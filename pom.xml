@@ -12,27 +12,19 @@
         <module>yudao-framework</module>
         <!-- Server 主项目 -->
         <module>yudao-server</module>
-        <!-- 各种 module 拓展 -->
+        <!-- HIS 核心模块 -->
         <module>yudao-module-system</module>
         <module>yudao-module-infra</module>
-<!--        <module>yudao-module-member</module>-->
-<!--        <module>yudao-module-bpm</module>-->
-<!--        <module>yudao-module-report</module>-->
-<!--        <module>yudao-module-mp</module>-->
-<!--        <module>yudao-module-pay</module>-->
-<!--        <module>yudao-module-mall</module>-->
-<!--        <module>yudao-module-crm</module>-->
-<!--        <module>yudao-module-erp</module>-->
-<!--        <module>yudao-module-iot</module>-->
-<!--        <module>yudao-module-mes</module>-->
-<!--        <module>yudao-module-wms</module>-->
-<!--        <module>yudao-module-im</module>-->
-<!-- 请参考 https://doc.iocoder.cn/ai/build/ 文档，完成 AI 模块的启动！！！ -->
-<!--        <module>yudao-module-ai</module>-->
+        <!-- HIS 扩展模块（按需启用） -->
+        <!-- <module>yudao-module-bpm</module> -->    <!-- 流程审批：手术审批、退费审批 -->
+        <!-- <module>yudao-module-pay</module> -->     <!-- 支付：门诊收费、住院预交金 -->
+        <!-- <module>yudao-module-mp</module> -->      <!-- 微信公众号：患者服务 -->
+        <!-- <module>yudao-module-report</module> -->  <!-- 报表：运营报表、财务报表 -->
+        <!-- <module>yudao-module-ai</module> -->      <!-- AI：智能分诊、影像AI -->
     </modules>
 
     <name>${project.artifactId}</name>
-    <description>芋道项目基础脚手架</description>
+    <description>YUDAO-AI-HIS 医院信息系统</description>
     <url>https://github.com/YunaiV/ruoyi-vue-pro</url>
 
     <properties>
