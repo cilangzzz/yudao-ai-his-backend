@@ -100,6 +100,11 @@ public interface ErrorCodeConstants {
     ErrorCode ORDER_ITEM_NOT_EXISTS = new ErrorCode(1_016_003_004, "医嘱明细不存在");
     ErrorCode ORDER_CANNOT_MODIFY = new ErrorCode(1_016_003_005, "医嘱已执行，无法修改");
 
+    // 医嘱模板
+    ErrorCode ORDER_TEMPLATE_NOT_EXISTS = new ErrorCode(1_016_003_010, "医嘱模板不存在");
+    ErrorCode ORDER_TEMPLATE_CODE_DUPLICATE = new ErrorCode(1_016_003_011, "医嘱模板编码已存在");
+    ErrorCode ORDER_TEMPLATE_ITEM_EMPTY = new ErrorCode(1_016_003_012, "医嘱模板明细项目编码或内容不能为空");
+
     // 诊断管理
     ErrorCode DIAGNOSIS_NOT_EXISTS = new ErrorCode(1_016_004_000, "诊断记录不存在");
     ErrorCode DIAGNOSIS_CODE_INVALID = new ErrorCode(1_016_004_001, "ICD-10诊断编码无效");
