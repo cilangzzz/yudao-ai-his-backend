@@ -84,6 +84,13 @@ public interface ErrorCodeConstants {
     // 预交金管理
     ErrorCode PREPAYMENT_NOT_EXISTS = new ErrorCode(1_016_002_000, "预交金记录不存在");
     ErrorCode PREPAYMENT_AMOUNT_INVALID = new ErrorCode(1_016_002_001, "预交金金额无效");
+    ErrorCode PREPAYMENT_STATUS_ERROR = new ErrorCode(1_016_002_002, "预交金状态不正确，无法操作");
+    ErrorCode PREPAYMENT_CAN_NOT_DELETE = new ErrorCode(1_016_002_003, "预交金已使用，不能删除");
+    ErrorCode PREPAYMENT_INSUFFICIENT_BALANCE = new ErrorCode(1_016_002_004, "预交金余额不足");
+    ErrorCode PREPAYMENT_REFUND_NOT_EXISTS = new ErrorCode(1_016_002_005, "预交金退还记录不存在");
+    ErrorCode PREPAYMENT_REFUND_EXCEED_BALANCE = new ErrorCode(1_016_002_006, "退还金额超过可用余额");
+    ErrorCode PREPAYMENT_REFUND_ALREADY_APPLYING = new ErrorCode(1_016_002_007, "该预交金已有退还申请中");
+    ErrorCode PREPAYMENT_REFUND_STATUS_ERROR = new ErrorCode(1_016_002_008, "退还状态不正确，无法操作");
 
     // 医嘱管理
     ErrorCode ORDER_NOT_EXISTS = new ErrorCode(1_016_003_000, "医嘱不存在");

@@ -7,30 +7,32 @@ import lombok.Getter;
 import java.util.Arrays;
 
 /**
- * 预交金状态枚举
+ * 支付方式枚举
  *
  * @author yudao
  */
 @Getter
 @AllArgsConstructor
-public enum PrepaymentStatusEnum implements ArrayValuable<Integer> {
+public enum PaymentTypeEnum implements ArrayValuable<Integer> {
 
-    PAID(1, "已缴纳"),
-    USED(2, "已使用"),
-    REFUNDED(3, "已退还"),
-    SETTLED(4, "已结算");
+    CASH(1, "现金"),
+    BANK_CARD(2, "银行卡"),
+    MEDICAL_CARD(3, "医保卡"),
+    WECHAT(4, "微信"),
+    ALIPAY(5, "支付宝"),
+    MIXED(6, "混合支付");
 
-    public static final int[] ARRAYS = Arrays.stream(values()).mapToInt(PrepaymentStatusEnum::getValue).toArray();
+    public static final int[] ARRAYS = Arrays.stream(values()).mapToInt(PaymentTypeEnum::getValue).toArray();
 
     private final Integer value;
     private final String name;
 
     @Override
     public Integer[] array() {
-        return Arrays.stream(values()).map(PrepaymentStatusEnum::getValue).toArray(Integer[]::new);
+        return Arrays.stream(values()).map(PaymentTypeEnum::getValue).toArray(Integer[]::new);
     }
 
-    public static PrepaymentStatusEnum valueOf(Integer value) {
+    public static PaymentTypeEnum valueOf(Integer value) {
         return Arrays.stream(values())
                 .filter(e -> e.getValue().equals(value))
                 .findFirst()

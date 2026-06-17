@@ -1,35 +1,39 @@
 package cn.iocoder.yudao.module.his.enums;
 
-import cn.iocoder.yudao.framework.common.core.IntArrayValuable;
+import cn.iocoder.yudao.framework.common.core.ArrayValuable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.Arrays;
 
 /**
- * 退费类型枚举
+ * 退还方式枚举
+ *
+ * @author yudao
  */
 @Getter
 @AllArgsConstructor
-public enum RefundTypeEnum implements IntArrayValuable {
+public enum RefundTypeEnum implements ArrayValuable<Integer> {
 
-    FULL(1, "全额退费"),
-    PARTIAL(2, "部分退费");
+    CASH(1, "现金"),
+    BANK_CARD(2, "银行卡"),
+    ORIGINAL(3, "原路退回");
 
-    public static final int[] ARRAYS = Arrays.stream(values()).mapToInt(RefundTypeEnum::getType).toArray();
+    public static final int[] ARRAYS = Arrays.stream(values()).mapToInt(RefundTypeEnum::getValue).toArray();
 
-    /**
-     * 类型值
-     */
-    private final Integer type;
-    /**
-     * 类型名称
-     */
+    private final Integer value;
     private final String name;
 
     @Override
-    public int[] array() {
-        return ARRAYS;
+    public Integer[] array() {
+        return Arrays.stream(values()).map(RefundTypeEnum::getValue).toArray(Integer[]::new);
+    }
+
+    public static RefundTypeEnum valueOf(Integer value) {
+        return Arrays.stream(values())
+                .filter(e -> e.getValue().equals(value))
+                .findFirst()
+                .orElse(null);
     }
 
 }
