@@ -1,3 +1,15 @@
 {
-  "tasks": []
+  "tasks": [
+    {
+      "id": "5fcf1a0b",
+      "cron": "*/30 * * * *",
+      "prompt": "检查项目是否有未提交的文件变更，如果有则提交（不推送）。如果没有变更则不做任何操作。",
+      "createdAt": 1781728971089,
+      "recurring": true,
+      "createdBySessionId": "78455bfd-96b7-4f77-a917-a68495e80231",
+      "createdByPid": 23244,
+      "createdByProcStart": "639173507797256770",
+      "lastFiredAt": 1781730337436
+    }
+  ]
 }

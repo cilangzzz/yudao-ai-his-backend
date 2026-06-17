@@ -53,6 +53,13 @@ public interface ErrorCodeConstants {
     ErrorCode OP_PAYMENT_NOT_EXISTS = new ErrorCode(1_015_004_003, "支付记录不存在");
     ErrorCode OP_REFUND_NOT_EXISTS = new ErrorCode(1_015_004_004, "退费记录不存在");
     ErrorCode OP_REFUND_AMOUNT_INVALID = new ErrorCode(1_015_004_005, "退费金额无效");
+    ErrorCode PAYMENT_ITEM_NOT_EXISTS = new ErrorCode(1_015_004_006, "支付明细不存在");
+    ErrorCode PAYMENT_ITEM_ALREADY_PAID = new ErrorCode(1_015_004_007, "支付明细已支付");
+    ErrorCode PAYMENT_ITEM_ALREADY_REFUNDED = new ErrorCode(1_015_004_008, "支付明细已退费");
+    ErrorCode PAYMENT_NOT_EXISTS = new ErrorCode(1_015_004_009, "支付记录不存在");
+    ErrorCode REFUND_NOT_EXISTS = new ErrorCode(1_015_004_010, "退费记录不存在");
+    ErrorCode REFUND_AMOUNT_EXCEED = new ErrorCode(1_015_004_011, "退费金额超过可退金额");
+    ErrorCode REFUND_STATUS_ERROR = new ErrorCode(1_015_004_012, "退费状态不正确，无法操作");
 
     // 门诊药房
     ErrorCode OP_DISPENSE_NOT_EXISTS = new ErrorCode(1_015_005_000, "发药记录不存在");

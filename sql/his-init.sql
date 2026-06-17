@@ -471,6 +471,60 @@ CREATE TABLE `op_payment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='支付记录表';
 
 -- ----------------------------
+-- 支付明细表
+-- ----------------------------
+DROP TABLE IF EXISTS `op_payment_item`;
+CREATE TABLE `op_payment_item` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+    `tenant_id` BIGINT NOT NULL DEFAULT 0 COMMENT '租户编号',
+    `payment_id` BIGINT NOT NULL COMMENT '支付记录ID',
+    `fee_id` BIGINT NOT NULL COMMENT '费用ID',
+    `fee_item_id` BIGINT NOT NULL COMMENT '费用明细ID',
+    `register_id` BIGINT NOT NULL COMMENT '挂号ID',
+    `patient_id` BIGINT NOT NULL COMMENT '患者ID',
+    `patient_name` VARCHAR(50) DEFAULT NULL COMMENT '患者姓名',
+    `charge_item_id` BIGINT DEFAULT NULL COMMENT '收费项目ID',
+    `item_code` VARCHAR(20) NOT NULL COMMENT '项目编码',
+    `item_name` VARCHAR(100) NOT NULL COMMENT '项目名称',
+    `item_category` TINYINT NOT NULL COMMENT '项目类别:1-挂号费 2-诊查费 3-检查费 4-治疗费 5-手术费 6-化验费 7-材料费 8-药品费 9-床位费 10-护理费 11-其他',
+    `spec` VARCHAR(100) DEFAULT NULL COMMENT '规格',
+    `unit` VARCHAR(20) NOT NULL COMMENT '计价单位',
+    `unit_price` DECIMAL(10,4) NOT NULL COMMENT '单价',
+    `quantity` DECIMAL(10,2) NOT NULL COMMENT '数量',
+    `fee_amount` DECIMAL(12,2) NOT NULL COMMENT '费用明细金额',
+    `pay_amount` DECIMAL(12,2) NOT NULL COMMENT '本次支付金额',
+    `discount_amount` DECIMAL(12,2) DEFAULT 0.00 COMMENT '优惠金额',
+    `insurance_amount` DECIMAL(12,2) DEFAULT 0.00 COMMENT '医保支付金额',
+    `self_amount` DECIMAL(12,2) DEFAULT 0.00 COMMENT '自付金额',
+    `pay_type` TINYINT NOT NULL COMMENT '支付方式:1-现金 2-微信 3-支付宝 4-医保 5-银行卡',
+    `insurance_type` TINYINT DEFAULT NULL COMMENT '医保类型',
+    `insurance_no` VARCHAR(30) DEFAULT NULL COMMENT '医保卡号',
+    `insurance_code` VARCHAR(20) DEFAULT NULL COMMENT '医保编码',
+    `insurance_category` TINYINT DEFAULT NULL COMMENT '医保类别:1-甲类 2-乙类 3-丙类',
+    `pay_status` TINYINT NOT NULL DEFAULT 0 COMMENT '支付状态:0-待支付 1-已支付 2-已退费',
+    `pay_time` DATETIME DEFAULT NULL COMMENT '支付时间',
+    `refund_time` DATETIME DEFAULT NULL COMMENT '退费时间',
+    `refund_amount` DECIMAL(12,2) DEFAULT NULL COMMENT '退费金额',
+    `execution_dept_id` BIGINT DEFAULT NULL COMMENT '执行科室ID',
+    `execution_dept_name` VARCHAR(100) DEFAULT NULL COMMENT '执行科室名称',
+    `doctor_id` BIGINT DEFAULT NULL COMMENT '开单医生ID',
+    `doctor_name` VARCHAR(50) DEFAULT NULL COMMENT '开单医生姓名',
+    `sort_order` INT DEFAULT 0 COMMENT '排序号',
+    `remark` VARCHAR(500) DEFAULT NULL COMMENT '备注',
+    `creator` VARCHAR(64) DEFAULT '' COMMENT '创建者',
+    `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updater` VARCHAR(64) DEFAULT '' COMMENT '更新者',
+    `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `deleted` BIT(1) NOT NULL DEFAULT b'0' COMMENT '是否删除',
+    PRIMARY KEY (`id`),
+    KEY `idx_tenant_payment_id` (`tenant_id`, `payment_id`),
+    KEY `idx_tenant_fee_id` (`tenant_id`, `fee_id`),
+    KEY `idx_tenant_fee_item_id` (`tenant_id`, `fee_item_id`),
+    KEY `idx_tenant_register_id` (`tenant_id`, `register_id`),
+    KEY `idx_tenant_patient_id` (`tenant_id`, `patient_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='支付明细表';
+
+-- ----------------------------
 -- 退费记录表
 -- ----------------------------
 DROP TABLE IF EXISTS `op_refund`;
