@@ -62,6 +62,26 @@ public interface HisNursingRecordService {
     // ==================== 护理评估相关 ====================
 
     /**
+     * 创建护理评估
+     */
+    Long createNursingAssessment(HisNursingAssessmentSaveReqVO createReqVO);
+
+    /**
+     * 更新护理评估
+     */
+    void updateNursingAssessment(HisNursingAssessmentSaveReqVO updateReqVO);
+
+    /**
+     * 删除护理评估
+     */
+    void deleteNursingAssessment(Long id);
+
+    /**
+     * 获取护理评估
+     */
+    HisNursingAssessmentDO getNursingAssessment(Long id);
+
+    /**
      * 分页查询护理评估
      */
     PageResult<HisNursingAssessmentDO> getNursingAssessmentPage(HisNursingAssessmentPageReqVO pageReqVO);
@@ -75,4 +95,9 @@ public interface HisNursingRecordService {
      * 获取最新的护理评估
      */
     HisNursingAssessmentDO getLatestNursingAssessment(Long admissionId, Integer assessmentType);
+
+    /**
+     * 校验护理评估是否存在
+     */
+    HisNursingAssessmentDO validateNursingAssessmentExists(Long id);
 }
