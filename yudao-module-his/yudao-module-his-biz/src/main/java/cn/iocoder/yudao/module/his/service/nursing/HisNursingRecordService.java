@@ -2,6 +2,7 @@ package cn.iocoder.yudao.module.his.service.nursing;
 
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.module.his.controller.admin.nursing.vo.HisNursingAssessmentPageReqVO;
+import cn.iocoder.yudao.module.his.controller.admin.nursing.vo.HisNursingAssessmentSaveReqVO;
 import cn.iocoder.yudao.module.his.controller.admin.nursing.vo.HisNursingRecordPageReqVO;
 import cn.iocoder.yudao.module.his.controller.admin.nursing.vo.HisNursingRecordSaveReqVO;
 import cn.iocoder.yudao.module.his.dal.dataobject.nursing.HisNursingAssessmentDO;

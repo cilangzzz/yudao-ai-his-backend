@@ -3,6 +3,7 @@ package cn.iocoder.yudao.module.his.service.nursing;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.common.util.object.BeanUtils;
 import cn.iocoder.yudao.module.his.controller.admin.nursing.vo.HisNursingAssessmentPageReqVO;
+import cn.iocoder.yudao.module.his.controller.admin.nursing.vo.HisNursingAssessmentSaveReqVO;
 import cn.iocoder.yudao.module.his.controller.admin.nursing.vo.HisNursingRecordPageReqVO;
 import cn.iocoder.yudao.module.his.controller.admin.nursing.vo.HisNursingRecordSaveReqVO;
 import cn.iocoder.yudao.module.his.dal.dataobject.admission.HisAdmissionDO;
@@ -20,6 +21,7 @@ import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
 import static cn.iocoder.yudao.module.his.enums.ErrorCodeConstants.NURSING_RECORD_NOT_EXISTS;
+import static cn.iocoder.yudao.module.his.enums.ErrorCodeConstants.NURSING_ASSESSMENT_NOT_EXISTS;
 
 /**
  * 护理记录 Service 实现类
