@@ -5,11 +5,11 @@
       "cron": "*/30 * * * *",
       "prompt": "检查项目是否有未提交的文件变更，如果有则提交（不推送）。如果没有变更则不做任何操作。",
       "createdAt": 1781728971089,
-      "lastFiredAt": 1781735737632,
+      "lastFiredAt": 1781738159437,
       "recurring": true,
       "createdBySessionId": "78455bfd-96b7-4f77-a917-a68495e80231",
-      "createdByPid": 23244,
-      "createdByProcStart": "639173507797256770"
+      "createdByPid": 21416,
+      "createdByProcStart": "639173638123761410"
     }
   ]
 }

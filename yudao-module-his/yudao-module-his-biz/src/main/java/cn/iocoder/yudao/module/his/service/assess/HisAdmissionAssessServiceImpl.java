@@ -94,7 +94,7 @@ public class HisAdmissionAssessServiceImpl implements HisAdmissionAssessService 
         }
         HisAdmissionAssessDO assess = assessMapper.selectById(id);
         if (assess == null) {
-            throw exception(NURSING_RECORD_NOT_EXISTS);
+            throw exception(ASSESS_NOT_EXISTS);
         }
         return assess;
     }

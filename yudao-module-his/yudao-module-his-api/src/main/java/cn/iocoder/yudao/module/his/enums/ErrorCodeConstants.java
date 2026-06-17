@@ -107,12 +107,19 @@ public interface ErrorCodeConstants {
 
     // 护理管理
     ErrorCode NURSING_RECORD_NOT_EXISTS = new ErrorCode(1_016_005_000, "护理记录不存在");
-   ErrorCode MEDICATION_ADMIN_NOT_EXISTS = new ErrorCode(1_016_005_001, "给药记录不存在");
+    ErrorCode MEDICATION_ADMIN_NOT_EXISTS = new ErrorCode(1_016_005_001, "给药记录不存在");
     ErrorCode MEDICATION_ADMIN_ALREADY_EXECUTED = new ErrorCode(1_016_005_002, "给药已执行");
     ErrorCode MEDICATION_ADMIN_BARCODE_MISMATCH = new ErrorCode(1_016_005_003, "药品条码不匹配");
     ErrorCode MEDICATION_ADMIN_WRISTBAND_MISMATCH = new ErrorCode(1_016_005_004, "患者腕带不匹配");
     ErrorCode NURSING_SHIFT_NOT_EXISTS = new ErrorCode(1_016_005_005, "交接班记录不存在");
     ErrorCode VITAL_SIGN_NOT_EXISTS = new ErrorCode(1_016_005_006, "生命体征记录不存在");
+
+    // 入院评估
+    ErrorCode ASSESS_NOT_EXISTS = new ErrorCode(1_016_006_000, "入院评估不存在");
+    ErrorCode ASSESS_ADMISSION_NOT_EXISTS = new ErrorCode(1_016_006_001, "住院记录不存在");
+    ErrorCode ASSESS_TYPE_INVALID = new ErrorCode(1_016_006_002, "评估类型无效");
+    ErrorCode ASSESS_SCORE_INVALID = new ErrorCode(1_016_006_003, "评估得分无效");
+    ErrorCode ASSESS_RISK_LEVEL_INVALID = new ErrorCode(1_016_006_004, "风险等级无效");
 
     // 出院管理
     ErrorCode DISCHARGE_NOT_EXISTS = new ErrorCode(1_016_006_000, "出院记录不存在");
