@@ -1,13 +1,3 @@
 {
-  "tasks": [
-    {
-      "id": "dfff008e",
-      "cron": "*/30 * * * *",
-      "prompt": "检查当前项目是否有未提交的文件变更，如果有则提交并推送到远程仓库。如果没有变更则提示用户任务完成。",
-      "createdAt": 1781727516165,
-      "recurring": true,
-      "createdBySessionId": "78455bfd-96b7-4f77-a917-a68495e80231",
-      "createdByPid": 23244
-    }
-  ]
+  "tasks": []
 }
