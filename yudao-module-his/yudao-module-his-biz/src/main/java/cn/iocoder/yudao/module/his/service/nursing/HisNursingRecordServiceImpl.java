@@ -134,6 +134,41 @@ public class HisNursingRecordServiceImpl implements HisNursingRecordService {
     // ==================== 护理评估相关 ====================
 
     @Override
+    public Long createNursingAssessment(HisNursingAssessmentSaveReqVO createReqVO) {
+        // 校验住院记录
+        HisAdmissionDO admission = admissionService.validateAdmissionExists(createReqVO.getAdmissionId());
+
+        // 创建护理评估
+        HisNursingAssessmentDO assessment = BeanUtils.toBean(createReqVO, HisNursingAssessmentDO.class);
+        assessment.setPatientId(admission.getPatientId());
+        assessment.setPatientName(admission.getPatientName());
+        if (assessment.getAssessmentTime() == null) {
+            assessment.setAssessmentTime(LocalDateTime.now());
+        }
+
+        nursingAssessmentMapper.insert(assessment);
+        return assessment.getId();
+    }
+
+    @Override
+    public void updateNursingAssessment(HisNursingAssessmentSaveReqVO updateReqVO) {
+        validateNursingAssessmentExists(updateReqVO.getId());
+        HisNursingAssessmentDO updateObj = BeanUtils.toBean(updateReqVO, HisNursingAssessmentDO.class);
+        nursingAssessmentMapper.updateById(updateObj);
+    }
+
+    @Override
+    public void deleteNursingAssessment(Long id) {
+        validateNursingAssessmentExists(id);
+        nursingAssessmentMapper.deleteById(id);
+    }
+
+    @Override
+    public HisNursingAssessmentDO getNursingAssessment(Long id) {
+        return nursingAssessmentMapper.selectById(id);
+    }
+
+    @Override
     public PageResult<HisNursingAssessmentDO> getNursingAssessmentPage(HisNursingAssessmentPageReqVO pageReqVO) {
         return nursingAssessmentMapper.selectPage(pageReqVO);
     }
@@ -146,5 +181,17 @@ public class HisNursingRecordServiceImpl implements HisNursingRecordService {
     @Override
     public HisNursingAssessmentDO getLatestNursingAssessment(Long admissionId, Integer assessmentType) {
         return nursingAssessmentMapper.selectLatest(admissionId, assessmentType);
+    }
+
+    @Override
+    public HisNursingAssessmentDO validateNursingAssessmentExists(Long id) {
+        if (id == null) {
+            return null;
+        }
+        HisNursingAssessmentDO assessment = nursingAssessmentMapper.selectById(id);
+        if (assessment == null) {
+            throw exception(NURSING_ASSESSMENT_NOT_EXISTS);
+        }
+        return assessment;
     }
 }
