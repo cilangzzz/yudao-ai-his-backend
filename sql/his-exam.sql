@@ -1,0 +1,378 @@
+-- ============================================
+-- HIS 检查申请模块数据库表
+-- 版本: V1.0
+-- 日期: 2026-06-18
+-- 说明: 包含检查申请、检查项目、检查报告相关表
+-- ============================================
+
+-- ----------------------------
+-- 检查申请主表
+-- ----------------------------
+DROP TABLE IF EXISTS `his_exam_request`;
+CREATE TABLE `his_exam_request` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+    `tenant_id` BIGINT NOT NULL DEFAULT 0 COMMENT '租户编号',
+    `request_no` VARCHAR(30) NOT NULL COMMENT '申请单号',
+    `encounter_type` TINYINT NOT NULL COMMENT '就诊类型:1-门诊 2-住院 3-急诊',
+    `encounter_id` BIGINT DEFAULT NULL COMMENT '就诊ID(挂号ID/住院ID)',
+    `patient_id` BIGINT NOT NULL COMMENT '患者ID',
+    `patient_name` VARCHAR(50) DEFAULT NULL COMMENT '患者姓名',
+    `patient_gender` TINYINT DEFAULT NULL COMMENT '患者性别:1-男 2-女',
+    `patient_age` INT DEFAULT NULL COMMENT '患者年龄',
+    `patient_phone` VARCHAR(20) DEFAULT NULL COMMENT '患者电话',
+    `dept_id` BIGINT NOT NULL COMMENT '申请科室ID',
+    `dept_name` VARCHAR(100) DEFAULT NULL COMMENT '申请科室名称',
+    `doctor_id` BIGINT NOT NULL COMMENT '申请医生ID',
+    `doctor_name` VARCHAR(50) DEFAULT NULL COMMENT '申请医生姓名',
+    `exam_type` TINYINT NOT NULL COMMENT '检查类型:1-影像检查 2-检验检查 3-病理检查 4-功能检查',
+    `exam_category` VARCHAR(50) DEFAULT NULL COMMENT '检查类别(CT/MRI/X光/B超/血常规等)',
+    `clinical_diagnosis` VARCHAR(200) DEFAULT NULL COMMENT '临床诊断',
+    `clinical_symptom` TEXT DEFAULT NULL COMMENT '临床症状',
+    `exam_purpose` VARCHAR(200) DEFAULT NULL COMMENT '检查目的',
+    `exam_part` VARCHAR(100) DEFAULT NULL COMMENT '检查部位',
+    `urgency` TINYINT NOT NULL DEFAULT 0 COMMENT '紧急程度:0-普通 1-急诊 2-加急',
+    `is_stat` TINYINT DEFAULT 0 COMMENT '是否急诊检查:0-否 1-是',
+    `sample_type` VARCHAR(50) DEFAULT NULL COMMENT '标本类型(检验检查用)',
+    `sample_collect_time` DATETIME DEFAULT NULL COMMENT '标本采集时间',
+    `sample_collect_nurse` BIGINT DEFAULT NULL COMMENT '标本采集护士',
+    `sample_collect_nurse_name` VARCHAR(50) DEFAULT NULL COMMENT '标本采集护士姓名',
+    `execution_dept_id` BIGINT DEFAULT NULL COMMENT '执行科室ID',
+    `execution_dept_name` VARCHAR(100) DEFAULT NULL COMMENT '执行科室名称',
+    `execution_room` VARCHAR(50) DEFAULT NULL COMMENT '检查室/机房',
+    `appointment_time` DATETIME DEFAULT NULL COMMENT '预约检查时间',
+    `scheduled_time` DATETIME DEFAULT NULL COMMENT '安排检查时间',
+    `check_in_time` DATETIME DEFAULT NULL COMMENT '签到时间',
+    `start_time` DATETIME DEFAULT NULL COMMENT '检查开始时间',
+    `end_time` DATETIME DEFAULT NULL COMMENT '检查结束时间',
+    `technician_id` BIGINT DEFAULT NULL COMMENT '检查技师ID',
+    `technician_name` VARCHAR(50) DEFAULT NULL COMMENT '检查技师姓名',
+    `report_doctor_id` BIGINT DEFAULT NULL COMMENT '报告医生ID',
+    `report_doctor_name` VARCHAR(50) DEFAULT NULL COMMENT '报告医生姓名',
+    `audit_doctor_id` BIGINT DEFAULT NULL COMMENT '审核医生ID',
+    `audit_doctor_name` VARCHAR(50) DEFAULT NULL COMMENT '审核医生姓名',
+    `request_status` TINYINT NOT NULL DEFAULT 1 COMMENT '状态:1-已申请 2-已预约 3-已签到 4-检查中 5-已完成 6-已报告 7-已审核 8-已取消 9-已退费',
+    `report_status` TINYINT DEFAULT 0 COMMENT '报告状态:0-未报告 1-初步报告 2-最终报告 3-已审核',
+    `report_no` VARCHAR(30) DEFAULT NULL COMMENT '报告编号',
+    `report_time` DATETIME DEFAULT NULL COMMENT '报告时间',
+    `audit_time` DATETIME DEFAULT NULL COMMENT '审核时间',
+    `total_amount` DECIMAL(12,2) DEFAULT 0.00 COMMENT '总金额',
+    `insurance_amount` DECIMAL(12,2) DEFAULT 0.00 COMMENT '医保支付金额',
+    `self_amount` DECIMAL(12,2) DEFAULT 0.00 COMMENT '自付金额',
+    `pay_status` TINYINT DEFAULT 0 COMMENT '支付状态:0-未支付 1-已支付 2-已退费',
+    `pay_time` DATETIME DEFAULT NULL COMMENT '支付时间',
+    `pay_type` TINYINT DEFAULT NULL COMMENT '支付方式:1-现金 2-微信 3-支付宝 4-医保',
+    `cancel_reason` VARCHAR(200) DEFAULT NULL COMMENT '取消原因',
+    `cancel_time` DATETIME DEFAULT NULL COMMENT '取消时间',
+    `cancel_by` BIGINT DEFAULT NULL COMMENT '取消人',
+    `remark` VARCHAR(500) DEFAULT NULL COMMENT '备注',
+    `clinical_history` TEXT DEFAULT NULL COMMENT '相关临床病史',
+    `allergy_history` VARCHAR(200) DEFAULT NULL COMMENT '过敏史',
+    `medication_history` VARCHAR(200) DEFAULT NULL COMMENT '用药史',
+    `pregnancy_flag` TINYINT DEFAULT NULL COMMENT '妊娠标志:0-未妊娠 1-已妊娠(女性患者必填)',
+    `contrast_flag` TINYINT DEFAULT 0 COMMENT '是否需要造影:0-否 1-是',
+    `contrast_type` VARCHAR(50) DEFAULT NULL COMMENT '造影剂类型',
+    `contrast_amount` DECIMAL(10,2) DEFAULT NULL COMMENT '造影剂用量',
+    ` fasting_flag` TINYINT DEFAULT 0 COMMENT '是否需要空腹:0-否 1-是',
+    `preparation_instruction` TEXT DEFAULT NULL COMMENT '检查准备说明',
+    `special_instruction` TEXT DEFAULT NULL COMMENT '特殊说明',
+    `creator` VARCHAR(64) DEFAULT '' COMMENT '创建者',
+    `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updater` VARCHAR(64) DEFAULT '' COMMENT '更新者',
+    `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `deleted` BIT(1) NOT NULL DEFAULT b'0' COMMENT '是否删除',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uk_tenant_request_no` (`tenant_id`, `request_no`, `deleted`),
+    KEY `idx_tenant_patient_id` (`tenant_id`, `patient_id`),
+    KEY `idx_tenant_encounter_id` (`tenant_id`, `encounter_id`),
+    KEY `idx_tenant_dept_id` (`tenant_id`, `dept_id`),
+    KEY `idx_tenant_status` (`tenant_id`, `request_status`),
+    KEY `idx_tenant_appointment_time` (`tenant_id`, `appointment_time`),
+    KEY `idx_tenant_create_time` (`tenant_id`, `create_time`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='检查申请主表';
+
+-- ----------------------------
+-- 检查申请明细表
+-- ----------------------------
+DROP TABLE IF EXISTS `his_exam_request_item`;
+CREATE TABLE `his_exam_request_item` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+    `tenant_id` BIGINT NOT NULL DEFAULT 0 COMMENT '租户编号',
+    `request_id` BIGINT NOT NULL COMMENT '申请ID',
+    `item_code` VARCHAR(20) NOT NULL COMMENT '检查项目编码',
+    `item_name` VARCHAR(100) NOT NULL COMMENT '检查项目名称',
+    `item_category` VARCHAR(50) DEFAULT NULL COMMENT '项目类别',
+    `exam_method` VARCHAR(100) DEFAULT NULL COMMENT '检查方法',
+    `exam_part` VARCHAR(100) DEFAULT NULL COMMENT '检查部位',
+    `spec` VARCHAR(100) DEFAULT NULL COMMENT '规格/条件',
+    `unit` VARCHAR(20) DEFAULT NULL COMMENT '单位',
+    `quantity` DECIMAL(10,2) NOT NULL DEFAULT 1 COMMENT '数量',
+    `unit_price` DECIMAL(10,4) NOT NULL COMMENT '单价',
+    `amount` DECIMAL(12,2) NOT NULL COMMENT '金额',
+    `insurance_code` VARCHAR(20) DEFAULT NULL COMMENT '医保编码',
+    `insurance_category` TINYINT DEFAULT NULL COMMENT '医保类别:1-甲类 2-乙类 3-丙类',
+    `execution_dept_id` BIGINT DEFAULT NULL COMMENT '执行科室ID',
+    `execution_dept_name` VARCHAR(100) DEFAULT NULL COMMENT '执行科室名称',
+    `item_status` TINYINT NOT NULL DEFAULT 1 COMMENT '状态:1-待检查 2-检查中 3-已完成 4-已取消',
+    `start_time` DATETIME DEFAULT NULL COMMENT '检查开始时间',
+    `end_time` DATETIME DEFAULT NULL COMMENT '检查结束时间',
+    `technician_id` BIGINT DEFAULT NULL COMMENT '检查技师',
+    `technician_name` VARCHAR(50) DEFAULT NULL COMMENT '检查技师姓名',
+    `result_value` VARCHAR(200) DEFAULT NULL COMMENT '检查结果(检验)',
+    `result_unit` VARCHAR(20) DEFAULT NULL COMMENT '结果单位',
+    `reference_range` VARCHAR(50) DEFAULT NULL COMMENT '参考范围',
+    `abnormal_flag` TINYINT DEFAULT NULL COMMENT '异常标志:0-正常 1-偏高 2-偏低 3-阳性 4-阴性',
+    `result_remark` VARCHAR(500) DEFAULT NULL COMMENT '结果备注',
+    `image_url` VARCHAR(200) DEFAULT NULL COMMENT '影像URL',
+    `sort_order` INT DEFAULT 0 COMMENT '排序号',
+    `remark` VARCHAR(500) DEFAULT NULL COMMENT '备注',
+    `creator` VARCHAR(64) DEFAULT '' COMMENT '创建者',
+    `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updater` VARCHAR(64) DEFAULT '' COMMENT '更新者',
+    `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `deleted` BIT(1) NOT NULL DEFAULT b'0' COMMENT '是否删除',
+    PRIMARY KEY (`id`),
+    KEY `idx_tenant_request_id` (`tenant_id`, `request_id`),
+    KEY `idx_tenant_item_code` (`tenant_id`, `item_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='检查申请明细表';
+
+-- ----------------------------
+-- 检查报告表
+-- ----------------------------
+DROP TABLE IF EXISTS `his_exam_report`;
+CREATE TABLE `his_exam_report` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+    `tenant_id` BIGINT NOT NULL DEFAULT 0 COMMENT '租户编号',
+    `report_no` VARCHAR(30) NOT NULL COMMENT '报告编号',
+    `request_id` BIGINT NOT NULL COMMENT '申请ID',
+    `patient_id` BIGINT NOT NULL COMMENT '患者ID',
+    `patient_name` VARCHAR(50) DEFAULT NULL COMMENT '患者姓名',
+    `exam_type` TINYINT NOT NULL COMMENT '检查类型:1-影像检查 2-检验检查 3-病理检查 4-功能检查',
+    `exam_category` VARCHAR(50) DEFAULT NULL COMMENT '检查类别',
+    `exam_part` VARCHAR(100) DEFAULT NULL COMMENT '检查部位',
+    `exam_method` VARCHAR(100) DEFAULT NULL COMMENT '检查方法',
+    `exam_time` DATETIME NOT NULL COMMENT '检查时间',
+    `report_doctor_id` BIGINT NOT NULL COMMENT '报告医生ID',
+    `report_doctor_name` VARCHAR(50) DEFAULT NULL COMMENT '报告医生姓名',
+    `report_time` DATETIME NOT NULL COMMENT '报告时间',
+    `audit_doctor_id` BIGINT DEFAULT NULL COMMENT '审核医生ID',
+    `audit_doctor_name` VARCHAR(50) DEFAULT NULL COMMENT '审核医生姓名',
+    `audit_time` DATETIME DEFAULT NULL COMMENT '审核时间',
+    `report_type` TINYINT NOT NULL DEFAULT 1 COMMENT '报告类型:1-初步报告 2-最终报告',
+    `report_status` TINYINT NOT NULL DEFAULT 1 COMMENT '状态:1-待审核 2-已审核 3-已发布 4-已撤回',
+    `report_content` TEXT DEFAULT NULL COMMENT '报告内容/检查所见',
+    `diagnosis_result` TEXT DEFAULT NULL COMMENT '诊断结论/检查结论',
+    `impression` TEXT DEFAULT NULL COMMENT '印象/分析意见',
+    `recommendation` VARCHAR(500) DEFAULT NULL COMMENT '建议',
+    `comparison_with` BIGINT DEFAULT NULL COMMENT '对比历史检查ID',
+    `comparison_result` TEXT DEFAULT NULL COMMENT '对比结果',
+    `image_count` INT DEFAULT 0 COMMENT '影像数量',
+    `image_urls` TEXT DEFAULT NULL COMMENT '影像URL列表(JSON数组)',
+    `attachment_urls` TEXT DEFAULT NULL COMMENT '附件URL列表',
+    `positive_findings` TEXT DEFAULT NULL COMMENT '阳性发现',
+    `negative_findings` TEXT DEFAULT NULL COMMENT '阴性发现',
+    `critical_flag` TINYINT DEFAULT 0 COMMENT '危急值标志:0-无 1-有',
+    `critical_value` VARCHAR(200) DEFAULT NULL COMMENT '危急值内容',
+    `critical_time` DATETIME DEFAULT NULL COMMENT '危急值报告时间',
+    `critical_handler` BIGINT DEFAULT NULL COMMENT '危急值处理人',
+    `critical_handle_time` DATETIME DEFAULT NULL COMMENT '危急值处理时间',
+    `print_count` INT DEFAULT 0 COMMENT '打印次数',
+    `last_print_time` DATETIME DEFAULT NULL COMMENT '最后打印时间',
+    `remark` VARCHAR(500) DEFAULT NULL COMMENT '备注',
+    `creator` VARCHAR(64) DEFAULT '' COMMENT '创建者',
+    `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updater` VARCHAR(64) DEFAULT '' COMMENT '更新者',
+    `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `deleted` BIT(1) NOT NULL DEFAULT b'0' COMMENT '是否删除',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uk_tenant_report_no` (`tenant_id`, `report_no`, `deleted`),
+    KEY `idx_tenant_request_id` (`tenant_id`, `request_id`),
+    KEY `idx_tenant_patient_id` (`tenant_id`, `patient_id`),
+    KEY `idx_tenant_status` (`tenant_id`, `report_status`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='检查报告表';
+
+-- ----------------------------
+-- 检查报告明细表(检验项目结果)
+-- ----------------------------
+DROP TABLE IF EXISTS `his_exam_report_item`;
+CREATE TABLE `his_exam_report_item` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+    `tenant_id` BIGINT NOT NULL DEFAULT 0 COMMENT '租户编号',
+    `report_id` BIGINT NOT NULL COMMENT '报告ID',
+    `request_item_id` BIGINT DEFAULT NULL COMMENT '申请明细ID',
+    `item_code` VARCHAR(20) NOT NULL COMMENT '检查项目编码',
+    `item_name` VARCHAR(100) NOT NULL COMMENT '检查项目名称',
+    `item_category` VARCHAR(50) DEFAULT NULL COMMENT '项目类别',
+    `test_method` VARCHAR(50) DEFAULT NULL COMMENT '检验方法',
+    `result_value` VARCHAR(200) DEFAULT NULL COMMENT '结果值',
+    `result_unit` VARCHAR(20) DEFAULT NULL COMMENT '结果单位',
+    `reference_range_low` DECIMAL(10,4) DEFAULT NULL COMMENT '参考范围下限',
+    `reference_range_high` DECIMAL(10,4) DEFAULT NULL COMMENT '参考范围上限',
+    `reference_range_text` VARCHAR(50) DEFAULT NULL COMMENT '参考范围文本',
+    `abnormal_flag` TINYINT DEFAULT NULL COMMENT '异常标志:0-正常 1-偏高 2-偏低 3-阳性 4-阴性 5-弱阳性',
+    `critical_flag` TINYINT DEFAULT 0 COMMENT '危急值标志:0-无 1-有',
+    `critical_low` DECIMAL(10,4) DEFAULT NULL COMMENT '危急值下限',
+    `critical_high` DECIMAL(10,4) DEFAULT NULL COMMENT '危急值上限',
+    `result_status` TINYINT NOT NULL DEFAULT 1 COMMENT '结果状态:1-正常 2-异常 3-危急',
+    `result_remark` VARCHAR(500) DEFAULT NULL COMMENT '结果备注',
+    `specimen_id` VARCHAR(50) DEFAULT NULL COMMENT '标本编号',
+    `specimen_status` TINYINT DEFAULT NULL COMMENT '标本状态',
+    `instrument_id` BIGINT DEFAULT NULL COMMENT '仪器设备ID',
+    `instrument_name` VARCHAR(50) DEFAULT NULL COMMENT '仪器设备名称',
+    `reagent_batch` VARCHAR(50) DEFAULT NULL COMMENT '试剂批号',
+    `test_time` DATETIME DEFAULT NULL COMMENT '检验时间',
+    `operator_id` BIGINT DEFAULT NULL COMMENT '操作员ID',
+    `operator_name` VARCHAR(50) DEFAULT NULL COMMENT '操作员姓名',
+    `sort_order` INT DEFAULT 0 COMMENT '排序号',
+    `group_code` VARCHAR(20) DEFAULT NULL COMMENT '分组编码',
+    `creator` VARCHAR(64) DEFAULT '' COMMENT '创建者',
+    `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updater` VARCHAR(64) DEFAULT '' COMMENT '更新者',
+    `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `deleted` BIT(1) NOT NULL DEFAULT b'0' COMMENT '是否删除',
+    PRIMARY KEY (`id`),
+    KEY `idx_tenant_report_id` (`tenant_id`, `report_id`),
+    KEY `idx_tenant_item_code` (`tenant_id`, `item_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='检查报告明细表';
+
+-- ----------------------------
+-- 检查项目字典表
+-- ----------------------------
+DROP TABLE IF EXISTS `his_exam_item`;
+CREATE TABLE `his_exam_item` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+    `tenant_id` BIGINT NOT NULL DEFAULT 0 COMMENT '租户编号',
+    `item_code` VARCHAR(20) NOT NULL COMMENT '项目编码',
+    `item_name` VARCHAR(100) NOT NULL COMMENT '项目名称',
+    `item_short_name` VARCHAR(50) DEFAULT NULL COMMENT '项目简称',
+    `item_category` VARCHAR(50) DEFAULT NULL COMMENT '项目类别',
+    `exam_type` TINYINT NOT NULL COMMENT '检查类型:1-影像检查 2-检验检查 3-病理检查 4-功能检查',
+    `exam_method` VARCHAR(100) DEFAULT NULL COMMENT '检查方法',
+    `spec` VARCHAR(100) DEFAULT NULL COMMENT '规格/条件',
+    `unit` VARCHAR(20) DEFAULT NULL COMMENT '单位',
+    `default_part` VARCHAR(100) DEFAULT NULL COMMENT '默认检查部位',
+    `execution_dept` BIGINT DEFAULT NULL COMMENT '执行科室ID',
+    `execution_dept_name` VARCHAR(100) DEFAULT NULL COMMENT '执行科室名称',
+    `standard_price` DECIMAL(10,4) NOT NULL COMMENT '标准价格',
+    `insurance_code` VARCHAR(20) DEFAULT NULL COMMENT '医保编码',
+    `insurance_category` TINYINT DEFAULT NULL COMMENT '医保类别:1-甲类 2-乙类 3-丙类',
+    `insurance_price` DECIMAL(10,4) DEFAULT NULL COMMENT '医保定价',
+    `preparation_instruction` TEXT DEFAULT NULL COMMENT '检查准备说明',
+    `fasting_flag` TINYINT DEFAULT 0 COMMENT '是否需要空腹:0-否 1-是',
+    `contrast_flag` TINYINT DEFAULT 0 COMMENT '是否需要造影:0-否 1-是',
+    `contrast_type` VARCHAR(50) DEFAULT NULL COMMENT '造影剂类型',
+    `appointment_required` TINYINT DEFAULT 0 COMMENT '是否需要预约:0-否 1-是',
+    `default_duration` INT DEFAULT NULL COMMENT '默认检查时长(分钟)',
+    `report_tat` INT DEFAULT NULL COMMENT '报告周转时间(小时)',
+    `stat_report_tat` INT DEFAULT NULL COMMENT '急诊报告周转时间(分钟)',
+    `reference_range_low` DECIMAL(10,4) DEFAULT NULL COMMENT '参考范围下限(检验)',
+    `reference_range_high` DECIMAL(10,4) DEFAULT NULL COMMENT '参考范围上限(检验)',
+    `reference_range_text` VARCHAR(50) DEFAULT NULL COMMENT '参考范围文本',
+    `critical_low` DECIMAL(10,4) DEFAULT NULL COMMENT '危急值下限(检验)',
+    `critical_high` DECIMAL(10,4) DEFAULT NULL COMMENT '危急值上限(检验)',
+    `result_unit` VARCHAR(20) DEFAULT NULL COMMENT '结果单位(检验)',
+    `sample_type` VARCHAR(50) DEFAULT NULL COMMENT '标本类型(检验)',
+    `sample_volume` VARCHAR(20) DEFAULT NULL COMMENT '标本量(检验)',
+    `status` TINYINT NOT NULL DEFAULT 1 COMMENT '状态:1-在用 2-停用',
+    `remark` VARCHAR(500) DEFAULT NULL COMMENT '备注',
+    `creator` VARCHAR(64) DEFAULT '' COMMENT '创建者',
+    `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updater` VARCHAR(64) DEFAULT '' COMMENT '更新者',
+    `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `deleted` BIT(1) NOT NULL DEFAULT b'0' COMMENT '是否删除',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uk_tenant_item_code` (`tenant_id`, `item_code`, `deleted`),
+    KEY `idx_tenant_category` (`tenant_id`, `item_category`),
+    KEY `idx_tenant_exam_type` (`tenant_id`, `exam_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='检查项目字典表';
+
+-- ----------------------------
+-- 检查设备表
+-- ----------------------------
+DROP TABLE IF EXISTS `his_exam_equipment`;
+CREATE TABLE `his_exam_equipment` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+    `tenant_id` BIGINT NOT NULL DEFAULT 0 COMMENT '租户编号',
+    `equipment_code` VARCHAR(20) NOT NULL COMMENT '设备编码',
+    `equipment_name` VARCHAR(100) NOT NULL COMMENT '设备名称',
+    `equipment_type` TINYINT NOT NULL COMMENT '设备类型:1-CT 2-MRI 3-X光 4-B超 5-检验设备 6-病理设备',
+    `equipment_model` VARCHAR(50) DEFAULT NULL COMMENT '设备型号',
+    `manufacturer` VARCHAR(100) DEFAULT NULL COMMENT '生产厂商',
+    `serial_no` VARCHAR(50) DEFAULT NULL COMMENT '序列号',
+    `dept_id` BIGINT NOT NULL COMMENT '所属科室ID',
+    `dept_name` VARCHAR(100) DEFAULT NULL COMMENT '所属科室名称',
+    `location` VARCHAR(100) DEFAULT NULL COMMENT '设备位置',
+    `installation_date` DATE DEFAULT NULL COMMENT '安装日期',
+    `warranty_expire` DATE DEFAULT NULL COMMENT '保修到期',
+    `status` TINYINT NOT NULL DEFAULT 1 COMMENT '状态:1-正常 2-维修 3-停用',
+    `daily_capacity` INT DEFAULT NULL COMMENT '日检查能力',
+    `working_hours_start` TIME DEFAULT NULL COMMENT '工作开始时间',
+    `working_hours_end` TIME DEFAULT NULL COMMENT '工作结束时间',
+    `remark` VARCHAR(500) DEFAULT NULL COMMENT '备注',
+    `creator` VARCHAR(64) DEFAULT '' COMMENT '创建者',
+    `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updater` VARCHAR(64) DEFAULT '' COMMENT '更新者',
+    `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `deleted` BIT(1) NOT NULL DEFAULT b'0' COMMENT '是否删除',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uk_tenant_equipment_code` (`tenant_id`, `equipment_code`, `deleted`),
+    KEY `idx_tenant_dept_id` (`tenant_id`, `dept_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='检查设备表';
+
+-- ============================================
+-- 检查模块字典数据
+-- ============================================
+
+-- 初始化检查类型字典
+INSERT INTO `system_dict_type` (`name`, `type`, `status`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`)
+VALUES ('HIS检查类型', 'his_exam_type', 0, 'HIS检查类型字典', 'admin', NOW(), 'admin', NOW(), b'0');
+
+INSERT INTO `system_dict_data` (`sort`, `label`, `value`, `dict_type`, `status`, `color_type`, `css_class`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`)
+VALUES
+(1, '影像检查', '1', 'his_exam_type', 0, 'primary', '', '影像检查(X光/CT/MRI/B超等)', 'admin', NOW(), 'admin', NOW(), b'0'),
+(2, '检验检查', '2', 'his_exam_type', 0, 'success', '', '检验检查(血液/尿液/生化等)', 'admin', NOW(), 'admin', NOW(), b'0'),
+(3, '病理检查', '3', 'his_exam_type', 0, 'warning', '', '病理检查', 'admin', NOW(), 'admin', NOW(), b'0'),
+(4, '功能检查', '4', 'his_exam_type', 0, 'info', '', '功能检查(心电图/脑电图等)', 'admin', NOW(), 'admin', NOW(), b'0');
+
+-- 初始化检查申请状态字典
+INSERT INTO `system_dict_type` (`name`, `type`, `status`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`)
+VALUES ('HIS检查申请状态', 'his_exam_request_status', 0, 'HIS检查申请状态字典', 'admin', NOW(), 'admin', NOW(), b'0');
+
+INSERT INTO `system_dict_data` (`sort`, `label`, `value`, `dict_type`, `status`, `color_type`, `css_class`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`)
+VALUES
+(1, '已申请', '1', 'his_exam_request_status', 0, 'default', '', '已申请', 'admin', NOW(), 'admin', NOW(), b'0'),
+(2, '已预约', '2', 'his_exam_request_status', 0, 'primary', '', '已预约', 'admin', NOW(), 'admin', NOW(), b'0'),
+(3, '已签到', '3', 'his_exam_request_status', 0, 'info', '', '已签到', 'admin', NOW(), 'admin', NOW(), b'0'),
+(4, '检查中', '4', 'his_exam_request_status', 0, 'warning', '', '检查中', 'admin', NOW(), 'admin', NOW(), b'0'),
+(5, '已完成', '5', 'his_exam_request_status', 0, 'success', '', '已完成', 'admin', NOW(), 'admin', NOW(), b'0'),
+(6, '已报告', '6', 'his_exam_request_status', 0, 'primary', '', '已报告', 'admin', NOW(), 'admin', NOW(), b'0'),
+(7, '已审核', '7', 'his_exam_request_status', 0, 'success', '', '已审核', 'admin', NOW(), 'admin', NOW(), b'0'),
+(8, '已取消', '8', 'his_exam_request_status', 0, 'danger', '', '已取消', 'admin', NOW(), 'admin', NOW(), b'0'),
+(9, '已退费', '9', 'his_exam_request_status', 0, 'info', '', '已退费', 'admin', NOW(), 'admin', NOW(), b'0');
+
+-- 初始化报告状态字典
+INSERT INTO `system_dict_type` (`name`, `type`, `status`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`)
+VALUES ('HIS检查报告状态', 'his_exam_report_status', 0, 'HIS检查报告状态字典', 'admin', NOW(), 'admin', NOW(), b'0');
+
+INSERT INTO `system_dict_data` (`sort`, `label`, `value`, `dict_type`, `status`, `color_type`, `css_class`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`)
+VALUES
+(1, '未报告', '0', 'his_exam_report_status', 0, 'default', '', '未报告', 'admin', NOW(), 'admin', NOW(), b'0'),
+(2, '初步报告', '1', 'his_exam_report_status', 0, 'warning', '', '初步报告', 'admin', NOW(), 'admin', NOW(), b'0'),
+(3, '最终报告', '2', 'his_exam_report_status', 0, 'primary', '', '最终报告', 'admin', NOW(), 'admin', NOW(), b'0'),
+(4, '已审核', '3', 'his_exam_report_status', 0, 'success', '', '已审核', 'admin', NOW(), 'admin', NOW(), b'0');
+
+-- 初始化异常标志字典
+INSERT INTO `system_dict_type` (`name`, `type`, `status`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`)
+VALUES ('HIS检查异常标志', 'his_exam_abnormal_flag', 0, 'HIS检查异常标志字典', 'admin', NOW(), 'admin', NOW(), b'0');
+
+INSERT INTO `system_dict_data` (`sort`, `label`, `value`, `dict_type`, `status`, `color_type`, `css_class`, `remark`, `creator`, `create_time`, `updater`, `update_time`, `deleted`)
+VALUES
+(1, '正常', '0', 'his_exam_abnormal_flag', 0, 'success', '', '正常', 'admin', NOW(), 'admin', NOW(), b'0'),
+(2, '偏高', '1', 'his_exam_abnormal_flag', 0, 'danger', '', '偏高', 'admin', NOW(), 'admin', NOW(), b'0'),
+(3, '偏低', '2', 'his_exam_abnormal_flag', 0, 'warning', '', '偏低', 'admin', NOW(), 'admin', NOW(), b'0'),
+(4, '阳性', '3', 'his_exam_abnormal_flag', 0, 'danger', '', '阳性', 'admin', NOW(), 'admin', NOW(), b'0'),
+(5, '阴性', '4', 'his_exam_abnormal_flag', 0, 'success', '', '阴性', 'admin', NOW(), 'admin', NOW(), b'0'),
+(6, '弱阳性', '5', 'his_exam_abnormal_flag', 0, 'warning', '', '弱阳性', 'admin', NOW(), 'admin', NOW(), b'0');
+
+-- ============================================
+-- 初始化完成
+-- ============================================

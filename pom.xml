@@ -12,9 +12,11 @@
         <module>yudao-framework</module>
         <!-- Server 主项目 -->
         <module>yudao-server</module>
-        <!-- HIS 核心模块 -->
+        <!-- System 基础模块 -->
         <module>yudao-module-system</module>
         <module>yudao-module-infra</module>
+        <!-- HIS 医院信息系统核心模块 -->
+        <module>yudao-module-his</module>
         <!-- HIS 扩展模块（按需启用） -->
         <!-- <module>yudao-module-bpm</module> -->    <!-- 流程审批：手术审批、退费审批 -->
         <!-- <module>yudao-module-pay</module> -->     <!-- 支付：门诊收费、住院预交金 -->

@@ -1,0 +1,71 @@
+spring:
+  application:
+    name: his-server
+
+--- #################### HIS 模块配置 ####################
+
+yudao:
+  his:
+    # 门诊配置
+    outpatient:
+      # 预约挂号超时时间（分钟）
+      appointment-timeout: 30
+      # 挂号费默认金额
+      default-registration-fee: 0
+      # 是否启用分时段预约
+      time-slot-enabled: true
+      # 每个时段时长（分钟）
+      time-slot-duration: 30
+
+    # 住院配置
+    inpatient:
+      # 床位预警阈值（%）
+      bed-warning-threshold: 90
+      # 默认预交金金额
+      default-deposit-amount: 1000
+      # 出院结算宽限期（天）
+      discharge-grace-period: 7
+
+    # 药品配置
+    pharmacy:
+      # 库存预警阈值（%）
+      stock-warning-threshold: 20
+      # 药品有效期预警天数
+      expiry-warning-days: 90
+      # 是否启用药品批次管理
+      batch-management-enabled: true
+      # 是否启用药品追溯码
+      trace-code-enabled: false
+
+    # 计费配置
+    billing:
+      # 是否自动计费
+      auto-billing-enabled: true
+      # 退费审批金额阈值
+      refund-approval-threshold: 1000
+      # 是否启用医保结算
+      insurance-settlement-enabled: false
+
+    # 处方配置
+    prescription:
+      # 处方有效期（天）
+      validity-days: 3
+      # 最大开药天数
+      max-medication-days: 14
+      # 是否启用电子处方签名
+      electronic-signature-enabled: true
+
+--- #################### MyBatis 配置 ####################
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath*:mapper/**/*.xml
+  type-aliases-package: cn.iocoder.yudao.module.his.dal.dataobject
+
+--- #################### 日志配置 ####################
+
+logging:
+  level:
+    cn.iocoder.yudao.module.his: DEBUG
+    cn.iocoder.yudao.module.his.dal.mysql: debug
