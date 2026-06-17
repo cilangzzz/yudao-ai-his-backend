@@ -161,6 +161,18 @@ public interface ErrorCodeConstants {
     ErrorCode SPECIAL_DRUG_QUANTITY_EXCEED = new ErrorCode(1_017_007_003, "特殊药品数量超出限制");
     ErrorCode SPECIAL_DRUG_NOT_AUTHORIZED = new ErrorCode(1_017_007_004, "无特殊药品处方权");
 
+    // 退药管理
+    ErrorCode DRUG_RETURN_NOT_EXISTS = new ErrorCode(1_017_008_000, "退药申请不存在");
+    ErrorCode DRUG_RETURN_ITEM_NOT_EXISTS = new ErrorCode(1_017_008_001, "退药明细不存在");
+    ErrorCode DRUG_RETURN_STATUS_ERROR = new ErrorCode(1_017_008_002, "退药状态不正确，无法操作：{}");
+    ErrorCode DRUG_RETURN_ALREADY_AUDITED = new ErrorCode(1_017_008_003, "退药申请已审核");
+    ErrorCode DRUG_RETURN_ALREADY_CANCELLED = new ErrorCode(1_017_008_004, "退药申请已取消");
+    ErrorCode DRUG_RETURN_ALREADY_INBOUNDED = new ErrorCode(1_017_008_005, "退药已入库");
+    ErrorCode DRUG_RETURN_ALREADY_REFUNDED = new ErrorCode(1_017_008_006, "退药已退款");
+    ErrorCode DRUG_RETURN_QUANTITY_EXCEED = new ErrorCode(1_017_008_007, "退药数量超过原发药数量");
+    ErrorCode DRUG_RETURN_INBOUND_NOT_EXISTS = new ErrorCode(1_017_008_008, "退药入库记录不存在");
+    ErrorCode DRUG_RETURN_INBOUND_ITEM_NOT_EXISTS = new ErrorCode(1_017_008_009, "退药入库明细不存在");
+
     // ========== M04 检验管理 1_018_000_XXX ==========
 
     // 检验申请
