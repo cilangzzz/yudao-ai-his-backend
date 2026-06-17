@@ -119,6 +119,13 @@ public interface ErrorCodeConstants {
     ErrorCode NURSING_SHIFT_NOT_EXISTS = new ErrorCode(1_016_005_005, "交接班记录不存在");
     ErrorCode VITAL_SIGN_NOT_EXISTS = new ErrorCode(1_016_005_006, "生命体征记录不存在");
 
+    // 护理交接班
+    ErrorCode NURSING_HANDOVER_NOT_EXISTS = new ErrorCode(1_016_005_010, "交接班记录不存在");
+    ErrorCode NURSING_HANDOVER_STATUS_ERROR = new ErrorCode(1_016_005_011, "交接班状态不正确：{}");
+    ErrorCode NURSING_HANDOVER_ALREADY_SIGNED = new ErrorCode(1_016_005_012, "交接班签名失败：{}");
+    ErrorCode NURSING_HANDOVER_CANNOT_TAKEOVER = new ErrorCode(1_016_005_013, "接班失败：{}");
+    ErrorCode NURSING_HANDOVER_CANNOT_CANCEL = new ErrorCode(1_016_005_014, "作废失败：{}");
+
     // 入院评估
     ErrorCode ASSESS_NOT_EXISTS = new ErrorCode(1_016_006_000, "入院评估不存在");
     ErrorCode ASSESS_ADMISSION_NOT_EXISTS = new ErrorCode(1_016_006_001, "住院记录不存在");
