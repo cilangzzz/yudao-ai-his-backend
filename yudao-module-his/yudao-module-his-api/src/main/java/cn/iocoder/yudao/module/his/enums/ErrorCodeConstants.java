@@ -241,7 +241,7 @@ public interface ErrorCodeConstants {
     ErrorCode LAB_REPORT_ALREADY_PUBLISHED = new ErrorCode(1_018_004_002, "检验报告已发布");
 
     // 危急值管理
-   ErrorCode CRITICAL_VALUE_NOT_EXISTS = new ErrorCode(1_018_005_000, "危急值记录不存在");
+    ErrorCode CRITICAL_VALUE_NOT_EXISTS = new ErrorCode(1_018_005_000, "危急值记录不存在");
     ErrorCode CRITICAL_VALUE_ALREADY_CONFIRMED = new ErrorCode(1_018_005_001, "危急值已确认");
     ErrorCode CRITICAL_VALUE_NOT_CONFIRMED = new ErrorCode(1_018_005_002, "危急值未确认，请先确认");
 

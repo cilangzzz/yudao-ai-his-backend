@@ -1,6 +1,6 @@
 package cn.iocoder.yudao.module.his.enums;
 
-import cn.iocoder.yudao.framework.common.core.IntArrayValuable;
+import cn.iocoder.yudao.framework.common.core.ArrayValuable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -11,7 +11,7 @@ import java.util.Arrays;
  */
 @Getter
 @AllArgsConstructor
-public enum FeeItemCategoryEnum implements IntArrayValuable {
+public enum FeeItemCategoryEnum implements ArrayValiable<Integer> {
 
     REGISTRATION(1, "挂号费"),
     CONSULTATION(2, "诊查费"),
@@ -25,7 +25,7 @@ public enum FeeItemCategoryEnum implements IntArrayValuable {
     NURSING(10, "护理费"),
     OTHER(11, "其他");
 
-    public static final int[] ARRAYS = Arrays.stream(values()).mapToInt(FeeItemCategoryEnum::getCategory).toArray();
+    public static final Integer[] ARRAYS = Arrays.stream(values()).map(FeeItemCategoryEnum::getCategory).toArray(Integer[]::new);
 
     /**
      * 类别值
@@ -37,7 +37,7 @@ public enum FeeItemCategoryEnum implements IntArrayValuable {
     private final String name;
 
     @Override
-    public int[] array() {
+    public Integer[] array() {
         return ARRAYS;
     }
 
