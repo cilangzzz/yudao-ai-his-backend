@@ -166,13 +166,19 @@ public class HisNursingRecordDO extends TenantBaseDO {
         if (recordType == null) {
             return "未知";
         }
-        return switch (recordType) {
-            case 1 -> "一般护理记录";
-            case 2 -> "危重护理记录";
-            case 3 -> "手术护理记录";
-            case 4 -> "交接班记录";
-            case 5 -> "特殊护理记录";
-            default -> "未知";
-        };
+        switch (recordType) {
+            case 1:
+                return "一般护理记录";
+            case 2:
+                return "危重护理记录";
+            case 3:
+                return "手术护理记录";
+            case 4:
+                return "交接班记录";
+            case 5:
+                return "特殊护理记录";
+            default:
+                return "未知";
+        }
     }
 }

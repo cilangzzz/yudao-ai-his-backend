@@ -188,15 +188,22 @@ public class HisNursingMeasureDO extends TenantBaseDO {
         if (measureType == null) {
             return "未知";
         }
-        return switch (measureType) {
-            case 1 -> "跌倒预防";
-            case 2 -> "压疮预防";
-            case 3 -> "疼痛管理";
-            case 4 -> "营养支持";
-            case 5 -> "安全护理";
-            case 6 -> "其他";
-            default -> "未知";
-        };
+        switch (measureType) {
+            case 1:
+                return "跌倒预防";
+            case 2:
+                return "压疮预防";
+            case 3:
+                return "疼痛管理";
+            case 4:
+                return "营养支持";
+            case 5:
+                return "安全护理";
+            case 6:
+                return "其他";
+            default:
+                return "未知";
+        }
     }
 
     /**
@@ -206,13 +213,18 @@ public class HisNursingMeasureDO extends TenantBaseDO {
         if (status == null) {
             return "未知";
         }
-        return switch (status) {
-            case 0 -> "未开始";
-            case 1 -> "执行中";
-            case 2 -> "已完成";
-            case 3 -> "已停止";
-            default -> "未知";
-        };
+        switch (status) {
+            case 0:
+                return "未开始";
+            case 1:
+                return "执行中";
+            case 2:
+                return "已完成";
+            case 3:
+                return "已停止";
+            default:
+                return "未知";
+        }
     }
 
     /**
@@ -222,11 +234,15 @@ public class HisNursingMeasureDO extends TenantBaseDO {
         if (effectEvaluation == null) {
             return null;
         }
-        return switch (effectEvaluation) {
-            case 1 -> "有效";
-            case 2 -> "部分有效";
-            case 3 -> "无效";
-            default -> null;
-        };
+        switch (effectEvaluation) {
+            case 1:
+                return "有效";
+            case 2:
+                return "部分有效";
+            case 3:
+                return "无效";
+            default:
+                return null;
+        }
     }
 }

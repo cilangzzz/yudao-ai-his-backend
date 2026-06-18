@@ -254,12 +254,16 @@ public class HisNursingHandoverDO extends TenantBaseDO {
         if (shiftType == null) {
             return "未知";
         }
-        return switch (shiftType) {
-            case 1 -> "白班";
-            case 2 -> "小夜班";
-            case 3 -> "大夜班";
-            default -> "未知";
-        };
+        switch (shiftType) {
+            case 1:
+                return "白班";
+            case 2:
+                return "小夜班";
+            case 3:
+                return "大夜班";
+            default:
+                return "未知";
+        }
     }
 
     /**
@@ -269,11 +273,15 @@ public class HisNursingHandoverDO extends TenantBaseDO {
         if (status == null) {
             return "未知";
         }
-        return switch (status) {
-            case 0 -> "待接班";
-            case 1 -> "已接班";
-            case 2 -> "已作废";
-            default -> "未知";
-        };
+        switch (status) {
+            case 0:
+                return "待接班";
+            case 1:
+                return "已接班";
+            case 2:
+                return "已作废";
+            default:
+                return "未知";
+        }
     }
 }

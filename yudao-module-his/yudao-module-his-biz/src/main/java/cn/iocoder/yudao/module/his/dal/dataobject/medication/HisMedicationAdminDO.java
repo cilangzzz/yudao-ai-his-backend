@@ -294,13 +294,19 @@ public class HisMedicationAdminDO extends TenantBaseDO {
         if (status == null) {
             return "未知";
         }
-        return switch (status) {
-            case 1 -> "待执行";
-            case 2 -> "已执行";
-            case 3 -> "未执行";
-            case 4 -> "延迟执行";
-            case 5 -> "患者拒绝";
-            default -> "未知";
-        };
+        switch (status) {
+            case 1:
+                return "待执行";
+            case 2:
+                return "已执行";
+            case 3:
+                return "未执行";
+            case 4:
+                return "延迟执行";
+            case 5:
+                return "患者拒绝";
+            default:
+                return "未知";
+        }
     }
 }

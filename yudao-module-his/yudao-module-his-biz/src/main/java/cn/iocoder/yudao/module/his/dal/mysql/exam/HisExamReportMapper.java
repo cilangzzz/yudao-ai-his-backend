@@ -58,27 +58,3 @@ public interface HisExamReportMapper extends BaseMapperX<HisExamReportDO> {
 
 }
 
-/**
- * 检查报告明细 Mapper
- */
-@Mapper
-public interface HisExamReportItemMapper extends BaseMapperX<HisExamReportItemDO> {
-
-    /**
-     * 根据报告ID查询明细列表
-     */
-    default List<HisExamReportItemDO> selectListByReportId(Long reportId) {
-        return selectList(new LambdaQueryWrapperX<HisExamReportItemDO>()
-                .eq(HisExamReportItemDO::getReportId, reportId)
-                .orderByAsc(HisExamReportItemDO::getSortOrder));
-    }
-
-    /**
-     * 根据报告ID删除明细
-     */
-    default void deleteByReportId(Long reportId) {
-        delete(new LambdaQueryWrapperX<HisExamReportItemDO>()
-                .eq(HisExamReportItemDO::getReportId, reportId));
-    }
-
-}

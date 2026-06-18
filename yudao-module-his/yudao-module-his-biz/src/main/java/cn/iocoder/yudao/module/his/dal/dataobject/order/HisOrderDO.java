@@ -354,15 +354,22 @@ public class HisOrderDO extends TenantBaseDO {
         if (orderStatus == null) {
             return "未知";
         }
-        return switch (orderStatus) {
-            case 1 -> "开立";
-            case 2 -> "审核";
-            case 3 -> "执行中";
-            case 4 -> "已完成";
-            case 5 -> "已停止";
-            case 6 -> "已作废";
-            default -> "未知";
-        };
+        switch (orderStatus) {
+            case 1:
+                return "开立";
+            case 2:
+                return "审核";
+            case 3:
+                return "执行中";
+            case 4:
+                return "已完成";
+            case 5:
+                return "已停止";
+            case 6:
+                return "已作废";
+            default:
+                return "未知";
+        }
     }
 
     /**
@@ -372,16 +379,24 @@ public class HisOrderDO extends TenantBaseDO {
         if (orderType == null) {
             return "未知";
         }
-        return switch (orderType) {
-            case 1 -> "药品";
-            case 2 -> "检验";
-            case 3 -> "检查";
-            case 4 -> "护理";
-            case 5 -> "手术";
-            case 6 -> "饮食";
-            case 7 -> "其他";
-            default -> "未知";
-        };
+        switch (orderType) {
+            case 1:
+                return "药品";
+            case 2:
+                return "检验";
+            case 3:
+                return "检查";
+            case 4:
+                return "护理";
+            case 5:
+                return "手术";
+            case 6:
+                return "饮食";
+            case 7:
+                return "其他";
+            default:
+                return "未知";
+        }
     }
 
     /**

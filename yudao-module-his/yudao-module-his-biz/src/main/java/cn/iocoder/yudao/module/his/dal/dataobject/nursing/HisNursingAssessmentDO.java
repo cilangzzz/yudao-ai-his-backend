@@ -154,13 +154,19 @@ public class HisNursingAssessmentDO extends TenantBaseDO {
         if (assessmentType == null) {
             return "未知";
         }
-        return switch (assessmentType) {
-            case 1 -> "跌倒评估";
-            case 2 -> "压疮评估";
-            case 3 -> "疼痛评估";
-            case 4 -> "自理能力评估";
-            case 5 -> "营养评估";
-            default -> "未知";
-        };
+        switch (assessmentType) {
+            case 1:
+                return "跌倒评估";
+            case 2:
+                return "压疮评估";
+            case 3:
+                return "疼痛评估";
+            case 4:
+                return "自理能力评估";
+            case 5:
+                return "营养评估";
+            default:
+                return "未知";
+        }
     }
 }

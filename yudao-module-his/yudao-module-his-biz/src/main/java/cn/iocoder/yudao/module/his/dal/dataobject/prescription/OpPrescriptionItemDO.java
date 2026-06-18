@@ -202,13 +202,22 @@ public class OpPrescriptionItemDO extends TenantBaseDO {
         if (frequencyCode == null) {
             return 1;
         }
-        return switch (frequencyCode) {
-            case "QD", "QN" -> 1;
-            case "BID", "Q12H" -> 2;
-            case "TID", "Q8H" -> 3;
-            case "QID", "Q6H" -> 4;
-            default -> 1;
-        };
+        switch (frequencyCode) {
+            case "QD":
+            case "QN":
+                return 1;
+            case "BID":
+            case "Q12H":
+                return 2;
+            case "TID":
+            case "Q8H":
+                return 3;
+            case "QID":
+            case "Q6H":
+                return 4;
+            default:
+                return 1;
+        }
     }
 
     /**
