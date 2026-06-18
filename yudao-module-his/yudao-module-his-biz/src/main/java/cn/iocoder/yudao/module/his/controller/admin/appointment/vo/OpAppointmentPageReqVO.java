@@ -24,11 +24,20 @@ public class OpAppointmentPageReqVO extends PageParam {
     @Schema(description = "患者姓名",  example = "张三")
     private String patientName;
 
+    @Schema(description = "排班ID", example = "1")
+    private Long scheduleId;
+
     @Schema(description = "医生ID", example = "1")
     private Long doctorId;
 
+    @Schema(description = "医生姓名", example = "李医生")
+    private String doctorName;
+
     @Schema(description = "科室ID", example = "1")
     private Long deptId;
+
+    @Schema(description = "科室名称", example = "内科")
+    private String deptName;
 
     @Schema(description = "预约日期", example = "2026-06-17")
     private LocalDate appointmentDate;

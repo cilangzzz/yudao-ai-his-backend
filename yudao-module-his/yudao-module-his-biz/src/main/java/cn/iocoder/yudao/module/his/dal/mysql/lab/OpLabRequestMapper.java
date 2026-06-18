@@ -40,13 +40,13 @@ public interface OpLabRequestMapper extends BaseMapperX<OpLabRequestDO> {
      * @param endTime 结束时间
      * @return 分页结果
      */
-    default PageResult<OpLabRequestDO> selectPage(String requestNo, Long patientId, String patientName,
+    default List<OpLabRequestDO> selectList(String requestNo, Long patientId, String patientName,
                                                    Integer requestType, Long registerId, Long admissionId,
                                                    Long deptId, Long doctorId, Integer labType, Integer specimenType,
                                                    Integer requestStatus, Integer feeStatus, Integer urgency,
                                                    Integer hasCriticalValue, LocalDate requestDate,
                                                    LocalDateTime startTime, LocalDateTime endTime) {
-        return selectPage(new LambdaQueryWrapperX<OpLabRequestDO>()
+        return selectList(new LambdaQueryWrapperX<OpLabRequestDO>()
                 .eqIfPresent(OpLabRequestDO::getRequestNo, requestNo)
                 .eqIfPresent(OpLabRequestDO::getPatientId, patientId)
                 .likeIfPresent(OpLabRequestDO::getPatientName, patientName)

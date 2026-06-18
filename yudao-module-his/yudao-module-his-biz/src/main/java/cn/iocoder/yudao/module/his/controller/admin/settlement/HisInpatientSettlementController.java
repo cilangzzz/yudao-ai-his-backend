@@ -6,10 +6,10 @@ import cn.iocoder.yudao.framework.common.util.object.BeanUtils;
 import cn.iocoder.yudao.module.his.controller.admin.settlement.vo.*;
 import cn.iocoder.yudao.module.his.dal.dataobject.settlement.HisInpatientSettlementDO;
 import cn.iocoder.yudao.module.his.service.settlement.HisInpatientSettlementService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +26,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
  *
  * @author yudao
  */
-@Api(tags = "管理后台 - 住院结算")
+@Tag(name = "管理后台 - 住院结算")
 @RestController
 @RequestMapping("/his/settlement")
 @Validated
@@ -36,14 +36,14 @@ public class HisInpatientSettlementController {
     private HisInpatientSettlementService settlementService;
 
     @PostMapping("/create")
-    @ApiOperation("创建住院结算单")
+    @Operation(summary = "创建住院结算单")
     @PreAuthorize("@ss.hasPermission('his:settlement:create')")
     public CommonResult<Long> createSettlement(@Valid @RequestBody HisInpatientSettlementSaveReqVO createReqVO) {
         return success(settlementService.createSettlement(createReqVO));
     }
 
     @PutMapping("/update")
-    @ApiOperation("更新住院结算单")
+    @Operation(summary = "更新住院结算单")
     @PreAuthorize("@ss.hasPermission('his:settlement:update')")
     public CommonResult<Boolean> updateSettlement(@Valid @RequestBody HisInpatientSettlementSaveReqVO updateReqVO) {
         settlementService.updateSettlement(updateReqVO);
@@ -51,8 +51,8 @@ public class HisInpatientSettlementController {
     }
 
     @DeleteMapping("/delete")
-    @ApiOperation("删除住院结算单")
-    @ApiImplicitParam(name = "id", value = "结算单ID", required = true, dataTypeClass = Long.class)
+    @Operation(summary = "删除住院结算单")
+    @Parameter(name = "id", description = "结算单ID", required = true)
     @PreAuthorize("@ss.hasPermission('his:settlement:delete')")
     public CommonResult<Boolean> deleteSettlement(@RequestParam("id") Long id) {
         settlementService.deleteSettlement(id);
@@ -60,8 +60,8 @@ public class HisInpatientSettlementController {
     }
 
     @GetMapping("/get")
-    @ApiOperation("获取住院结算单详情")
-    @ApiImplicitParam(name = "id", value = "结算单ID", required = true, dataTypeClass = Long.class)
+    @Operation(summary = "获取住院结算单详情")
+    @Parameter(name = "id", description = "结算单ID", required = true)
     @PreAuthorize("@ss.hasPermission('his:settlement:query')")
     public CommonResult<HisInpatientSettlementRespVO> getSettlement(@RequestParam("id") Long id) {
         HisInpatientSettlementDO settlement = settlementService.getSettlement(id);
@@ -69,7 +69,7 @@ public class HisInpatientSettlementController {
     }
 
     @GetMapping("/page")
-    @ApiOperation("获取住院结算单分页")
+    @Operation(summary = "获取住院结算单分页")
     @PreAuthorize("@ss.hasPermission('his:settlement:query')")
     public CommonResult<PageResult<HisInpatientSettlementRespVO>> getSettlementPage(@Valid HisInpatientSettlementPageReqVO pageReqVO) {
         PageResult<HisInpatientSettlementDO> pageResult = settlementService.getSettlementPage(pageReqVO);
@@ -77,8 +77,8 @@ public class HisInpatientSettlementController {
     }
 
     @GetMapping("/list-by-admission")
-    @ApiOperation("根据入院ID查询结算单列表")
-    @ApiImplicitParam(name = "admissionId", value = "入院记录ID", required = true, dataTypeClass = Long.class)
+    @Operation(summary = "根据入院ID查询结算单列表")
+    @Parameter(name = "admissionId", description = "入院记录ID", required = true)
     @PreAuthorize("@ss.hasPermission('his:settlement:query')")
     public CommonResult<List<HisInpatientSettlementRespVO>> getSettlementListByAdmissionId(@RequestParam("admissionId") Long admissionId) {
         List<HisInpatientSettlementDO> list = settlementService.getSettlementListByAdmissionId(admissionId);
@@ -86,10 +86,10 @@ public class HisInpatientSettlementController {
     }
 
     @PostMapping("/confirm")
-    @ApiOperation("结算确认")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "结算单ID", required = true, dataTypeClass = Long.class),
-            @ApiImplicitParam(name = "paymentType", value = "支付方式", required = true, dataTypeClass = Integer.class)
+    @Operation(summary = "结算确认")
+    @Parameters({
+            @Parameter(name = "id", description = "结算单ID", required = true),
+            @Parameter(name = "paymentType", description = "支付方式", required = true)
     })
     @PreAuthorize("@ss.hasPermission('his:settlement:confirm')")
     public CommonResult<Boolean> confirmSettlement(
@@ -101,11 +101,11 @@ public class HisInpatientSettlementController {
     }
 
     @PostMapping("/refund")
-    @ApiOperation("退费处理")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "结算单ID", required = true, dataTypeClass = Long.class),
-            @ApiImplicitParam(name = "refundAmount", value = "退费金额", required = true, dataTypeClass = BigDecimal.class),
-            @ApiImplicitParam(name = "remark", value = "备注", dataTypeClass = String.class)
+    @Operation(summary = "退费处理")
+    @Parameters({
+            @Parameter(name = "id", description = "结算单ID", required = true),
+            @Parameter(name = "refundAmount", description = "退费金额", required = true),
+            @Parameter(name = "remark", description = "备注")
     })
     @PreAuthorize("@ss.hasPermission('his:settlement:refund')")
     public CommonResult<Boolean> refundSettlement(
@@ -117,10 +117,10 @@ public class HisInpatientSettlementController {
     }
 
     @PostMapping("/cancel")
-    @ApiOperation("作废处理")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "结算单ID", required = true, dataTypeClass = Long.class),
-            @ApiImplicitParam(name = "remark", value = "备注", dataTypeClass = String.class)
+    @Operation(summary = "作废处理")
+    @Parameters({
+            @Parameter(name = "id", description = "结算单ID", required = true),
+            @Parameter(name = "remark", description = "备注")
     })
     @PreAuthorize("@ss.hasPermission('his:settlement:cancel')")
     public CommonResult<Boolean> cancelSettlement(
@@ -131,8 +131,8 @@ public class HisInpatientSettlementController {
     }
 
     @GetMapping("/fee-summary")
-    @ApiOperation("获取费用汇总")
-    @ApiImplicitParam(name = "admissionId", value = "入院记录ID", required = true, dataTypeClass = Long.class)
+    @Operation(summary = "获取费用汇总")
+    @Parameter(name = "admissionId", description = "入院记录ID", required = true)
     @PreAuthorize("@ss.hasPermission('his:settlement:query')")
     public CommonResult<HisInpatientSettlementRespVO> getFeeSummary(@RequestParam("admissionId") Long admissionId) {
         HisInpatientSettlementDO summary = settlementService.calculateFeeSummary(admissionId);
