@@ -83,11 +83,15 @@ mysql -u root -p ruoyi-vue-pro < sql/mysql/his/data/20260618_his_menu_data.sql
 
 ## 表前缀说明
 
+根据数据库设计文档，表前缀规范如下：
+
 | 前缀 | 说明 | 示例 |
 |------|------|------|
-| `his_` | HIS 系统核心业务表 | `his_patient`, `his_department` |
-| `op_` | 门诊相关表 | `op_register`, `op_prescription` |
-| `ip_` | 住院相关表 | `ip_admission`, `ip_discharge` |
+| `his_` | HIS 系统核心业务表 | `his_patient`, `his_department`, `his_order` |
+| `op_` | 门诊相关表 | `op_register`, `op_prescription`, `op_schedule` |
+| `sys_` | 系统管理表（框架自带） | `sys_user`, `sys_role`, `sys_menu` |
+
+> **注意**: `op_` 前缀是设计时就定义的，用于区分门诊业务表，符合数据库设计规范。
 
 ## 注意事项
 
