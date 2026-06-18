@@ -177,7 +177,7 @@ public class HisPrepaymentServiceImpl implements HisPrepaymentService {
                              Long operatorId, String operatorName, String remark) {
         // 1. 校验预交金
         HisPrepaymentDO prepayment = validatePrepaymentExists(prepaymentId);
-        if (!prepayment.isPaid() && !prepayment.getStatus() == 2) {
+        if (!prepayment.isPaid() && prepayment.getStatus() != 2) {
             throw exception(PREPAYMENT_STATUS_ERROR);
         }
 

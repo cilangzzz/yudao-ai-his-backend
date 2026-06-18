@@ -181,6 +181,7 @@ public class HisDischargeSummaryServiceImpl implements HisDischargeSummaryServic
 
     @Override
     public int countPendingReview() {
-        return (int) dischargeSummaryMapper.selectCount(HisDischargeSummaryDO::getSummaryStatus, 1);
+        Long count = dischargeSummaryMapper.selectCount(HisDischargeSummaryDO::getSummaryStatus, 1);
+        return count != null ? count.intValue() : 0;
     }
 }

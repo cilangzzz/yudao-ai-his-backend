@@ -2,6 +2,7 @@ package cn.iocoder.yudao.module.his.service.admission;
 
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.common.util.object.BeanUtils;
+import cn.iocoder.yudao.framework.mybatis.core.query.LambdaQueryWrapperX;
 import cn.iocoder.yudao.module.his.controller.admin.admission.vo.DischargeApplyReqVO;
 import cn.iocoder.yudao.module.his.controller.admin.admission.vo.HisAdmissionPageReqVO;
 import cn.iocoder.yudao.module.his.controller.admin.admission.vo.HisAdmissionSaveReqVO;
@@ -11,6 +12,7 @@ import cn.iocoder.yudao.module.his.dal.dataobject.patient.HisPatientDO;
 import cn.iocoder.yudao.module.his.dal.mysql.admission.HisAdmissionMapper;
 import cn.iocoder.yudao.module.his.service.bed.HisBedService;
 import cn.iocoder.yudao.module.his.service.patient.HisPatientService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
@@ -126,7 +128,7 @@ public class HisAdmissionServiceImpl implements HisAdmissionService {
 
     @Override
     public List<HisAdmissionDO> getInHospitalList() {
-        return admissionMapper.selectList(admission -> admission
+        return admissionMapper.selectList(new cn.iocoder.yudao.framework.mybatis.core.query.LambdaQueryWrapperX<HisAdmissionDO>()
                 .eq(HisAdmissionDO::getAdmissionStatus, 1));
     }
 
@@ -317,8 +319,10 @@ public class HisAdmissionServiceImpl implements HisAdmissionService {
 
     @Override
     public int countInHospital() {
-        Long count = admissionMapper.selectCount(admission -> admission
-                .eq(HisAdmissionDO::getAdmissionStatus, 1));
+        Long count = admissionMapper.selectCount(
+                new LambdaQueryWrapperX<HisAdmissionDO>()
+                        .eq(HisAdmissionDO::getAdmissionStatus, 1)
+        );
         return count.intValue();
     }
 
