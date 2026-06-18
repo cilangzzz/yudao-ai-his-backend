@@ -1,6 +1,6 @@
 package cn.iocoder.yudao.module.his.enums;
 
-import cn.iocoder.yudao.framework.common.core.IntArrayValuable;
+import cn.iocoder.yudao.framework.common.core.ArrayValuable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -11,13 +11,13 @@ import java.util.Arrays;
  */
 @Getter
 @AllArgsConstructor
-public enum PaymentStatusEnum implements IntArrayValuable {
+public enum PaymentStatusEnum implements ArrayValiable<Integer> {
 
     SUCCESS(1, "成功"),
     FAILED(2, "失败"),
     REFUNDED(3, "已退费");
 
-    public static final int[] ARRAYS = Arrays.stream(values()).mapToInt(PaymentStatusEnum::getStatus).toArray();
+    public static final Integer[] ARRAYS = Arrays.stream(values()).map(PaymentStatusEnum::getStatus).toArray(Integer[]::new);
 
     /**
      * 状态值
@@ -29,7 +29,7 @@ public enum PaymentStatusEnum implements IntArrayValuable {
     private final String name;
 
     @Override
-    public int[] array() {
+    public Integer[] array() {
         return ARRAYS;
     }
 
