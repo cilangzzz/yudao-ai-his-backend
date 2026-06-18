@@ -1,6 +1,6 @@
 package cn.iocoder.yudao.module.his.enums;
 
-import cn.iocoder.yudao.framework.common.core.IntArrayValuable;
+import cn.iocoder.yudao.framework.common.core.ArrayValuable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -11,7 +11,7 @@ import java.util.Arrays;
  */
 @Getter
 @AllArgsConstructor
-public enum PayTypeEnum implements IntArrayValuable {
+public enum PayTypeEnum implements ArrayValiable<Integer> {
 
     CASH(1, "现金"),
     WECHAT(2, "微信"),
@@ -19,7 +19,7 @@ public enum PayTypeEnum implements IntArrayValuable {
     INSURANCE(4, "医保"),
     BANK_CARD(5, "银行卡");
 
-    public static final int[] ARRAYS = Arrays.stream(values()).mapToInt(PayTypeEnum::getType).toArray();
+    public static final Integer[] ARRAYS = Arrays.stream(values()).map(PayTypeEnum::getType).toArray(Integer[]::new);
 
     /**
      * 类型值
@@ -31,7 +31,7 @@ public enum PayTypeEnum implements IntArrayValuable {
     private final String name;
 
     @Override
-    public int[] array() {
+    public Integer[] array() {
         return ARRAYS;
     }
 
