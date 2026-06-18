@@ -11,7 +11,7 @@ import java.util.Arrays;
  */
 @Getter
 @AllArgsConstructor
-public enum PaymentStatusEnum implements ArrayValiable<Integer> {
+public enum PaymentStatusEnum implements ArrayValuable<Integer> {
 
     SUCCESS(1, "成功"),
     FAILED(2, "失败"),

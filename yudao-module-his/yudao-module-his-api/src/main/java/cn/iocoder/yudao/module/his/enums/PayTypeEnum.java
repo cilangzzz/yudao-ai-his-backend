@@ -11,7 +11,7 @@ import java.util.Arrays;
  */
 @Getter
 @AllArgsConstructor
-public enum PayTypeEnum implements ArrayValiable<Integer> {
+public enum PayTypeEnum implements ArrayValuable<Integer> {
 
     CASH(1, "现金"),
     WECHAT(2, "微信"),

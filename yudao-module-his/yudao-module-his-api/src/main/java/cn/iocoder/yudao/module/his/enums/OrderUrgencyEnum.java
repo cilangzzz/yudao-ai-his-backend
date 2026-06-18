@@ -11,7 +11,7 @@ import java.util.Arrays;
  */
 @Getter
 @AllArgsConstructor
-public enum OrderUrgencyEnum implements ArrayValiable<Integer> {
+public enum OrderUrgencyEnum implements ArrayValuable<Integer> {
 
     NORMAL(0, "常规"),
     URGENT(1, "紧急");
