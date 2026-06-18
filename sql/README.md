@@ -11,40 +11,52 @@ sql/mysql/
 │   └── ruoyi-vue-pro.sql   # 框架基础表结构和初始化数据
 │
 └── his/                    # HIS 系统业务 SQL
-    ├── his-init.sql                    # HIS 系统初始化主脚本
-    ├── his-database-init-full.sql      # HIS 数据库完整初始化
+    ├── his_init.sql                    # HIS 系统初始化主脚本
+    ├── his_database_init_full.sql      # HIS 数据库完整初始化
     │
     # 门诊模块
-    ├── op-fee-item.sql                 # 门诊费用项目
-    ├── op-refund-item.sql              # 门诊退费项目
+    ├── his_op_fee_item.sql             # 门诊费用项目
+    ├── his_op_refund_item.sql          # 门诊退费项目
     │
     # 住院模块
-    ├── his-admission-menu.sql          # 住院入院菜单
-    ├── his-discharge-apply.sql         # 出院申请
-    ├── his-inpatient-settlement.sql    # 住院结算
-    ├── his-prepayment-create.sql       # 预交金创建
+    ├── his_admission_menu.sql          # 住院入院菜单
+    ├── his_discharge_apply.sql         # 出院申请
+    ├── his_inpatient_settlement.sql    # 住院结算
+    ├── his_prepayment_create.sql       # 预交金创建
     │
     # 医嘱执行
-    ├── his-order-execution.sql         # 医嘱执行
-    ├── his-order-template.sql          # 医嘱模板
+    ├── his_order_execution.sql         # 医嘱执行
+    ├── his_order_template.sql          # 医嘱模板
     │
     # 检查检验
-    ├── his-exam.sql                    # 检查模块
-    ├── his-exam-menu.sql               # 检查菜单
-    ├── his-lab.sql                     # 检验模块
-    ├── his-lab-menu.sql                # 检验菜单
+    ├── his_exam.sql                    # 检查模块
+    ├── his_exam_menu.sql               # 检查菜单
+    ├── his_lab.sql                     # 检验模块
+    ├── his_lab_menu.sql                # 检验菜单
     │
     # 护理模块
-    ├── his-nursing.sql                 # 护理模块
-    ├── his-nursing-handover.sql        # 护理交接班
+    ├── his_nursing.sql                 # 护理模块
+    ├── his_nursing_handover.sql        # 护理交接班
     │
     # 药品管理
-    ├── his-drug-return.sql             # 药品退药
-    ├── his-drug-return-menu.sql        # 退药菜单
+    ├── his_drug_return.sql             # 药品退药
+    ├── his_drug_return_menu.sql        # 退药菜单
     │
     # 支付结算
-    ├── his-payment-menu.sql            # 支付菜单
+    └── his_payment_menu.sql            # 支付菜单
 ```
+
+## 命名规范
+
+所有 HIS 业务 SQL 文件统一采用以下命名规范：
+- **前缀**: `his_` 开头
+- **分隔符**: 使用下划线 `_` 分隔单词
+- **格式**: `his_模块名_功能名.sql`
+
+示例：
+- `his_exam.sql` - 检查模块
+- `his_exam_menu.sql` - 检查模块菜单
+- `his_op_fee_item.sql` - 门诊费用项目
 
 ## 使用说明
 
@@ -61,7 +73,7 @@ mysql -u root -p ruoyi-vue-pro < sql/mysql/framework/ruoyi-vue-pro.sql
 mysql -u root -p ruoyi-vue-pro < sql/mysql/framework/quartz.sql
 
 # 3. 执行 HIS 业务脚本
-mysql -u root -p ruoyi-vue-pro < sql/mysql/his/his-init.sql
+mysql -u root -p ruoyi-vue-pro < sql/mysql/his/his_init.sql
 ```
 
 ### 2. 增量更新
