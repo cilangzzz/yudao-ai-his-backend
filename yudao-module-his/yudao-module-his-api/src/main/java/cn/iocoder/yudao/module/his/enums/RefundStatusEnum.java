@@ -11,7 +11,7 @@ import java.util.Arrays;
  */
 @Getter
 @AllArgsConstructor
-public enum RefundStatusEnum implements ArrayValiable<Integer> {
+public enum RefundStatusEnum implements ArrayValuable<Integer> {
 
     PENDING(1, "待审核"),
     APPROVED(2, "已通过"),
