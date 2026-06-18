@@ -122,7 +122,11 @@ CALL sp_disable_menu_tree(1281);
 SELECT '禁用代码生成案例...' AS '';
 CALL sp_disable_menu_tree(1070);
 
--- 14. 禁用开发者文档链接
+-- 14. 禁用 IM 即时通讯 (id=6500)
+SELECT '禁用 IM 即时通讯...' AS '';
+CALL sp_disable_menu_tree(6500);
+
+-- 15. 禁用开发者文档链接
 SELECT '禁用开发者文档...' AS '';
 UPDATE system_menu SET status = 1 WHERE id IN (1254, 2159, 2160);
 SELECT ROW_COUNT() AS disabled_count;
