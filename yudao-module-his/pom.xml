@@ -17,6 +17,10 @@
     <modules>
         <module>yudao-module-his-api</module>
         <module>yudao-module-his-biz</module>
+        <!-- HIS 子模块 -->
+        <module>yudao-module-his-op</module>    <!-- 门诊管理 -->
+        <module>yudao-module-his-ip</module>    <!-- 住院管理 -->
+        <module>yudao-module-his-drug</module>  <!-- 药品管理 -->
     </modules>
 
 </project>
