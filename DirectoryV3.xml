@@ -1,4 +1,695 @@
-<?xml version="1.0" encoding="UTF-8"?> 
- <trees>
-     <tree path="/yudao-module-his" title="医院住院模块"/>
- </trees>
+<?xml version="1.0" encoding="UTF-8"?>
+<trees>
+    <!-- ==================== HIS 医院信息系统核心模块 ==================== -->
+    <tree path="/yudao-module-his" title="HIS医院信息系统">
+        <description>HIS系统核心业务模块，包含门诊、住院、药品等子模块</description>
+    </tree>
+
+    <!-- ==================== HIS API 接口层 ==================== -->
+    <tree path="/yudao-module-his/yudao-module-his-api" title="HIS API接口层">
+        <description>HIS模块对外API接口定义，包含DTO、枚举、常量等</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-api/src/main/java/cn/iocoder/yudao/module/his/enums" title="HIS枚举定义">
+        <description>HIS系统枚举类型：状态枚举、类型枚举、错误码枚举等</description>
+    </tree>
+
+    <!-- ==================== HIS 业务基础层 ==================== -->
+    <tree path="/yudao-module-his/yudao-module-his-biz" title="HIS业务基础层">
+        <description>HIS公共业务逻辑，包含患者、科室、人员等基础服务</description>
+    </tree>
+
+    <!-- HIS-biz Controller层 -->
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin" title="HIS控制器层">
+        <description>HIS模块REST API控制器，处理HTTP请求</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/patient" title="患者管理控制器">
+        <description>患者信息管理：患者基本信息、就诊记录、过敏史等</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/register" title="挂号管理控制器">
+        <description>门诊挂号管理：现场挂号、预约挂号、退号处理</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/appointment" title="预约管理控制器">
+        <description>预约挂号管理：预约申请、预约取消、号源管理</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/schedule" title="排班管理控制器">
+        <description>医生排班管理：排班计划、号源池配置、加号管理</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/admission" title="入院管理控制器">
+        <description>入院登记管理：入院登记、床位分配、医保登记</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/discharge" title="出院管理控制器">
+        <description>出院管理：出院申请、出院结算、出院带药</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/bed" title="床位管理控制器">
+        <description>床位管理：床位状态、床位分配、转床处理</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/ward" title="病区管理控制器">
+        <description>病区管理：病区信息、病房配置、科室关联</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/preAdmission" title="预住院管理控制器">
+        <description>预住院管理：预住院登记、预住院评估</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/prepayment" title="预交金管理控制器">
+        <description>预交金管理：预交金缴纳、余额查询、预警提醒</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/settlement" title="结算管理控制器">
+        <description>费用结算管理：门诊结算、住院结算、医保结算</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/fee" title="费用管理控制器">
+        <description>费用明细管理：费用录入、费用查询、退费处理</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/prescription" title="处方管理控制器">
+        <description>处方管理：西药处方、中药处方、处方审核</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/order" title="医嘱管理控制器">
+        <description>医嘱管理：长期医嘱、临时医嘱、医嘱执行</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/orderTemplate" title="医嘱模板控制器">
+        <description>医嘱模板管理：个人模板、科室模板、全院模板</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/diagnosis" title="诊断管理控制器">
+        <description>诊断管理：ICD-10诊断、入院诊断、出院诊断</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/exam" title="检查管理控制器">
+        <description>检查申请管理：影像检查、超声检查、内镜检查</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/lab" title="检验管理控制器">
+        <description>检验申请管理：检验申请、标本采集、结果查询</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/drug" title="药品管理控制器">
+        <description>药品管理：药品信息、库存管理、效期管理</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/dispense" title="发药管理控制器">
+        <description>发药管理：处方接收、调配发药、发药确认</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/drugreturn" title="退药管理控制器">
+        <description>退药管理：退药申请、退药审核、退药处理</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/nursing" title="护理管理控制器">
+        <description>护理管理：护理记录、护理评估、护理计划</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/vital" title="生命体征控制器">
+        <description>生命体征管理：体温单、血压脉搏、出入量记录</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/medication" title="给药管理控制器">
+        <description>给药管理：给药记录、给药核对、输液巡视</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/assess" title="评估管理控制器">
+        <description>评估管理：跌倒评估、压疮评估、疼痛评估、营养评估</description>
+    </tree>
+
+    <!-- HIS-biz Service层 -->
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service" title="HIS服务层">
+        <description>HIS模块业务逻辑层，处理核心业务逻辑</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/patient" title="患者服务">
+        <description>患者信息服务：患者CRUD、就诊历史、过敏史管理</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/register" title="挂号服务">
+        <description>挂号服务：挂号处理、退号处理、挂号查询</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/appointment" title="预约服务">
+        <description>预约服务：预约处理、号源管理、预约提醒</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/schedule" title="排班服务">
+        <description>排班服务：排班计划、号源生成、排班调整</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/admission" title="入院服务">
+        <description>入院服务：入院登记、床位分配、医保登记</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/discharge" title="出院服务">
+        <description>出院服务：出院申请、出院结算、病案归档</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/bed" title="床位服务">
+        <description>床位服务：床位状态管理、床位分配、转床处理</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/ward" title="病区服务">
+        <description>病区服务：病区信息管理、病房配置</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/preAdmission" title="预住院服务">
+        <description>预住院服务：预住院登记、预住院评估</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/prepayment" title="预交金服务">
+        <description>预交金服务：预交金缴纳、余额管理、预警通知</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/settlement" title="结算服务">
+        <description>结算服务：费用汇总、医保结算、个人结算</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/fee" title="费用服务">
+        <description>费用服务：费用录入、费用查询、退费处理</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/prescription" title="处方服务">
+        <description>处方服务：处方开立、处方审核、处方查询</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/order" title="医嘱服务">
+        <description>医嘱服务：医嘱开立、医嘱执行、医嘱停止</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/orderTemplate" title="医嘱模板服务">
+        <description>医嘱模板服务：模板管理、模板应用</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/diagnosis" title="诊断服务">
+        <description>诊断服务：诊断录入、诊断查询、ICD-10编码</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/exam" title="检查服务">
+        <description>检查服务：检查申请、检查安排、报告查询</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/lab" title="检验服务">
+        <description>检验服务：检验申请、标本管理、结果查询</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/drug" title="药品服务">
+        <description>药品服务：药品信息、库存管理、效期预警</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/dispense" title="发药服务">
+        <description>发药服务：处方接收、药品调配、发药确认</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/drugreturn" title="退药服务">
+        <description>退药服务：退药申请、退药审核、退药入库</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/nursing" title="护理服务">
+        <description>护理服务：护理记录、护理评估、护理计划</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/vital" title="生命体征服务">
+        <description>生命体征服务：体温记录、血压脉搏、出入量统计</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/medication" title="给药服务">
+        <description>给药服务：给药记录、给药核对、输液巡视</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/assess" title="评估服务">
+        <description>评估服务：跌倒评估、压疮评估、疼痛评估</description>
+    </tree>
+
+    <!-- HIS-biz DAL层 -->
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal" title="HIS数据访问层">
+        <description>HIS模块数据访问层，包含DO实体和Mapper</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject" title="DO实体类">
+        <description>数据库实体对象(DO)，对应数据库表结构</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/patient" title="患者DO">
+        <description>患者实体：his_patient_info、his_patient_card等</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/register" title="挂号DO">
+        <description>挂号实体：op_register、op_register_queue等</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/admission" title="入院DO">
+        <description>入院实体：ip_admission、ip_admission_record等</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/bed" title="床位DO">
+        <description>床位实体：ip_bed、ip_bed_record等</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/order" title="医嘱DO">
+        <description>医嘱实体：ip_order、ip_order_execute等</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/prescription" title="处方DO">
+        <description>处方实体：op_prescription、op_prescription_item等</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/drug" title="药品DO">
+        <description>药品实体：drug_info、drug_stock、drug_batch等</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/mysql" title="Mapper接口">
+        <description>MyBatis Mapper接口，数据库操作方法</description>
+    </tree>
+
+    <!-- HIS-biz 转换层 -->
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/convert" title="对象转换器">
+        <description>DO与VO对象转换器，基于MapStruct</description>
+    </tree>
+
+    <!-- ==================== M01 门诊管理模块 ==================== -->
+    <tree path="/yudao-module-his/yudao-module-his-op" title="M01-门诊管理">
+        <description>门诊管理子系统：挂号管理、门诊医生工作站、门诊收费、门诊药房、门诊输液</description>
+        <features>
+            <feature>M01-01 挂号管理：现场挂号、预约挂号、分诊排队、退号处理</feature>
+            <feature>M01-02 门诊医生工作站：患者接诊、诊断开立、处方开立、检查检验申请</feature>
+            <feature>M01-03 门诊收费管理：门诊收费、医保结算、退费处理、发票管理</feature>
+            <feature>M01-04 门诊药房管理：处方接收、处方审核、调配发药、退药处理</feature>
+            <feature>M01-05 门诊输液管理：输液登记、输液执行、输液叫号</feature>
+        </features>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-op/src/main/java/cn/iocoder/yudao/module/his/op/controller" title="门诊控制器">
+        <description>门诊模块REST API控制器</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-op/src/main/java/cn/iocoder/yudao/module/his/op/service" title="门诊服务层">
+        <description>门诊模块业务逻辑层</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-op/src/main/java/cn/iocoder/yudao/module/his/op/dal" title="门诊数据访问层">
+        <description>门诊模块数据访问层</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-op/src/main/java/cn/iocoder/yudao/module/his/op/enums" title="门诊枚举">
+        <description>门诊模块枚举类型定义</description>
+    </tree>
+
+    <!-- ==================== M02 住院管理模块 ==================== -->
+    <tree path="/yudao-module-his/yudao-module-his-ip" title="M02-住院管理">
+        <description>住院管理子系统：入院管理、住院医生工作站、护理工作站、床位管理、出院管理</description>
+        <features>
+            <feature>M02-01 入院管理：入院登记、床位分配、预交金管理、医保登记</feature>
+            <feature>M02-02 住院医生工作站：医嘱管理、病历书写、诊断管理、临床路径</feature>
+            <feature>M02-03 护理工作站：医嘱执行、护理记录、体温单、护理评估、给药记录</feature>
+            <feature>M02-04 床位管理：床位总览、床位分配、转床处理、床位预约</feature>
+            <feature>M02-05 出院管理：出院申请、出院结算、出院带药、病案归档</feature>
+        </features>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-ip/src/main/java/cn/iocoder/yudao/module/his/ip/controller" title="住院控制器">
+        <description>住院模块REST API控制器</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-ip/src/main/java/cn/iocoder/yudao/module/his/ip/service" title="住院服务层">
+        <description>住院模块业务逻辑层</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-ip/src/main/java/cn/iocoder/yudao/module/his/ip/dal" title="住院数据访问层">
+        <description>住院模块数据访问层</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-ip/src/main/java/cn/iocoder/yudao/module/his/ip/enums" title="住院枚举">
+        <description>住院模块枚举类型定义</description>
+    </tree>
+
+    <!-- ==================== M06 药品管理模块 ==================== -->
+    <tree path="/yudao-module-his/yudao-module-his-drug" title="M06-药品管理">
+        <description>药品管理子系统：药库管理、采购管理、处方审核、特殊药品管理</description>
+        <features>
+            <feature>M06-01 药库管理：药品入库、药品出库、库存盘点、效期管理、批号管理</feature>
+            <feature>M06-02 采购管理：采购计划、采购订单、供应商管理、采购验收</feature>
+            <feature>M06-03 处方审核与合理用药：处方审核、药物相互作用、过敏检查、剂量检查</feature>
+            <feature>M06-04 特殊药品管理：麻醉药品、精神药品、毒性药品、放射药品</feature>
+        </features>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-drug/src/main/java/cn/iocoder/yudao/module/his/drug/controller" title="药品控制器">
+        <description>药品模块REST API控制器</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-drug/src/main/java/cn/iocoder/yudao/module/his/drug/service" title="药品服务层">
+        <description>药品模块业务逻辑层</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-drug/src/main/java/cn/iocoder/yudao/module/his/drug/dal" title="药品数据访问层">
+        <description>药品模块数据访问层</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-drug/src/main/java/cn/iocoder/yudao/module/his/drug/enums" title="药品枚举">
+        <description>药品模块枚举类型定义</description>
+    </tree>
+
+    <!-- ==================== Yudao 框架基础模块 ==================== -->
+    <tree path="/yudao-framework" title="基础框架层">
+        <description>Yudao框架核心组件，提供通用能力和基础设施</description>
+    </tree>
+
+    <!-- Framework 子模块 -->
+    <tree path="/yudao-framework/yudao-common" title="公共工具类">
+        <description>通用工具类、枚举、常量、异常处理等</description>
+    </tree>
+    <tree path="/yudao-framework/yudao-spring-boot-starter-biz-data-permission" title="数据权限">
+        <description>基于MyBatis的数据权限控制，支持部门、个人等多种数据权限</description>
+    </tree>
+    <tree path="/yudao-framework/yudao-spring-boot-starter-biz-ip" title="IP地址解析">
+        <description>IP地址归属地解析，支持离线数据库</description>
+    </tree>
+    <tree path="/yudao-framework/yudao-spring-boot-starter-biz-tenant" title="多租户">
+        <description>多租户支持，租户隔离、租户切换等</description>
+    </tree>
+    <tree path="/yudao-framework/yudao-spring-boot-starter-excel" title="Excel处理">
+        <description>Excel导入导出功能，基于EasyExcel</description>
+    </tree>
+    <tree path="/yudao-framework/yudao-spring-boot-starter-job" title="定时任务">
+        <description>分布式定时任务调度，基于Quartz/XXL-Job</description>
+    </tree>
+    <tree path="/yudao-framework/yudao-spring-boot-starter-monitor" title="监控告警">
+        <description>应用监控、日志监控、性能监控</description>
+    </tree>
+    <tree path="/yudao-framework/yudao-spring-boot-starter-mq" title="消息队列">
+        <description>消息队列支持，支持Redis/RocketMQ/Kafka</description>
+    </tree>
+    <tree path="/yudao-framework/yudao-spring-boot-starter-mybatis" title="MyBatis增强">
+        <description>MyBatis-Plus增强配置，分页、数据权限等</description>
+    </tree>
+    <tree path="/yudao-framework/yudao-spring-boot-starter-protection" title="安全防护">
+        <description>接口防刷、敏感词过滤、XSS防护等</description>
+    </tree>
+    <tree path="/yudao-framework/yudao-spring-boot-starter-redis" title="Redis缓存">
+        <description>Redis缓存配置，分布式锁、限流等</description>
+    </tree>
+    <tree path="/yudao-framework/yudao-spring-boot-starter-security" title="安全认证">
+        <description>Spring Security配置，OAuth2.0、JWT认证</description>
+    </tree>
+    <tree path="/yudao-framework/yudao-spring-boot-starter-test" title="测试支持">
+        <description>单元测试、集成测试支持</description>
+    </tree>
+    <tree path="/yudao-framework/yudao-spring-boot-starter-web" title="Web增强">
+        <description>Web层增强配置，全局异常处理、Swagger、日志等</description>
+    </tree>
+    <tree path="/yudao-framework/yudao-spring-boot-starter-websocket" title="WebSocket">
+        <description>WebSocket支持，消息推送、在线状态</description>
+    </tree>
+
+    <!-- ==================== 依赖管理 ==================== -->
+    <tree path="/yudao-dependencies" title="依赖管理">
+        <description>Maven BOM依赖版本管理，统一管理所有依赖版本</description>
+    </tree>
+
+    <!-- ==================== M09 系统管理模块 ==================== -->
+    <tree path="/yudao-module-system" title="M09-系统管理子系统">
+        <description>系统管理子系统：用户、角色、权限、部门、租户、字典、日志等基础功能</description>
+        <features>
+            <feature>M09-001 用户管理：用户账号创建、停用、密码管理</feature>
+            <feature>M09-002 角色管理：角色定义、权限分配</feature>
+            <feature>M09-003 权限管理：RBAC权限控制，数据权限</feature>
+            <feature>M09-004 组织架构：科室、岗位、人员信息维护</feature>
+            <feature>M09-005 数据字典：基础数据字典维护</feature>
+            <feature>M09-006 日志管理：操作日志、登录日志、审计日志</feature>
+            <feature>M09-007 参数配置：系统参数、业务规则配置</feature>
+            <feature>M09-008 消息管理：站内消息、通知管理</feature>
+            <feature>M09-009 菜单管理：系统菜单配置</feature>
+            <feature>M09-010 数据备份：数据备份策略配置、备份执行</feature>
+        </features>
+    </tree>
+
+    <!-- System模块 API层 -->
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/api" title="系统API层">
+        <description>系统模块对外API接口定义</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/api/dept" title="部门API">
+        <description>部门对外API：部门信息、岗位信息查询</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/api/dict" title="字典API">
+        <description>字典对外API：字典数据查询</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/api/permission" title="权限API">
+        <description>权限对外API：权限校验、角色查询</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/api/user" title="用户API">
+        <description>用户对外API：用户信息查询</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/api/tenant" title="租户API">
+        <description>租户对外API：租户信息查询</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/api/oauth2" title="OAuth2 API">
+        <description>OAuth2对外API：令牌管理、客户端管理</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/api/sms" title="短信API">
+        <description>短信对外API：短信发送、验证码</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/api/mail" title="邮件API">
+        <description>邮件对外API：邮件发送</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/api/notify" title="通知API">
+        <description>通知对外API：站内消息</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/api/social" title="社交API">
+        <description>社交登录对外API：微信、钉钉等</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/api/logger" title="日志API">
+        <description>日志对外API：操作日志、登录日志</description>
+    </tree>
+
+    <!-- System模块 Controller层 -->
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/controller/admin" title="系统控制器层">
+        <description>系统模块REST API控制器</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/controller/admin/auth" title="认证控制器">
+        <description>认证控制器：登录、登出、刷新令牌</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/controller/admin/dept" title="部门控制器">
+        <description>部门控制器：部门管理、岗位管理</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/controller/admin/dict" title="字典控制器">
+        <description>字典控制器：字典类型、字典数据</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/controller/admin/logger" title="日志控制器">
+        <description>日志控制器：操作日志、登录日志</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/controller/admin/permission" title="权限控制器">
+        <description>权限控制器：角色管理、菜单管理、权限分配</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/controller/admin/user" title="用户控制器">
+        <description>用户控制器：用户管理、用户导入导出</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/controller/admin/tenant" title="租户控制器">
+        <description>租户控制器：租户管理、租户套餐</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/controller/admin/sms" title="短信控制器">
+        <description>短信控制器：短信模板、短信日志</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/controller/admin/mail" title="邮件控制器">
+        <description>邮件控制器：邮件模板、邮件账号</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/controller/admin/notify" title="通知控制器">
+        <description>通知控制器：站内消息、通知公告</description>
+    </tree>
+
+    <!-- System模块 Service层 -->
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/service" title="系统服务层">
+        <description>系统模块业务逻辑层</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/service/auth" title="认证服务">
+        <description>认证服务：登录验证、令牌管理</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/service/dept" title="部门服务">
+        <description>部门服务：部门管理、岗位管理</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/service/dict" title="字典服务">
+        <description>字典服务：字典类型、字典数据</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/service/permission" title="权限服务">
+        <description>权限服务：角色管理、菜单管理、权限分配</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/service/user" title="用户服务">
+        <description>用户服务：用户管理、密码管理</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/service/tenant" title="租户服务">
+        <description>租户服务：租户管理、租户隔离</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/service/oauth2" title="OAuth2服务">
+        <description>OAuth2服务：令牌管理、客户端管理</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/service/sms" title="短信服务">
+        <description>短信服务：短信发送、模板管理</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/service/mail" title="邮件服务">
+        <description>邮件服务：邮件发送、模板管理</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/service/notify" title="通知服务">
+        <description>通知服务：站内消息、消息推送</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/service/social" title="社交服务">
+        <description>社交服务：微信登录、钉钉登录</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/service/logger" title="日志服务">
+        <description>日志服务：操作日志、登录日志</description>
+    </tree>
+
+    <!-- System模块 DAL层 -->
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/dal" title="系统数据访问层">
+        <description>系统模块数据访问层</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/dal/dataobject" title="系统DO实体">
+        <description>数据库实体对象(DO)</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/dal/dataobject/user" title="用户DO">
+        <description>用户实体：system_users</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/dal/dataobject/dept" title="部门DO">
+        <description>部门实体：system_dept、system_post</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/dal/dataobject/permission" title="权限DO">
+        <description>权限实体：system_role、system_menu、system_role_menu</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/dal/dataobject/tenant" title="租户DO">
+        <description>租户实体：system_tenant、system_tenant_package</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/dal/dataobject/dict" title="字典DO">
+        <description>字典实体：system_dict_type、system_dict_data</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/dal/dataobject/oauth2" title="OAuth2 DO">
+        <description>OAuth2实体：system_oauth2_client、system_oauth2_token</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/dal/dataobject/sms" title="短信DO">
+        <description>短信实体：system_sms_template、system_sms_log</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/dal/dataobject/mail" title="邮件DO">
+        <description>邮件实体：system_mail_template、system_mail_account</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/dal/dataobject/notify" title="通知DO">
+        <description>通知实体：system_notify_message、system_notice</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/dal/dataobject/logger" title="日志DO">
+        <description>日志实体：system_operate_log、system_login_log</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/dal/mysql" title="系统Mapper">
+        <description>MyBatis Mapper接口</description>
+    </tree>
+    <tree path="/yudao-module-system/src/main/java/cn/iocoder/yudao/module/system/dal/redis" title="系统Redis">
+        <description>Redis缓存操作</description>
+    </tree>
+
+    <!-- ==================== Infra 基础设施模块 ==================== -->
+    <tree path="/yudao-module-infra" title="基础设施模块">
+        <description>基础设施模块：文件存储、配置中心、定时任务、代码生成、日志管理等</description>
+    </tree>
+
+    <!-- Infra模块 API层 -->
+    <tree path="/yudao-module-infra/src/main/java/cn/iocoder/yudao/module/infra/api" title="Infra API层">
+        <description>Infra模块对外API接口定义</description>
+    </tree>
+    <tree path="/yudao-module-infra/src/main/java/cn/iocoder/yudao/module/infra/api/file" title="文件API">
+        <description>文件对外API：文件上传、文件下载</description>
+    </tree>
+    <tree path="/yudao-module-infra/src/main/java/cn/iocoder/yudao/module/infra/api/config" title="配置API">
+        <description>配置对外API：系统配置查询</description>
+    </tree>
+    <tree path="/yudao-module-infra/src/main/java/cn/iocoder/yudao/module/infra/api/logger" title="日志API">
+        <description>日志对外API：API访问日志、API错误日志</description>
+    </tree>
+    <tree path="/yudao-module-infra/src/main/java/cn/iocoder/yudao/module/infra/api/websocket" title="WebSocket API">
+        <description>WebSocket对外API：消息推送</description>
+    </tree>
+
+    <!-- Infra模块 Controller层 -->
+    <tree path="/yudao-module-infra/src/main/java/cn/iocoder/yudao/module/infra/controller/admin" title="Infra控制器层">
+        <description>Infra模块REST API控制器</description>
+    </tree>
+    <tree path="/yudao-module-infra/src/main/java/cn/iocoder/yudao/module/infra/controller/admin/file" title="文件控制器">
+        <description>文件控制器：文件上传、文件管理、文件配置</description>
+    </tree>
+    <tree path="/yudao-module-infra/src/main/java/cn/iocoder/yudao/module/infra/controller/admin/config" title="配置控制器">
+        <description>配置控制器：系统参数配置</description>
+    </tree>
+    <tree path="/yudao-module-infra/src/main/java/cn/iocoder/yudao/module/infra/controller/admin/codegen" title="代码生成控制器">
+        <description>代码生成控制器：表导入、代码生成、预览下载</description>
+    </tree>
+    <tree path="/yudao-module-infra/src/main/java/cn/iocoder/yudao/module/infra/controller/admin/job" title="定时任务控制器">
+        <description>定时任务控制器：任务管理、任务日志</description>
+    </tree>
+    <tree path="/yudao-module-infra/src/main/java/cn/iocoder/yudao/module/infra/controller/admin/logger" title="日志控制器">
+        <description>日志控制器：API访问日志、API错误日志</description>
+    </tree>
+    <tree path="/yudao-module-infra/src/main/java/cn/iocoder/yudao/module/infra/controller/admin/db" title="数据库控制器">
+        <description>数据库控制器：数据源管理</description>
+    </tree>
+    <tree path="/yudao-module-infra/src/main/java/cn/iocoder/yudao/module/infra/controller/admin/redis" title="Redis控制器">
+        <description>Redis控制器：缓存管理、键值监控</description>
+    </tree>
+    <tree path="/yudao-module-infra/src/main/java/cn/iocoder/yudao/module/infra/controller/admin/demo" title="示例控制器">
+        <description>示例控制器：代码生成示例</description>
+    </tree>
+
+    <!-- Infra模块 Service层 -->
+    <tree path="/yudao-module-infra/src/main/java/cn/iocoder/yudao/module/infra/service" title="Infra服务层">
+        <description>Infra模块业务逻辑层</description>
+    </tree>
+    <tree path="/yudao-module-infra/src/main/java/cn/iocoder/yudao/module/infra/service/file" title="文件服务">
+        <description>文件服务：文件上传、文件存储、文件配置</description>
+    </tree>
+    <tree path="/yudao-module-infra/src/main/java/cn/iocoder/yudao/module/infra/service/config" title="配置服务">
+        <description>配置服务：系统参数管理</description>
+    </tree>
+    <tree path="/yudao-module-infra/src/main/java/cn/iocoder/yudao/module/infra/service/codegen" title="代码生成服务">
+        <description>代码生成服务：表导入、代码生成、模板渲染</description>
+    </tree>
+    <tree path="/yudao-module-infra/src/main/java/cn/iocoder/yudao/module/infra/service/job" title="定时任务服务">
+        <description>定时任务服务：任务调度、任务执行</description>
+    </tree>
+    <tree path="/yudao-module-infra/src/main/java/cn/iocoder/yudao/module/infra/service/logger" title="日志服务">
+        <description>日志服务：API日志记录</description>
+    </tree>
+    <tree path="/yudao-module-infra/src/main/java/cn/iocoder/yudao/module/infra/service/db" title="数据库服务">
+        <description>数据库服务：数据源管理</description>
+    </tree>
+
+    <!-- Infra模块 DAL层 -->
+    <tree path="/yudao-module-infra/src/main/java/cn/iocoder/yudao/module/infra/dal" title="Infra数据访问层">
+        <description>Infra模块数据访问层</description>
+    </tree>
+    <tree path="/yudao-module-infra/src/main/java/cn/iocoder/yudao/module/infra/dal/dataobject/file" title="文件DO">
+        <description>文件实体：infra_file、infra_file_config</description>
+    </tree>
+    <tree path="/yudao-module-infra/src/main/java/cn/iocoder/yudao/module/infra/dal/dataobject/config" title="配置DO">
+        <description>配置实体：infra_config</description>
+    </tree>
+    <tree path="/yudao-module-infra/src/main/java/cn/iocoder/yudao/module/infra/dal/dataobject/codegen" title="代码生成DO">
+        <description>代码生成实体：infra_codegen_table、infra_codegen_column</description>
+    </tree>
+    <tree path="/yudao-module-infra/src/main/java/cn/iocoder/yudao/module/infra/dal/dataobject/job" title="任务DO">
+        <description>任务实体：infra_job、infra_job_log</description>
+    </tree>
+    <tree path="/yudao-module-infra/src/main/java/cn/iocoder/yudao/module/infra/dal/dataobject/logger" title="日志DO">
+        <description>日志实体：infra_api_access_log、infra_api_error_log</description>
+    </tree>
+
+    <!-- ==================== 其他业务模块 ==================== -->
+    <tree path="/yudao-module-ai" title="AI能力模块">
+        <description>AI能力模块：对话、图像、模型、知识库、音乐、写作等AI服务</description>
+    </tree>
+    <tree path="/yudao-module-bpm" title="工作流模块">
+        <description>BPM工作流模块：流程定义、流程实例、任务管理、表单管理等</description>
+    </tree>
+    <tree path="/yudao-module-pay" title="支付模块">
+        <description>支付模块：订单、退款、钱包、转账、渠道、通知等支付服务</description>
+    </tree>
+    <tree path="/yudao-module-mp" title="公众号模块">
+        <description>微信公众号模块：账号、用户、消息、素材、菜单、自动回复等</description>
+    </tree>
+    <tree path="/yudao-module-report" title="报表模块">
+        <description>报表模块：GoView项目、数据查询、积木报表等</description>
+    </tree>
+
+    <!-- ==================== 文档目录 ==================== -->
+    <tree path="/docs" title="项目文档">
+        <description>项目文档目录：模块文档、API文档、数据模型、业务流程图等</description>
+    </tree>
+    <tree path="/docs/his" title="HIS设计文档">
+        <description>HIS系统设计文档：需求规格说明书、功能模块清单、业务流程图、数据库设计、数据字典</description>
+    </tree>
+    <tree path="/docs/his/M01-门诊管理" title="M01门诊设计文档">
+        <description>门诊管理设计文档：数据库设计、业务流程图</description>
+    </tree>
+    <tree path="/docs/his/M02-住院管理" title="M02住院设计文档">
+        <description>住院管理设计文档：数据库设计、业务流程图</description>
+    </tree>
+    <tree path="/docs/his/M06-药品管理" title="M06药品设计文档">
+        <description>药品管理设计文档：数据库设计、业务流程图</description>
+    </tree>
+    <tree path="/docs/his/M09-系统管理" title="M09系统设计文档">
+        <description>系统管理设计文档：数据库设计、业务流程图</description>
+    </tree>
+
+    <!-- ==================== SQL目录 ==================== -->
+    <tree path="/sql" title="数据库脚本">
+        <description>数据库SQL脚本：建表语句、初始化数据、存储过程等</description>
+    </tree>
+
+    <!-- ==================== Skills目录 ==================== -->
+    <tree path="/skills" title="Skills开发规范">
+        <description>Claude Code Skills开发规范文档：设计规范、模块指南、使用场景等</description>
+    </tree>
+    <tree path="/skills/design" title="设计规范">
+        <description>设计规范：数据库设计、实体设计、API设计、CRUD生成</description>
+    </tree>
+    <tree path="/skills/modules" title="模块规范">
+        <description>模块规范：各模块开发指南和约束</description>
+    </tree>
+    <tree path="/skills/patterns" title="设计模式">
+        <description>设计模式：工厂模式、策略模式、模板方法模式</description>
+    </tree>
+    <tree path="/skills/usage" title="使用指南">
+        <description>使用指南：实体实现、模块扩展、新建模块、改造模块</description>
+    </tree>
+
+    <!-- ==================== 其他目录 ==================== -->
+    <tree path="/script" title="部署脚本">
+        <description>部署脚本目录：Docker配置、CI/CD脚本、数据库初始化脚本等</description>
+    </tree>
+
+    <!-- ==================== 隐藏目录说明 ==================== -->
+    <tree path="/.claude" title="Claude Code配置">
+        <description>Claude Code工作流配置：记忆文件、任务列表、设置等</description>
+    </tree>
+    <tree path="/.github" title="GitHub配置">
+        <description>GitHub配置：CI/CD工作流、Issue模板、PR模板等</description>
+    </tree>
+    <tree path="/.gitee" title="Gitee配置">
+        <description>Gitee配置：CI/CD工作流、Issue模板、PR模板等</description>
+    </tree>
+    <tree path="/.idea" title="IDEA配置">
+        <description>IntelliJ IDEA项目配置文件</description>
+    </tree>
+    <tree path="/.image" title="图片资源">
+        <description>项目图片资源目录</description>
+    </tree>
+</trees>
