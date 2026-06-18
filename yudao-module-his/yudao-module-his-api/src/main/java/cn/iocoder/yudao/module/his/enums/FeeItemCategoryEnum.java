@@ -11,7 +11,7 @@ import java.util.Arrays;
  */
 @Getter
 @AllArgsConstructor
-public enum FeeItemCategoryEnum implements ArrayValiable<Integer> {
+public enum FeeItemCategoryEnum implements ArrayValuable<Integer> {
 
     REGISTRATION(1, "挂号费"),
     CONSULTATION(2, "诊查费"),

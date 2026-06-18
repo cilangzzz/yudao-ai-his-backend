@@ -11,7 +11,7 @@ import java.util.Arrays;
  */
 @Getter
 @AllArgsConstructor
-public enum OrderTemplateCategoryEnum implements ArrayValiable<Integer> {
+public enum OrderTemplateCategoryEnum implements ArrayValuable<Integer> {
 
     PERSONAL(1, "个人模板"),
     DEPT(2, "科室模板"),

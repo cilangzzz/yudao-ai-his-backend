@@ -13,7 +13,7 @@ import java.util.Arrays;
  */
 @Getter
 @AllArgsConstructor
-public enum DiagnosisStatusEnum implements ArrayValiable<Integer> {
+public enum DiagnosisStatusEnum implements ArrayValuable<Integer> {
 
     PRELIMINARY(1, "初步诊断"),
     CONFIRMED(2, "确定诊断"),
