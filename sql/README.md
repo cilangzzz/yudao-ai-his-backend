@@ -12,38 +12,45 @@ sql/mysql/
 │
 └── his/                         # HIS 系统业务 SQL
     ├── tables/                  # 表结构 DDL
-    │   ├── his_init_tables.sql           # HIS 核心表结构（科室、人员、患者等）
-    │   ├── his_exam_tables.sql           # 检查模块表结构
-    │   ├── his_lab_tables.sql            # 检验模块表结构
-    │   ├── his_nursing_tables.sql        # 护理模块表结构
-    │   ├── his_drug_return_tables.sql    # 退药模块表结构
-    │   ├── his_inpatient_settlement_tables.sql  # 住院结算表结构
-    │   ├── his_order_template_tables.sql # 医嘱模板表结构
-    │   ├── his_prepayment_create_tables.sql     # 预交金表结构
+    │   ├── 20260618_his_init_tables.sql           # HIS 核心表结构（科室、人员、患者等）
+    │   ├── 20260618_his_exam_tables.sql           # 检查模块表结构
+    │   ├── 20260618_his_lab_tables.sql            # 检验模块表结构
+    │   ├── 20260618_his_nursing_tables.sql        # 护理模块表结构
+    │   ├── 20260618_his_drug_return_tables.sql    # 退药模块表结构
+    │   ├── 20260618_his_inpatient_settlement_tables.sql  # 住院结算表结构
+    │   ├── 20260618_his_order_template_tables.sql # 医嘱模板表结构
+    │   ├── 20260618_his_prepayment_tables.sql     # 预交金表结构
     │   └── ... (其他表结构文件)
     │
     ├── data/                    # 初始数据 DML
-    │   ├── his_menu_merged.sql           # HIS 菜单数据（合并）
-    │   ├── his_dict_merged.sql           # HIS 字典数据（合并）
-    │   ├── his_database_init_full_data.sql # 完整初始化数据
-    │   └── his_order_template_data.sql   # 医嘱模板初始数据
+    │   ├── 20260618_his_menu_data.sql           # HIS 菜单数据（合并）
+    │   ├── 20260618_his_dict_data.sql           # HIS 字典数据（合并）
+    │   ├── 20260618_his_init_data.sql           # 完整初始化数据
+    │   └── 20260618_his_order_template_data.sql # 医嘱模板初始数据
     │
     └── migrations/              # 增量迁移脚本（待添加）
 ```
 
 ## 文件命名规范
 
-### 表结构文件
-- **格式**: `{module}_tables.sql` 或 `{table_name}.sql`
-- **示例**: `his_init_tables.sql`, `his_exam_tables.sql`
+所有 SQL 文件统一使用日期前缀命名：
 
-### 数据文件
-- **格式**: `{module}_data.sql` 或 `{table_name}_data.sql`
-- **示例**: `his_menu_merged.sql`, `his_dict_merged.sql`
+### 格式
+```
+{YYYYMMDD}_{表名/模块名}_{类型}.sql
+```
+
+### 示例
+| 文件名 | 说明 |
+|--------|------|
+| `20260618_his_init_tables.sql` | 2026年6月18日创建的HIS 核心表结构 |
+| `20260618_his_exam_tables.sql` | 2026年6月18日创建的检查模块表结构 |
+| `20260618_his_menu_data.sql` | 2026年6月18日的菜单初始数据 |
+| `20260618_his_dict_data.sql` | 2026年6月18日的字典初始数据 |
 
 ### 迁移文件
 - **格式**: `{YYYYMMDD}_{description}.sql`
-- **示例**: `20260618_add_refund_type.sql`
+- **示例**: `20260620_add_refund_type.sql`
 
 ## 使用说明
 
@@ -60,14 +67,14 @@ mysql -u root -p ruoyi-vue-pro < sql/mysql/framework/ruoyi-vue-pro.sql
 mysql -u root -p ruoyi-vue-pro < sql/mysql/framework/quartz.sql
 
 # 3. 执行 HIS 表结构脚本
-mysql -u root -p ruoyi-vue-pro < sql/mysql/his/tables/his_init_tables.sql
-mysql -u root -p ruoyi-vue-pro < sql/mysql/his/tables/his_exam_tables.sql
-mysql -u root -p ruoyi-vue-pro < sql/mysql/his/tables/his_lab_tables.sql
+mysql -u root -p ruoyi-vue-pro < sql/mysql/his/tables/20260618_his_init_tables.sql
+mysql -u root -p ruoyi-vue-pro < sql/mysql/his/tables/20260618_his_exam_tables.sql
+mysql -u root -p ruoyi-vue-pro < sql/mysql/his/tables/20260618_his_lab_tables.sql
 # ... 其他表结构文件
 
 # 4. 执行 HIS 初始数据脚本
-mysql -u root -p ruoyi-vue-pro < sql/mysql/his/data/his_dict_merged.sql
-mysql -u root -p ruoyi-vue-pro < sql/mysql/his/data/his_menu_merged.sql
+mysql -u root -p ruoyi-vue-pro < sql/mysql/his/data/20260618_his_dict_data.sql
+mysql -u root -p ruoyi-vue-pro < sql/mysql/his/data/20260618_his_menu_data.sql
 ```
 
 ### 2. 增量更新
