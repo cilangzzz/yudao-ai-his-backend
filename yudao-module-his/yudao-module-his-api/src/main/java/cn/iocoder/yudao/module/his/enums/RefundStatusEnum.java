@@ -1,6 +1,6 @@
 package cn.iocoder.yudao.module.his.enums;
 
-import cn.iocoder.yudao.framework.common.core.IntArrayValuable;
+import cn.iocoder.yudao.framework.common.core.ArrayValuable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -11,14 +11,14 @@ import java.util.Arrays;
  */
 @Getter
 @AllArgsConstructor
-public enum RefundStatusEnum implements IntArrayValuable {
+public enum RefundStatusEnum implements ArrayValiable<Integer> {
 
     PENDING(1, "待审核"),
     APPROVED(2, "已通过"),
     REJECTED(3, "已拒绝"),
     COMPLETED(4, "已完成");
 
-    public static final int[] ARRAYS = Arrays.stream(values()).mapToInt(RefundStatusEnum::getStatus).toArray();
+    public static final Integer[] ARRAYS = Arrays.stream(values()).map(RefundStatusEnum::getStatus).toArray(Integer[]::new);
 
     /**
      * 状态值
@@ -30,7 +30,7 @@ public enum RefundStatusEnum implements IntArrayValuable {
     private final String name;
 
     @Override
-    public int[] array() {
+    public Integer[] array() {
         return ARRAYS;
     }
 
