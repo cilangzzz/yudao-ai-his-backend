@@ -118,6 +118,8 @@ public interface ErrorCodeConstants {
     ErrorCode MEDICATION_ADMIN_WRISTBAND_MISMATCH = new ErrorCode(1_016_005_004, "患者腕带不匹配");
     ErrorCode NURSING_SHIFT_NOT_EXISTS = new ErrorCode(1_016_005_005, "交接班记录不存在");
     ErrorCode VITAL_SIGN_NOT_EXISTS = new ErrorCode(1_016_005_006, "生命体征记录不存在");
+    ErrorCode NURSING_ASSESSMENT_NOT_EXISTS = new ErrorCode(1_016_005_007, "护理评估不存在");
+    ErrorCode NURSING_MEASURE_NOT_EXISTS = new ErrorCode(1_016_005_008, "护理措施不存在");
 
     // 护理交接班
     ErrorCode NURSING_HANDOVER_NOT_EXISTS = new ErrorCode(1_016_005_010, "交接班记录不存在");
@@ -134,9 +136,15 @@ public interface ErrorCodeConstants {
     ErrorCode ASSESS_RISK_LEVEL_INVALID = new ErrorCode(1_016_006_004, "风险等级无效");
 
     // 出院管理
-    ErrorCode DISCHARGE_NOT_EXISTS = new ErrorCode(1_016_006_000, "出院记录不存在");
-    ErrorCode DISCHARGE_FEE_NOT_SETTLED = new ErrorCode(1_016_006_001, "出院费用未结算");
-    ErrorCode DISCHARGE_SUMMARY_NOT_EXISTS = new ErrorCode(1_016_006_002, "出院小结不存在");
+    ErrorCode DISCHARGE_NOT_EXISTS = new ErrorCode(1_016_007_000, "出院记录不存在");
+    ErrorCode DISCHARGE_FEE_NOT_SETTLED = new ErrorCode(1_016_007_001, "出院费用未结算");
+
+    // 出院小结
+    ErrorCode DISCHARGE_SUMMARY_NOT_EXISTS = new ErrorCode(1_016_007_010, "出院小结不存在");
+    ErrorCode DISCHARGE_SUMMARY_ALREADY_EXISTS = new ErrorCode(1_016_007_011, "出院小结已存在，不能重复创建");
+    ErrorCode DISCHARGE_SUMMARY_CANNOT_MODIFY = new ErrorCode(1_016_007_012, "出院小结已审核，不能修改");
+    ErrorCode DISCHARGE_SUMMARY_CANNOT_REVIEW = new ErrorCode(1_016_007_013, "出院小结已审核，不能重复审核");
+    ErrorCode DISCHARGE_SUMMARY_NOT_REVIEWED = new ErrorCode(1_016_007_014, "出院小结未审核，不能撤回");
 
     // ========== M06 药品管理 1_017_000_XXX ==========
 
