@@ -1,7 +1,7 @@
 package cn.iocoder.yudao.module.his.controller.admin.payment.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotNull;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 @Schema(description = "管理后台 - 门诊退费审核 Request VO")

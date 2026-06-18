@@ -10,7 +10,7 @@ import cn.iocoder.yudao.module.his.dal.mysql.payment.OpPaymentMapper;
 import cn.iocoder.yudao.module.his.dal.mysql.payment.OpRefundMapper;
 import cn.iocoder.yudao.module.his.enums.PaymentStatusEnum;
 import cn.iocoder.yudao.module.his.enums.RefundStatusEnum;
-import jakarta.annotation.Resource;
+import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;

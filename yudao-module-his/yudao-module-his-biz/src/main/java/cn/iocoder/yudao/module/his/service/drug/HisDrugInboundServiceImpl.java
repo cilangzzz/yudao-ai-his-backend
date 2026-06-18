@@ -9,6 +9,7 @@ import cn.iocoder.yudao.module.his.dal.dataobject.drug.HisDrugInboundDO;
 import cn.iocoder.yudao.module.his.dal.dataobject.drug.HisDrugInboundItemDO;
 import cn.iocoder.yudao.module.his.dal.mysql.drug.HisDrugInboundItemMapper;
 import cn.iocoder.yudao.module.his.dal.mysql.drug.HisDrugInboundMapper;
+import cn.iocoder.yudao.module.his.dal.mysql.drug.HisDrugMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;

@@ -6,7 +6,7 @@ import cn.iocoder.yudao.framework.mybatis.core.query.LambdaQueryWrapperX;
 import cn.iocoder.yudao.module.his.controller.admin.payment.vo.*;
 import cn.iocoder.yudao.module.his.dal.dataobject.payment.HisPrepaymentDO;
 import cn.iocoder.yudao.module.his.dal.mysql.payment.HisPrepaymentMapper;
-import jakarta.annotation.Resource;
+import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 

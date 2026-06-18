@@ -4,6 +4,7 @@ import cn.hutool.core.map.MapUtil;
 import cn.iocoder.yudao.framework.common.enums.UserTypeEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -16,6 +17,7 @@ import java.util.Map;
  * @author 芋道源码
  */
 @Data
+@Accessors(chain = true)
 public class LoginUser {
 
     public static final String INFO_KEY_NICKNAME = "nickname";

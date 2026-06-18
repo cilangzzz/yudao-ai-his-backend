@@ -273,4 +273,18 @@ public interface ErrorCodeConstants {
     ErrorCode EXAM_EQUIPMENT_MAINTENANCE = new ErrorCode(1_019_003_001, "检查设备正在维护");
     ErrorCode EXAM_EQUIPMENT_STOPPED = new ErrorCode(1_019_003_002, "检查设备已停用");
 
+    // ========== M02-05 住院结算 1_016_008_XXX ==========
+
+    // 住院结算
+    ErrorCode SETTLEMENT_NOT_EXISTS = new ErrorCode(1_016_008_000, "住院结算单不存在");
+    ErrorCode SETTLEMENT_STATUS_ERROR = new ErrorCode(1_016_008_001, "结算状态不正确，无法操作");
+    ErrorCode SETTLEMENT_ALREADY_CONFIRMED = new ErrorCode(1_016_008_002, "结算单已确认，无法修改");
+    ErrorCode SETTLEMENT_ALREADY_REFUNDED = new ErrorCode(1_016_008_003, "结算单已退费");
+    ErrorCode SETTLEMENT_ALREADY_CANCELLED = new ErrorCode(1_016_008_004, "结算单已作废");
+
+    // 住院费用明细
+    ErrorCode FEE_NOT_EXISTS = new ErrorCode(1_016_008_010, "住院费用明细不存在");
+    ErrorCode FEE_ALREADY_SETTLED = new ErrorCode(1_016_008_011, "费用明细已结算，无法删除");
+    ErrorCode FEE_ALREADY_REFUNDED = new ErrorCode(1_016_008_012, "费用明细已退费");
+
 }

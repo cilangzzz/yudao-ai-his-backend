@@ -21,7 +21,7 @@ public class OpAppointmentPageReqVO extends PageParam {
     @Schema(description = "患者ID", example = "1")
     private Long patientId;
 
-    @Schema(description = "患者姓名", description = "支持模糊查询", example = "张三")
+    @Schema(description = "患者姓名",  example = "张三")
     private String patientName;
 
     @Schema(description = "医生ID", example = "1")

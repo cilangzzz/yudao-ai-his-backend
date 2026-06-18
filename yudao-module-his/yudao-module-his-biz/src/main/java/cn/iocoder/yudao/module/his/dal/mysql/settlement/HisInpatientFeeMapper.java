@@ -3,10 +3,12 @@ package cn.iocoder.yudao.module.his.dal.mysql.settlement;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.mybatis.core.mapper.BaseMapperX;
 import cn.iocoder.yudao.framework.mybatis.core.query.LambdaQueryWrapperX;
+import cn.iocoder.yudao.module.his.controller.admin.settlement.vo.HisInpatientFeePageReqVO;
 import cn.iocoder.yudao.module.his.dal.dataobject.settlement.HisInpatientFeeDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -121,5 +123,33 @@ public interface HisInpatientFeeMapper extends BaseMapperX<HisInpatientFeeDO> {
     int batchUpdateFeeStatus(@Param("feeIds") List<Long> feeIds,
                              @Param("feeStatus") Integer feeStatus,
                              @Param("settlementId") Long settlementId);
+
+    /**
+     * 分页查询费用明细
+     */
+    default PageResult<HisInpatientFeeDO> selectPage(HisInpatientFeePageReqVO reqVO) {
+        return selectPage(reqVO, new LambdaQueryWrapperX<HisInpatientFeeDO>()
+                .eqIfPresent(HisInpatientFeeDO::getAdmissionId, reqVO.getAdmissionId())
+                .eqIfPresent(HisInpatientFeeDO::getPatientId, reqVO.getPatientId())
+                .likeIfPresent(HisInpatientFeeDO::getPatientName, reqVO.getPatientName())
+                .eqIfPresent(HisInpatientFeeDO::getInpatientNo, reqVO.getInpatientNo())
+                .eqIfPresent(HisInpatientFeeDO::getFeeNo, reqVO.getFeeNo())
+                .eqIfPresent(HisInpatientFeeDO::getItemCode, reqVO.getItemCode())
+                .likeIfPresent(HisInpatientFeeDO::getItemName, reqVO.getItemName())
+                .eqIfPresent(HisInpatientFeeDO::getItemType, reqVO.getItemType())
+                .eqIfPresent(HisInpatientFeeDO::getFeeStatus, reqVO.getFeeStatus())
+                .eqIfPresent(HisInpatientFeeDO::getDeptId, reqVO.getDeptId())
+                .betweenIfPresent(HisInpatientFeeDO::getFeeDate, reqVO.getFeeDateStart(), reqVO.getFeeDateEnd())
+                .orderByDesc(HisInpatientFeeDO::getCreateTime));
+    }
+
+    /**
+     * 根据入院记录ID更新费用状态
+     */
+    @Update("UPDATE his_inpatient_fee SET fee_status = #{feeStatus}, settlement_id = #{settlementId}, " +
+            "update_time = NOW() WHERE admission_id = #{admissionId} AND deleted = 0")
+    int updateStatusByAdmissionId(@Param("admissionId") Long admissionId,
+                                   @Param("feeStatus") Integer feeStatus,
+                                   @Param("settlementId") Long settlementId);
 
 }

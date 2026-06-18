@@ -221,8 +221,8 @@ public class OpPrescriptionDO extends TenantBaseDO {
         if (validDays == null || validDays <= 0) {
             return true;
         }
-        return createTime != null &&
-               LocalDateTime.now().isBefore(createTime.plusDays(validDays));
+        return getCreateTime() != null &&
+               LocalDateTime.now().isBefore(getCreateTime().plusDays(validDays));
     }
 
     /**

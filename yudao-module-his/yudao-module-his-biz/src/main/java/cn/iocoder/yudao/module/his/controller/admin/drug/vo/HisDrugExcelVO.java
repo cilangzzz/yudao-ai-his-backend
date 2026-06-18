@@ -1,8 +1,9 @@
 package cn.iocoder.yudao.module.his.controller.admin.drug.vo;
 
+import cn.idev.excel.annotation.ExcelProperty;
 import cn.iocoder.yudao.framework.excel.core.annotations.DictFormat;
 import cn.iocoder.yudao.framework.excel.core.convert.DictConvert;
-import com.alibaba.excel.annotation.ExcelProperty;
+
 import lombok.Data;
 
 import java.math.BigDecimal;
