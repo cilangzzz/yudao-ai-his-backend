@@ -1238,4 +1238,119 @@ cn.iocoder.yudao.module.{模块}
 
 ---
 
+## 九、代码风格规范（重要！）
+
+> **强制要求**：为保持与 yudao 原生项目（system、pay、member 等）代码风格一致，生成的代码必须遵循以下规范。
+
+### 1. 禁止使用 var 关键字
+
+**原因**：yudao 项目统一使用显式类型声明，不使用 Java 10+ 的 var 特性。
+
+```java
+// ❌ 禁止写法
+var prescription = prescriptionService.validatePrescriptionExists(id);
+var list = mapper.selectList(reqVO);
+var dispense = validateDispenseCanDispense(id);
+
+// ✅ 正确写法
+OpPrescriptionDO prescription = prescriptionService.validatePrescriptionExists(id);
+List<OpPrescriptionDO> list = mapper.selectList(reqVO);
+OpDispenseDO dispense = validateDispenseCanDispense(id);
+```
+
+### 2. 谨慎使用 Stream API
+
+**原因**：yudao 项目优先使用传统 for 循环，Stream 仅用于简单的列表转换。
+
+**规则**：
+- 简单的 map/filter/collect 可以使用 Stream
+- 复杂的多步操作、带条件的处理，必须使用 for 循环
+- 计算累加、统计等操作，优先使用 for 循环
+
+```java
+// ❌ 禁止写法：复杂 Stream 操作
+return items.stream()
+        .map(item -> {
+            if (item.getQuantity() != null && item.getUnitPrice() != null) {
+                return item.getQuantity().multiply(item.getUnitPrice());
+            }
+            return BigDecimal.ZERO;
+        })
+        .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+// ✅ 正确写法：使用 for 循环
+BigDecimal totalAmount = BigDecimal.ZERO;
+for (OpDispenseSaveReqVO.DispenseItemVO item : items) {
+    if (item.getQuantity() != null && item.getUnitPrice() != null) {
+        totalAmount = totalAmount.add(item.getQuantity().multiply(item.getUnitPrice()));
+    }
+}
+return totalAmount;
+```
+
+### 3. 禁止复杂 Lambda 表达式
+
+**原因**：复杂逻辑应抽取为私有方法，提高可读性和可维护性。
+
+**规则**：
+- Lambda 表达式不超过 3 行
+- 包含条件判断、多步操作的，抽取为私有方法
+
+```java
+// ❌ 禁止写法：复杂 Lambda
+items.forEach(item -> {
+    OpDispenseItemDO dispenseItem = BeanUtils.toBean(item, OpDispenseItemDO.class);
+    dispenseItem.setDispenseId(dispenseId);
+    if (item.getQuantity() != null && item.getUnitPrice() != null) {
+        dispenseItem.setAmount(item.getQuantity().multiply(item.getUnitPrice()));
+    }
+    itemList.add(dispenseItem);
+});
+
+// ✅ 正确写法：抽取私有方法
+for (OpDispenseSaveReqVO.DispenseItemVO item : items) {
+    itemList.add(buildDispenseItem(dispenseId, item));
+}
+
+// 私有方法
+private OpDispenseItemDO buildDispenseItem(Long dispenseId, OpDispenseSaveReqVO.DispenseItemVO item) {
+    OpDispenseItemDO dispenseItem = BeanUtils.toBean(item, OpDispenseItemDO.class);
+    dispenseItem.setDispenseId(dispenseId);
+    if (item.getQuantity() != null && item.getUnitPrice() != null) {
+        dispenseItem.setAmount(item.getQuantity().multiply(item.getUnitPrice()));
+    }
+    return dispenseItem;
+}
+```
+
+### 4. 优先使用 Hutool 工具类
+
+**原因**：yudao 项目大量使用 Hutool，保持一致性。
+
+```java
+// ✅ 推荐
+if (CollUtil.isEmpty(list)) { return Collections.emptyList(); }
+if (StrUtil.isEmpty(str)) { return null; }
+if (ObjectUtil.equal(a, b)) { ... }
+
+// ❌ 不推荐
+if (list == null || list.isEmpty()) { return new ArrayList<>(); }
+if (str == null || str.isEmpty()) { return null; }
+if (Objects.equals(a, b)) { ... }
+```
+
+### 5. 代码风格检查清单
+
+生成代码后，必须逐项检查：
+
+| 检查项 | 要求 | 状态 |
+|--------|------|------|
+| var 关键字 | 全部替换为显式类型 | [ ] |
+| Stream API | 仅用于简单转换，复杂操作用 for 循环 | [ ] |
+| Lambda 表达式 | 不超过 3 行，超过则抽取方法 | [ ] |
+| Hutool 工具类 | 优先使用 CollUtil/StrUtil/ObjectUtil | [ ] |
+| 类型声明 | 所有变量必须指定具体类型 | [ ] |
+
+---
+
 > 提示：使用本文档的提示词模板，可以让 AI 快速生成符合项目规范的完整实体功能代码。

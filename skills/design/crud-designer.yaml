@@ -516,3 +516,87 @@ quick_reference:
     insert: "插入"
     updateById: "更新"
     deleteById: "删除"
+
+# ============================================
+# 第九部分：代码风格规范（重要！）
+# ============================================
+code_style:
+  description: |
+    为保持与 yudao 项目原有代码风格一致，生成的代码必须遵循以下规范。
+    这些规范基于 yudao 原生模块（system、pay、member 等）的实际代码风格。
+
+  prohibited_features:
+    # 禁止使用的 Java 特性
+    - feature: "var 关键字"
+      reason: "yudao 项目统一使用显式类型声明，不使用 Java 10+ 的 var"
+      example_bad: |
+        var prescription = prescriptionService.validatePrescriptionExists(id);
+        var list = mapper.selectList(reqVO);
+      example_good: |
+        OpPrescriptionDO prescription = prescriptionService.validatePrescriptionExists(id);
+        List<OpPrescriptionDO> list = mapper.selectList(reqVO);
+
+    - feature: "过度使用 Stream API"
+      reason: "yudao 项目优先使用传统 for 循环，Stream 仅用于简单的列表转换"
+      example_bad: |
+        return items.stream()
+                .map(item -> item.getQuantity().multiply(item.getUnitPrice()))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+      example_good: |
+        BigDecimal totalAmount = BigDecimal.ZERO;
+        for (OpDispenseSaveReqVO.DispenseItemVO item : items) {
+            if (item.getQuantity() != null && item.getUnitPrice() != null) {
+                totalAmount = totalAmount.add(item.getQuantity().multiply(item.getUnitPrice()));
+            }
+        }
+        return totalAmount;
+
+    - feature: "复杂的 Lambda 表达式"
+      reason: "复杂逻辑应抽取为私有方法，提高可读性"
+      example_bad: |
+        items.forEach(item -> {
+            // 多行复杂逻辑
+            ...
+        });
+      example_good: |
+        for (OpDispenseSaveReqVO.DispenseItemVO item : items) {
+            processItem(item);
+        }
+
+        // 私有方法
+        private void processItem(OpDispenseSaveReqVO.DispenseItemVO item) {
+            // 处理逻辑
+        }
+
+  recommended_practices:
+    # 推荐的代码实践
+    - practice: "使用 Hutool 工具类"
+      description: "优先使用 Hutool 提供的工具方法"
+      examples:
+        - "CollUtil.isEmpty(list) 代替 list == null || list.isEmpty()"
+        - "StrUtil.isEmpty(str) 代替 str == null || str.isEmpty()"
+        - "ObjectUtil.equal(a, b) 代替 Objects.equals(a, b)"
+
+    - practice: "显式类型声明"
+      description: "所有变量声明必须指定具体类型，提高代码可读性"
+      examples:
+        - "OpPrescriptionDO prescription = ..."
+        - "List<OpPrescriptionDO> list = ..."
+        - "BigDecimal totalAmount = ..."
+
+    - practice: "使用传统 for 循环"
+      description: "业务逻辑处理优先使用 for 循环，仅在简单转换时使用 Stream"
+      examples:
+        - "for (OpPrescriptionDO item : list) { ... }"
+        - "for (int i = 0; i < list.size(); i++) { ... }"
+
+  code_review_checklist:
+    # 代码审查检查项
+    - item: "检查是否使用了 var 关键字"
+      action: "全部替换为显式类型声明"
+    - item: "检查是否过度使用 Stream API"
+      action: "复杂的 Stream 操作改为 for 循环"
+    - item: "检查 Lambda 表达式复杂度"
+      action: "超过 3 行的 Lambda 抽取为私有方法"
+    - item: "检查是否使用了 Hutool 工具类"
+      action: "优先使用 Hutool 而非 JDK 原生方法"

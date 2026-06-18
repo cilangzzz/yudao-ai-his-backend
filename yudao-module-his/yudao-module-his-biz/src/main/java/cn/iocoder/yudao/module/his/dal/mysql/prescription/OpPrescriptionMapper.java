@@ -7,6 +7,7 @@ import cn.iocoder.yudao.module.his.dal.dataobject.prescription.OpPrescriptionDO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -19,6 +20,8 @@ public interface OpPrescriptionMapper extends BaseMapperX<OpPrescriptionDO> {
      * 分页查询处方
      */
     default PageResult<OpPrescriptionDO> selectPage(cn.iocoder.yudao.module.his.controller.admin.prescription.vo.OpPrescriptionPageReqVO reqVO) {
+        LocalDateTime startTime = reqVO.getStartDate() != null ? reqVO.getStartDate().atStartOfDay() : null;
+        LocalDateTime endTime = reqVO.getEndDate() != null ? reqVO.getEndDate().plusDays(1).atStartOfDay() : null;
         return selectPage(reqVO, new LambdaQueryWrapperX<OpPrescriptionDO>()
                 .eqIfPresent(OpPrescriptionDO::getPrescriptionNo, reqVO.getPrescriptionNo())
                 .eqIfPresent(OpPrescriptionDO::getPatientId, reqVO.getPatientId())
@@ -28,7 +31,7 @@ public interface OpPrescriptionMapper extends BaseMapperX<OpPrescriptionDO> {
                 .eqIfPresent(OpPrescriptionDO::getDeptId, reqVO.getDeptId())
                 .eqIfPresent(OpPrescriptionDO::getDoctorId, reqVO.getDoctorId())
                 .eqIfPresent(OpPrescriptionDO::getPrescriptionStatus, reqVO.getPrescriptionStatus())
-                .betweenIfPresent(OpPrescriptionDO::getCreateTime, reqVO.getCreateTime())
+                .betweenIfPresent(OpPrescriptionDO::getCreateTime, startTime, endTime)
                 .orderByDesc(OpPrescriptionDO::getId));
     }
 

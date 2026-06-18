@@ -152,6 +152,25 @@ public class HisOrderServiceImpl implements HisOrderService {
     }
 
     @Override
+    public void stopAllOrdersByAdmission(Long admissionId) {
+        // 查询该入院记录的所有长期医嘱
+        List<HisOrderDO> longTermOrders = orderMapper.selectList(new cn.iocoder.yudao.framework.mybatis.core.query.LambdaQueryWrapperX<HisOrderDO>()
+                .eq(HisOrderDO::getAdmissionId, admissionId)
+                .eq(HisOrderDO::getOrderType, 2) // 长期医嘱
+                .eq(HisOrderDO::getOrderStatus, OrderStatusEnum.EXECUTING.getStatus()) // 执行中
+        );
+
+        // 批量停止
+        for (HisOrderDO order : longTermOrders) {
+            HisOrderDO updateObj = new HisOrderDO();
+            updateObj.setId(order.getId());
+            updateObj.setOrderStatus(OrderStatusEnum.STOPPED.getStatus());
+            updateObj.setStopTime(LocalDateTime.now());
+            orderMapper.updateById(updateObj);
+        }
+    }
+
+    @Override
     public void updateOrderExecuteStatus(Long orderId) {
         HisOrderDO order = validateOrderExists(orderId);
 

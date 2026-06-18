@@ -10,6 +10,7 @@ import cn.iocoder.yudao.module.his.dal.dataobject.prescription.OpPrescriptionIte
 import cn.iocoder.yudao.module.his.dal.mysql.dispense.OpDispenseItemMapper;
 import cn.iocoder.yudao.module.his.dal.mysql.dispense.OpDispenseMapper;
 import cn.iocoder.yudao.module.his.dal.mysql.prescription.OpPrescriptionItemMapper;
+import cn.iocoder.yudao.module.his.dal.dataobject.prescription.OpPrescriptionDO;
 import cn.iocoder.yudao.module.his.service.prescription.OpPrescriptionService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,13 +53,13 @@ public class OpDispenseServiceImpl implements OpDispenseService {
     @Transactional(rollbackFor = Exception.class)
     public Long createDispense(OpDispenseSaveReqVO createReqVO) {
         // 1. 校验处方是否存在且已审核通过
-        var prescription = prescriptionService.validatePrescriptionExists(createReqVO.getPrescriptionId());
+        OpPrescriptionDO prescription = prescriptionService.validatePrescriptionExists(createReqVO.getPrescriptionId());
         if (prescription.getPrescriptionStatus() < 2) {
             throw exception(OP_DISPENSE_PRESCRIPTION_NOT_AUDITED);
         }
 
         // 2. 检查是否已存在发药单
-        var existingDispense = dispenseMapper.selectByPrescriptionId(createReqVO.getPrescriptionId());
+        OpDispenseDO existingDispense = dispenseMapper.selectByPrescriptionId(createReqVO.getPrescriptionId());
         if (existingDispense != null) {
             throw exception(OP_DISPENSE_ALREADY_COMPLETED);
         }
@@ -85,7 +86,7 @@ public class OpDispenseServiceImpl implements OpDispenseService {
     @Transactional(rollbackFor = Exception.class)
     public Long createDispenseByPrescription(Long prescriptionId, Long pharmacyId, String pharmacyName) {
         // 1. 获取处方信息
-        var prescription = prescriptionService.validatePrescriptionExists(prescriptionId);
+        OpPrescriptionDO prescription = prescriptionService.validatePrescriptionExists(prescriptionId);
 
         // 2. 获取处方明细
         List<OpPrescriptionItemDO> prescriptionItems = prescriptionItemMapper.selectListByPrescriptionId(prescriptionId);
@@ -189,7 +190,7 @@ public class OpDispenseServiceImpl implements OpDispenseService {
     @Transactional(rollbackFor = Exception.class)
     public void dispense(Long id, Long pharmacistId, String pharmacistName) {
         // 1. 校验发药单可以调配
-        var dispense = validateDispenseCanDispense(id);
+        OpDispenseDO dispense = validateDispenseCanDispense(id);
 
         // 2. 更新发药单状态
         OpDispenseDO updateObj = new OpDispenseDO();
@@ -201,14 +202,14 @@ public class OpDispenseServiceImpl implements OpDispenseService {
         dispenseMapper.updateById(updateObj);
 
         // 3. 同步更新处方状态
-        prescriptionService.dispense(dispense.getPrescriptionId(), pharmacistId, pharmacistName);
+        prescriptionService.dispense(updateObj.getPrescriptionId(), pharmacistId, pharmacistName);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void send(Long id, Long pharmacistId, String pharmacistName) {
         // 1. 校验发药单可以发药
-        var dispense = validateDispenseCanSend(id);
+        OpDispenseDO dispense = validateDispenseCanSend(id);
 
         // 2. 更新发药单状态
         OpDispenseDO updateObj = new OpDispenseDO();
@@ -241,7 +242,7 @@ public class OpDispenseServiceImpl implements OpDispenseService {
     @Transactional(rollbackFor = Exception.class)
     public void returnDrug(Long id, Long pharmacistId, String pharmacistName, String reason) {
         // 1. 校验发药单可以退药
-        var dispense = validateDispenseCanReturn(id);
+        OpDispenseDO dispense = validateDispenseCanReturn(id);
 
         // 2. 更新发药单状态
         OpDispenseDO updateObj = new OpDispenseDO();
@@ -299,7 +300,7 @@ public class OpDispenseServiceImpl implements OpDispenseService {
 
     @Override
     public OpDispenseDO validateDispenseCanDispense(Long id) {
-        var dispense = validateDispenseExists(id);
+        OpDispenseDO dispense = validateDispenseExists(id);
         if (!dispense.canDispense()) {
             throw exception(OP_DISPENSE_ALREADY_COMPLETED);
         }
@@ -308,7 +309,7 @@ public class OpDispenseServiceImpl implements OpDispenseService {
 
     @Override
     public OpDispenseDO validateDispenseCanSend(Long id) {
-        var dispense = validateDispenseExists(id);
+        OpDispenseDO dispense = validateDispenseExists(id);
         if (!dispense.canSend()) {
             throw exception(OP_DISPENSE_ALREADY_COMPLETED);
         }
@@ -317,7 +318,7 @@ public class OpDispenseServiceImpl implements OpDispenseService {
 
     @Override
     public OpDispenseDO validateDispenseCanReturn(Long id) {
-        var dispense = validateDispenseExists(id);
+        OpDispenseDO dispense = validateDispenseExists(id);
         if (!dispense.canReturn()) {
             throw exception(OP_DISPENSE_ALREADY_COMPLETED);
         }
@@ -328,7 +329,7 @@ public class OpDispenseServiceImpl implements OpDispenseService {
      * 校验发药单是否可以修改/删除（仅待调配状态可修改）
      */
     private OpDispenseDO validateDispenseCanUpdate(Long id) {
-        var dispense = validateDispenseExists(id);
+        OpDispenseDO dispense = validateDispenseExists(id);
         if (dispense.getDispenseStatus() != 1) {
             throw exception(OP_DISPENSE_ALREADY_COMPLETED);
         }
@@ -354,14 +355,13 @@ public class OpDispenseServiceImpl implements OpDispenseService {
         if (items == null || items.isEmpty()) {
             return BigDecimal.ZERO;
         }
-        return items.stream()
-                .map(item -> {
-                    if (item.getQuantity() != null && item.getUnitPrice() != null) {
-                        return item.getQuantity().multiply(item.getUnitPrice());
-                    }
-                    return BigDecimal.ZERO;
-                })
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal totalAmount = BigDecimal.ZERO;
+        for (OpDispenseSaveReqVO.DispenseItemVO item : items) {
+            if (item.getQuantity() != null && item.getUnitPrice() != null) {
+                totalAmount = totalAmount.add(item.getQuantity().multiply(item.getUnitPrice()));
+            }
+        }
+        return totalAmount;
     }
 
     /**
@@ -372,7 +372,7 @@ public class OpDispenseServiceImpl implements OpDispenseService {
             return;
         }
         List<OpDispenseItemDO> itemList = new ArrayList<>();
-        for (var itemVO : items) {
+        for (OpDispenseSaveReqVO.DispenseItemVO itemVO : items) {
             OpDispenseItemDO item = BeanUtils.toBean(itemVO, OpDispenseItemDO.class);
             item.setDispenseId(dispenseId);
             if (item.getQuantity() != null && item.getUnitPrice() != null) {

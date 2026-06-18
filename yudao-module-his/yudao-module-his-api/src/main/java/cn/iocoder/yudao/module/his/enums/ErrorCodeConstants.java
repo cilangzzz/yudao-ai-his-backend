@@ -138,6 +138,10 @@ public interface ErrorCodeConstants {
     // 出院管理
     ErrorCode DISCHARGE_NOT_EXISTS = new ErrorCode(1_016_007_000, "出院记录不存在");
     ErrorCode DISCHARGE_FEE_NOT_SETTLED = new ErrorCode(1_016_007_001, "出院费用未结算");
+    ErrorCode DISCHARGE_APPLY_NOT_EXISTS = new ErrorCode(1_016_007_002, "出院申请不存在");
+    ErrorCode DISCHARGE_APPLY_ALREADY_EXISTS = new ErrorCode(1_016_007_003, "出院申请已存在");
+    ErrorCode DISCHARGE_APPLY_STATUS_ERROR = new ErrorCode(1_016_007_004, "出院申请状态不正确，无法操作");
+    ErrorCode DISCHARGE_APPLY_NOT_APPROVED = new ErrorCode(1_016_007_005, "出院申请未审批，无法确认出院");
 
     // 出院小结
     ErrorCode DISCHARGE_SUMMARY_NOT_EXISTS = new ErrorCode(1_016_007_010, "出院小结不存在");

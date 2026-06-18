@@ -67,6 +67,11 @@ public interface HisOrderService {
     void cancelOrder(Long orderId, Long cancelDoctorId, String cancelReason);
 
     /**
+     * 停止某入院记录的所有长期医嘱
+     */
+    void stopAllOrdersByAdmission(Long admissionId);
+
+    /**
      * 更新医嘱执行状态
      *
      * 当给药记录执行后调用此方法更新医嘱状态
