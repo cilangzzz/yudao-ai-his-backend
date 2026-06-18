@@ -7,7 +7,7 @@ import lombok.Getter;
 import java.util.Arrays;
 
 /**
- * 退还方式枚举
+ * 退费类型枚举
  *
  * @author yudao
  */
@@ -15,23 +15,22 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum RefundTypeEnum implements ArrayValuable<Integer> {
 
-    CASH(1, "现金"),
-    BANK_CARD(2, "银行卡"),
-    ORIGINAL(3, "原路退回");
+    FULL(1, "全额退费"),
+    PARTIAL(2, "部分退费");
 
-    public static final int[] ARRAYS = Arrays.stream(values()).mapToInt(RefundTypeEnum::getValue).toArray();
+    public static final int[] ARRAYS = Arrays.stream(values()).mapToInt(RefundTypeEnum::getType).toArray();
 
-    private final Integer value;
+    private final Integer type;
     private final String name;
 
     @Override
     public Integer[] array() {
-        return Arrays.stream(values()).map(RefundTypeEnum::getValue).toArray(Integer[]::new);
+        return Arrays.stream(values()).map(RefundTypeEnum::getType).toArray(Integer[]::new);
     }
 
-    public static RefundTypeEnum valueOf(Integer value) {
+    public static RefundTypeEnum valueOf(Integer type) {
         return Arrays.stream(values())
-                .filter(e -> e.getValue().equals(value))
+                .filter(e -> e.getType().equals(type))
                 .findFirst()
                 .orElse(null);
     }

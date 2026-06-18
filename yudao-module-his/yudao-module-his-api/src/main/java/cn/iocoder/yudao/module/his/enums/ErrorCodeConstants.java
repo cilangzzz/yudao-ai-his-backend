@@ -221,6 +221,7 @@ public interface ErrorCodeConstants {
     ErrorCode LAB_REQUEST_NO_ITEMS = new ErrorCode(1_018_000_004, "检验申请无项目");
     ErrorCode LAB_REQUEST_DUPLICATE = new ErrorCode(1_018_000_005, "检验申请单号已存在");
     ErrorCode LAB_REQUEST_PATIENT_NOT_MATCH = new ErrorCode(1_018_000_006, "患者信息不匹配");
+    ErrorCode LAB_REQUEST_STATUS_ERROR = new ErrorCode(1_018_000_007, "检验申请状态不正确，无法操作");
 
     // 检验标本
     ErrorCode LAB_SPECIMEN_NOT_EXISTS = new ErrorCode(1_018_001_000, "标本不存在");

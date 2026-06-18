@@ -163,4 +163,12 @@ public interface OpFeeService {
      */
     OpFeeDO validateFeeExists(Long id);
 
+    /**
+     * 更新费用状态
+     *
+     * @param feeId 费用ID
+     * @param status 状态
+     */
+    void updateFeeStatus(Long feeId, Integer status);
+
 }

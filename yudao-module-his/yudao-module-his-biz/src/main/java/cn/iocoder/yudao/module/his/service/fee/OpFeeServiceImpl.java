@@ -305,6 +305,18 @@ public class OpFeeServiceImpl implements OpFeeService {
         return fee;
     }
 
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void updateFeeStatus(Long feeId, Integer status) {
+        if (feeId == null) {
+            return;
+        }
+        OpFeeDO updateFee = new OpFeeDO();
+        updateFee.setId(feeId);
+        updateFee.setFeeStatus(status);
+        feeMapper.updateById(updateFee);
+    }
+
     /**
      * 生成费用单号
      * 格式: F + yyyyMMddHHmmss + 4位流水号
