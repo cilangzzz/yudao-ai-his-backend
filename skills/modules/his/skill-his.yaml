@@ -1,0 +1,583 @@
+# HIS 医院信息系统模块 Skill
+# 基于 yudao-vue-pro 框架的 HIS 核心业务实现规范
+
+skill:
+  id: "his-module"
+  name: "HIS 医院信息系统模块 Skill"
+  version: "1.0.0"
+  category: "module"
+  description: "HIS 医院信息系统核心模块实现规范，包含门诊管理(M01)、住院管理(M02)、药品管理(M06)等核心业务"
+  created_at: "2026-06-18"
+  updated_at: "2026-06-18"
+
+# ============================================
+# 模块概述
+# ============================================
+module:
+  code: "his"
+  name: "HIS 医院信息系统"
+  description: |
+    HIS（Hospital Information System）医院信息系统，包含：
+    - M01 门诊管理：挂号、预约、就诊、处方、收费
+    - M02 住院管理：入院、床位、医嘱、护理、出院
+    - M06 药品管理：药品目录、库存、采购、发药
+    - M09 系统管理：科室、人员、字典（由 yudao 框架提供）
+
+  sub_modules:
+    - code: "op"
+      name: "门诊管理"
+      prefix: "op_"
+      description: "门诊业务流程管理"
+      features:
+        - "患者管理：患者主索引、就诊卡"
+        - "预约挂号：医生排班、预约管理"
+        - "门诊就诊：叫号、诊断、处方"
+        - "门诊收费：费用计算、支付、退费"
+        - "检验检查：申请、报告"
+
+    - code: "ip"
+      name: "住院管理"
+      prefix: ""
+      description: "住院业务流程管理"
+      features:
+        - "入院管理：入院登记、床位分配"
+        - "医嘱管理：长期/临时医嘱、执行"
+        - "护理管理：护理记录、交接班"
+        - "出院管理：出院结算、小结"
+
+    - code: "drug"
+      name: "药品管理"
+      prefix: "drug_"
+      description: "药品全流程管理"
+      features:
+        - "药品目录：药品信息、价格"
+        - "库存管理：入库、出库、盘点"
+        - "药品采购：采购计划、供应商"
+        - "合理用药：配伍禁忌、剂量审核"
+
+# ============================================
+# 表前缀规范
+# ============================================
+table_prefixes:
+  # 门诊业务表（op_前缀）
+  outpatient_tables:
+    - prefix: "op_"
+      usage: "门诊业务表"
+      examples:
+        - "op_schedule"          # 医生排班
+        - "op_appointment"       # 预约挂号
+        - "op_register"          # 挂号记录
+        - "op_prescription"      # 处方主表
+        - "op_prescription_item" # 处方明细
+        - "op_fee"               # 门诊费用
+        - "op_payment"           # 支付记录
+        - "op_refund"            # 退费记录
+        - "op_dispense"          # 发药记录
+
+  # 住院业务表（无前缀，直接使用业务名称）
+  inpatient_tables:
+    - prefix: ""
+      usage: "住院业务表"
+      examples:
+        - "admission"            # 入院记录
+        - "ward"                 # 病区
+        - "bed"                  # 床位
+        - "order"                # 医嘱主表
+        - "nursing_record"       # 护理记录
+        - "discharge"            # 出院记录
+        - "prepayment"           # 预交金
+        - "medication_admin"     # 给药记录(eMAR)
+        - "vital_sign"           # 生命体征
+
+  # 药品管理表（drug_前缀）
+  drug_tables:
+    - prefix: "drug_"
+      usage: "药品管理表"
+      examples:
+        - "drug"                 # 药品目录
+        - "drug_stock"           # 药品库存
+        - "drug_inbound"         # 入库记录
+        - "drug_outbound"        # 出库记录
+        - "drug_inventory"       # 盘点记录
+        - "drug_purchase"        # 采购计划
+        - "drug_interaction"     # 药物相互作用
+        - "drug_contraindication"# 配伍禁忌
+
+  # 基础字典表（无前缀）
+  base_tables:
+    - prefix: ""
+      usage: "HIS 基础字典表"
+      examples:
+        - "patient"              # 患者主索引
+        - "patient_card"         # 就诊卡
+        - "department"           # 科室信息
+        - "staff"                # 医护人员
+        - "charge_item"          # 收费项目字典
+        - "diagnosis"            # 诊断记录
+        - "supplier"             # 供应商
+
+  # 检验检查表
+  exam_tables:
+    - prefix: ""
+      usage: "检验检查表"
+      examples:
+        - "exam_request"         # 检查申请
+        - "exam_item"            # 检查项目
+        - "exam_report"          # 检查报告
+        - "lab_request"          # 检验申请
+        - "lab_item"             # 检验项目
+        - "lab_report"           # 检验报告
+
+# ============================================
+# 错误码规范
+# ============================================
+error_codes:
+  prefix: "1_015"
+  range: "1_015_000_000 - 1_019_999_999"
+
+  categories:
+    - code: "1_015"
+      name: "门诊管理"
+      range: "1_015_000_000 - 1_015_999_999"
+      errors:
+        - code: "1_015_000_001"
+          message: "患者不存在"
+        - code: "1_015_001_001"
+          message: "排班不存在"
+        - code: "1_015_001_002"
+          message: "号源已满"
+        - code: "1_015_003_001"
+          message: "处方不存在"
+
+    - code: "1_016"
+      name: "住院管理"
+      range: "1_016_000_000 - 1_016_999_999"
+      errors:
+        - code: "1_016_000_001"
+          message: "入院记录不存在"
+        - code: "1_016_001_001"
+          message: "床位不可用"
+        - code: "1_016_002_001"
+          message: "预交金不足"
+        - code: "1_016_003_001"
+          message: "医嘱已停止"
+
+    - code: "1_017"
+      name: "药品管理"
+      range: "1_017_000_000 - 1_017_999_999"
+      errors:
+        - code: "1_017_000_001"
+          message: "药品不存在"
+        - code: "1_017_001_001"
+          message: "药品库存不足"
+        - code: "1_017_002_001"
+          message: "入库记录不存在"
+
+# ============================================
+# 业务枚举规范
+# ============================================
+enums:
+  # 挂号类型
+  register_type:
+    class: "RegisterTypeEnum"
+    package: "cn.iocoder.yudao.module.his.enums"
+    values:
+      - value: 1
+        label: "普通号"
+        color: "default"
+      - value: 2
+        label: "专家号"
+        color: "primary"
+      - value: 3
+        label: "急诊号"
+        color: "danger"
+
+  # 处方类型
+  prescription_type:
+    class: "PrescriptionTypeEnum"
+    package: "cn.iocoder.yudao.module.his.enums"
+    values:
+      - value: 1
+        label: "普通处方"
+        color: "default"
+      - value: 2
+        label: "急诊处方"
+        color: "warning"
+      - value: 3
+        label: "儿科处方"
+        color: "success"
+      - value: 4
+        label: "麻醉处方"
+        color: "danger"
+      - value: 5
+        label: "精神处方"
+        color: "danger"
+      - value: 6
+        label: "中药处方"
+        color: "info"
+
+  # 医保类型
+  insurance_type:
+    class: "InsuranceTypeEnum"
+    package: "cn.iocoder.yudao.module.his.enums"
+    values:
+      - value: 1
+        label: "城镇职工医保"
+      - value: 2
+        label: "城镇居民医保"
+      - value: 3
+        label: "新农合"
+      - value: 4
+        label: "自费"
+
+  # 药品类型
+  drug_type:
+    class: "DrugTypeEnum"
+    package: "cn.iocoder.yudao.module.his.enums"
+    values:
+      - value: 1
+        label: "西药"
+      - value: 2
+        label: "中成药"
+      - value: 3
+        label: "中草药"
+      - value: 4
+        label: "生物制品"
+
+  # 支付方式
+  pay_type:
+    class: "PayTypeEnum"
+    package: "cn.iocoder.yudao.module.his.enums"
+    values:
+      - value: 1
+        label: "现金"
+      - value: 2
+        label: "微信"
+      - value: 3
+        label: "支付宝"
+      - value: 4
+        label: "医保"
+      - value: 5
+        label: "银行卡"
+
+# ============================================
+# 目录结构规范
+# ============================================
+directory_structure:
+  # Maven 模块结构
+  maven_modules:
+    pattern: |
+      yudao-module-his/
+      ├── yudao-module-his-api/           # API 模块：枚举、DTO、常量
+      ├── yudao-module-his-biz/           # 业务模块：主要实现
+      ├── yudao-module-his-op/            # 门诊管理子模块
+      ├── yudao-module-his-ip/            # 住院管理子模块
+      └── yudao-module-his-drug/          # 药品管理子模块
+
+  # 业务模块包结构
+  package_structure:
+    pattern: |
+      cn.iocoder.yudao.module.his
+      ├── controller.admin.{feature}/     # Controller + VO
+      │   ├── {Entity}Controller.java
+      │   └── vo/
+      │       ├── {Entity}SaveReqVO.java
+      │       ├── {Entity}PageReqVO.java
+      │       └── {Entity}RespVO.java
+      ├── service.{feature}/             # Service 接口 + 实现
+      │   ├── {Entity}Service.java
+      │   └── {Entity}ServiceImpl.java
+      ├── dal.dataobject.{feature}/      # DO 实体
+      │   └── {Entity}DO.java
+      ├── dal.mysql.{feature}/           # Mapper
+      │   └── {Entity}Mapper.java
+      ├── convert.{feature}/             # 对象转换
+      │   └── {Entity}Convert.java
+      └── enums/                         # 枚举
+
+  # SQL 脚本目录
+  sql_structure:
+    pattern: |
+      sql/mysql/his/
+      ├── tables/                        # 表结构
+      │   ├── 20260618_init_tables.sql
+      │   ├── 20260618_exam_tables.sql
+      │   └── ...
+      └── data/                          # 初始数据
+          ├── 20260618_init_data.sql
+          ├── 20260618_dict_data.sql
+          └── ...
+
+# ============================================
+# 命名规范
+# ============================================
+naming:
+  # 实体类命名
+  entity:
+    pattern: "{EntityName}DO"
+    examples:
+      - table: "patient"
+        class: "PatientDO"
+      - table: "op_register"
+        class: "OpRegisterDO"
+      - table: "op_prescription"
+        class: "OpPrescriptionDO"
+      - table: "admission"
+        class: "AdmissionDO"
+      - table: "drug"
+        class: "DrugDO"
+
+  # VO 类命名
+  vo:
+    save_req: "{EntityName}SaveReqVO"
+    page_req: "{EntityName}PageReqVO"
+    resp: "{EntityName}RespVO"
+
+  # Service 命名
+  service:
+    interface: "{EntityName}Service"
+    impl: "{EntityName}ServiceImpl"
+
+  # Mapper 命名
+  mapper: "{EntityName}Mapper"
+
+  # Controller 命名
+  controller: "{EntityName}Controller"
+
+  # 权限标识
+  permission:
+    pattern: "his:{feature}:{operation}"
+    examples:
+      - "his:patient:create"
+      - "his:patient:update"
+      - "his:patient:delete"
+      - "his:patient:query"
+      - "his:register:create"
+      - "his:prescription:audit"
+
+# ============================================
+# API 接口规范
+# ============================================
+api:
+  # RESTful 接口规范
+  restful:
+    create:
+      method: "POST"
+      path: "/create"
+      permission: "{module}:{feature}:create"
+
+    update:
+      method: "PUT"
+      path: "/update"
+      permission: "{module}:{feature}:update"
+
+    delete:
+      method: "DELETE"
+      path: "/delete"
+      permission: "{module}:{feature}:delete"
+
+    get:
+      method: "GET"
+      path: "/get"
+      permission: "{module}:{feature}:query"
+
+    page:
+      method: "GET"
+      path: "/page"
+      permission: "{module}:{feature}:query"
+
+    export:
+      method: "GET"
+      path: "/export-excel"
+      permission: "{module}:{feature}:export"
+
+  # 分页参数
+  pagination:
+    default_page_no: 1
+    default_page_size: 10
+    max_page_size: 100
+
+# ============================================
+# 业务流程规范
+# ============================================
+workflows:
+  # 门诊就诊流程
+  outpatient_visit:
+    steps:
+      - step: "预约/挂号"
+        description: "患者预约或现场挂号"
+        tables: ["op_appointment", "op_register"]
+      - step: "候诊"
+        description: "患者候诊等待叫号"
+        tables: ["op_register"]
+      - step: "就诊"
+        description: "医生接诊，录入诊断"
+        tables: ["op_register", "diagnosis"]
+      - step: "开立处方"
+        description: "医生开立处方"
+        tables: ["op_prescription", "op_prescription_item"]
+      - step: "收费"
+        description: "患者缴费"
+        tables: ["op_fee", "op_payment"]
+      - step: "取药"
+        description: "药房发药"
+        tables: ["op_dispense"]
+
+  # 住院流程
+  inpatient_admission:
+    steps:
+      - step: "入院登记"
+        description: "办理入院手续，分配床位"
+        tables: ["admission", "bed"]
+      - step: "入院评估"
+        description: "护士进行入院评估"
+        tables: ["admission_assess"]
+      - step: "医嘱处理"
+        description: "医生开立医嘱，护士执行"
+        tables: ["order", "medication_admin"]
+      - step: "护理记录"
+        description: "护士记录护理过程"
+        tables: ["nursing_record", "vital_sign"]
+      - step: "出院结算"
+        description: "办理出院结算"
+        tables: ["discharge", "discharge_summary"]
+
+# ============================================
+# 数据字典规范
+# ============================================
+dict_types:
+  - type: "his_register_type"
+    name: "HIS挂号类型"
+
+  - type: "his_prescription_type"
+    name: "HIS处方类型"
+
+  - type: "his_frequency"
+    name: "HIS用药频次"
+
+  - type: "his_route"
+    name: "HIS给药途径"
+
+  - type: "his_order_type"
+    name: "HIS医嘱类型"
+
+  - type: "his_insurance_type"
+    name: "HIS医保类型"
+
+  - type: "his_drug_type"
+    name: "HIS药品类型"
+
+  - type: "his_dept_type"
+    name: "HIS科室类型"
+
+# ============================================
+# 菜单结构规范
+# ============================================
+menu_structure:
+  - id: 2000
+    name: "HIS医院信息"
+    icon: "ep:house"
+    children:
+      - id: 2001
+        name: "门诊管理"
+        icon: "ep:user"
+        children:
+          - id: 2011
+            name: "患者管理"
+          - id: 2012
+            name: "医生排班"
+          - id: 2013
+            name: "预约挂号"
+          - id: 2014
+            name: "挂号记录"
+          - id: 2015
+            name: "处方管理"
+          - id: 2016
+            name: "门诊收费"
+
+      - id: 2002
+        name: "住院管理"
+        icon: "ep:building"
+        children:
+          - id: 2021
+            name: "入院管理"
+          - id: 2022
+            name: "病区床位"
+          - id: 2023
+            name: "医嘱管理"
+          - id: 2024
+            name: "护理管理"
+          - id: 2025
+            name: "出院管理"
+
+      - id: 2003
+        name: "药品管理"
+        icon: "ep:medicine-box"
+        children:
+          - id: 2031
+            name: "药品目录"
+          - id: 2032
+            name: "库存管理"
+          - id: 2033
+            name: "采购管理"
+          - id: 2034
+            name: "合理用药"
+
+      - id: 2004
+        name: "基础设置"
+        icon: "ep:setting"
+        children:
+          - id: 2041
+            name: "科室管理"
+          - id: 2042
+            name: "人员管理"
+          - id: 2043
+            name: "收费项目"
+
+# ============================================
+# 质量检查清单
+# ============================================
+quality_check:
+  code_review:
+    - "检查实体类是否继承正确的基类（TenantBaseDO）"
+    - "检查 VO 类是否包含必要的校验注解"
+    - "检查 Service 实现是否使用 @Service 注解"
+    - "检查 Controller 是否使用 @RestController 注解"
+    - "检查权限标识是否符合命名规范"
+    - "检查错误码是否已定义"
+    - "检查枚举类是否实现通用接口"
+
+  sql_review:
+    - "检查表名是否符合命名规范"
+    - "检查是否包含必要字段（id, tenant_id, 审计字段）"
+    - "检查索引是否包含 tenant_id"
+    - "检查唯一索引是否包含 deleted"
+    - "检查字段注释是否完整"
+
+# ============================================
+# 参考资源
+# ============================================
+references:
+  design_skills:
+    - path: "skills/design/db-designer.yaml"
+      description: "数据库设计规范"
+    - path: "skills/design/entity-designer.yaml"
+      description: "实体类设计规范"
+    - path: "skills/design/api-designer.yaml"
+      description: "API 接口设计规范"
+    - path: "skills/design/crud-designer.yaml"
+      description: "CRUD 代码生成规范"
+
+  usage_docs:
+    - path: "skills/usage/entity-implementation.md"
+      description: "实体类实现流程"
+    - path: "skills/usage/new-module.md"
+      description: "新增模块指南"
+
+  related_modules:
+    - module: "system"
+      path: "skills/modules/system/skill-system.yaml"
+      description: "系统管理模块"
+    - module: "infra"
+      path: "skills/modules/infra/skill-infra.yaml"
+      description: "基础设施模块"
