@@ -19,83 +19,211 @@
     </tree>
 
     <!-- HIS-biz Controller层 -->
-    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin" title="HIS控制器层">
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller" title="HIS控制器">
         <description>HIS模块REST API控制器，处理HTTP请求</description>
     </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin" title="管理端控制器">
+        <description>管理端REST API控制器</description>
+    </tree>
+
+    <!-- HIS-biz Controller - 患者管理 -->
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/patient" title="患者管理控制器">
         <description>患者信息管理：患者基本信息、就诊记录、过敏史等</description>
     </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/patient/vo" title="患者VO">
+        <description>患者视图对象：HisPatientInfoRespVO、HisPatientSaveReqVO、HisPatientPageReqVO</description>
+    </tree>
+
+    <!-- HIS-biz Controller - 挂号管理 -->
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/register" title="挂号管理控制器">
         <description>门诊挂号管理：现场挂号、预约挂号、退号处理</description>
     </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/register/vo" title="挂号VO">
+        <description>挂号视图对象：OpRegisterRespVO、OpRegisterSaveReqVO、OpRegisterPageReqVO</description>
+    </tree>
+
+    <!-- HIS-biz Controller - 预约管理 -->
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/appointment" title="预约管理控制器">
         <description>预约挂号管理：预约申请、预约取消、号源管理</description>
     </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/appointment/vo" title="预约VO">
+        <description>预约视图对象：OpAppointmentRespVO、OpAppointmentSaveReqVO</description>
+    </tree>
+
+    <!-- HIS-biz Controller - 排班管理 -->
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/schedule" title="排班管理控制器">
         <description>医生排班管理：排班计划、号源池配置、加号管理</description>
     </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/schedule/vo" title="排班VO">
+        <description>排班视图对象：OpScheduleRespVO、OpScheduleSaveReqVO、OpSchedulePageReqVO</description>
+    </tree>
+
+    <!-- HIS-biz Controller - 入院管理 -->
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/admission" title="入院管理控制器">
         <description>入院登记管理：入院登记、床位分配、医保登记</description>
     </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/admission/vo" title="入院VO">
+        <description>入院视图对象：IpAdmissionRespVO、IpAdmissionSaveReqVO、IpAdmissionPageReqVO</description>
+    </tree>
+
+    <!-- HIS-biz Controller - 出院管理 -->
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/discharge" title="出院管理控制器">
         <description>出院管理：出院申请、出院结算、出院带药</description>
     </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/discharge/vo" title="出院VO">
+        <description>出院视图对象：IpDischargeRespVO、IpDischargeSaveReqVO</description>
+    </tree>
+
+    <!-- HIS-biz Controller - 床位管理 -->
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/bed" title="床位管理控制器">
         <description>床位管理：床位状态、床位分配、转床处理</description>
     </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/bed/vo" title="床位VO">
+        <description>床位视图对象：IpBedRespVO、IpBedSaveReqVO、IpBedPageReqVO</description>
+    </tree>
+
+    <!-- HIS-biz Controller - 病区管理 -->
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/ward" title="病区管理控制器">
         <description>病区管理：病区信息、病房配置、科室关联</description>
     </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/ward/vo" title="病区VO">
+        <description>病区视图对象：IpWardRespVO、IpWardSaveReqVO</description>
+    </tree>
+
+    <!-- HIS-biz Controller - 预住院管理 -->
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/preAdmission" title="预住院管理控制器">
         <description>预住院管理：预住院登记、预住院评估</description>
     </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/preAdmission/vo" title="预住院VO">
+        <description>预住院视图对象：IpPreAdmissionRespVO、IpPreAdmissionSaveReqVO</description>
+    </tree>
+
+    <!-- HIS-biz Controller - 预交金管理 -->
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/prepayment" title="预交金管理控制器">
         <description>预交金管理：预交金缴纳、余额查询、预警提醒</description>
     </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/prepayment/vo" title="预交金VO">
+        <description>预交金视图对象：IpPrepaymentRespVO、IpPrepaymentSaveReqVO</description>
+    </tree>
+
+    <!-- HIS-biz Controller - 结算管理 -->
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/settlement" title="结算管理控制器">
         <description>费用结算管理：门诊结算、住院结算、医保结算</description>
     </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/settlement/vo" title="结算VO">
+        <description>结算视图对象：OpSettlementRespVO、IpSettlementRespVO、SettlementSaveReqVO</description>
+    </tree>
+
+    <!-- HIS-biz Controller - 费用管理 -->
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/fee" title="费用管理控制器">
         <description>费用明细管理：费用录入、费用查询、退费处理</description>
     </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/fee/vo" title="费用VO">
+        <description>费用视图对象：HisFeeDetailRespVO、HisFeeDetailSaveReqVO、HisFeeDetailPageReqVO</description>
+    </tree>
+
+    <!-- HIS-biz Controller - 处方管理 -->
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/prescription" title="处方管理控制器">
         <description>处方管理：西药处方、中药处方、处方审核</description>
     </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/prescription/vo" title="处方VO">
+        <description>处方视图对象：OpPrescriptionRespVO、OpPrescriptionSaveReqVO、OpPrescriptionPageReqVO</description>
+    </tree>
+
+    <!-- HIS-biz Controller - 医嘱管理 -->
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/order" title="医嘱管理控制器">
         <description>医嘱管理：长期医嘱、临时医嘱、医嘱执行</description>
     </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/order/vo" title="医嘱VO">
+        <description>医嘱视图对象：IpOrderRespVO、IpOrderSaveReqVO、IpOrderPageReqVO</description>
+    </tree>
+
+    <!-- HIS-biz Controller - 医嘱模板管理 -->
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/orderTemplate" title="医嘱模板控制器">
         <description>医嘱模板管理：个人模板、科室模板、全院模板</description>
     </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/orderTemplate/vo" title="医嘱模板VO">
+        <description>医嘱模板视图对象：IpOrderTemplateRespVO、IpOrderTemplateSaveReqVO</description>
+    </tree>
+
+    <!-- HIS-biz Controller - 诊断管理 -->
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/diagnosis" title="诊断管理控制器">
         <description>诊断管理：ICD-10诊断、入院诊断、出院诊断</description>
     </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/diagnosis/vo" title="诊断VO">
+        <description>诊断视图对象：HisDiagnosisRespVO、HisDiagnosisSaveReqVO</description>
+    </tree>
+
+    <!-- HIS-biz Controller - 检查管理 -->
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/exam" title="检查管理控制器">
         <description>检查申请管理：影像检查、超声检查、内镜检查</description>
     </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/exam/vo" title="检查VO">
+        <description>检查视图对象：HisExamApplyRespVO、HisExamApplySaveReqVO</description>
+    </tree>
+
+    <!-- HIS-biz Controller - 检验管理 -->
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/lab" title="检验管理控制器">
         <description>检验申请管理：检验申请、标本采集、结果查询</description>
     </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/lab/vo" title="检验VO">
+        <description>检验视图对象：HisLabApplyRespVO、HisLabApplySaveReqVO</description>
+    </tree>
+
+    <!-- HIS-biz Controller - 药品管理 -->
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/drug" title="药品管理控制器">
         <description>药品管理：药品信息、库存管理、效期管理</description>
     </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/drug/vo" title="药品VO">
+        <description>药品视图对象：DrugInfoRespVO、DrugInfoSaveReqVO、DrugStockRespVO</description>
+    </tree>
+
+    <!-- HIS-biz Controller - 发药管理 -->
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/dispense" title="发药管理控制器">
         <description>发药管理：处方接收、调配发药、发药确认</description>
     </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/dispense/vo" title="发药VO">
+        <description>发药视图对象：OpDispenseRespVO、OpDispenseConfirmReqVO</description>
+    </tree>
+
+    <!-- HIS-biz Controller - 退药管理 -->
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/drugreturn" title="退药管理控制器">
         <description>退药管理：退药申请、退药审核、退药处理</description>
     </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/drugreturn/vo" title="退药VO">
+        <description>退药视图对象：OpDrugReturnRespVO、OpDrugReturnApplyReqVO</description>
+    </tree>
+
+    <!-- HIS-biz Controller - 护理管理 -->
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/nursing" title="护理管理控制器">
         <description>护理管理：护理记录、护理评估、护理计划</description>
     </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/nursing/vo" title="护理VO">
+        <description>护理视图对象：IpNursingRecordRespVO、IpNursingRecordSaveReqVO</description>
+    </tree>
+
+    <!-- HIS-biz Controller - 生命体征管理 -->
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/vital" title="生命体征控制器">
         <description>生命体征管理：体温单、血压脉搏、出入量记录</description>
     </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/vital/vo" title="生命体征VO">
+        <description>生命体征视图对象：IpVitalSignRespVO、IpVitalSignSaveReqVO、IpTemperatureChartRespVO</description>
+    </tree>
+
+    <!-- HIS-biz Controller - 给药管理 -->
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/medication" title="给药管理控制器">
         <description>给药管理：给药记录、给药核对、输液巡视</description>
     </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/medication/vo" title="给药VO">
+        <description>给药视图对象：IpMedicationRecordRespVO、IpMedicationAdminReqVO</description>
+    </tree>
+
+    <!-- HIS-biz Controller - 评估管理 -->
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/assess" title="评估管理控制器">
         <description>评估管理：跌倒评估、压疮评估、疼痛评估、营养评估</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/controller/admin/assess/vo" title="评估VO">
+        <description>评估视图对象：IpFallAssessRespVO、IpPressureUlcerAssessRespVO、IpPainAssessRespVO</description>
     </tree>
 
     <!-- HIS-biz Service层 -->
@@ -103,116 +231,254 @@
         <description>HIS模块业务逻辑层，处理核心业务逻辑</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/patient" title="患者服务">
-        <description>患者信息服务：患者CRUD、就诊历史、过敏史管理</description>
+        <description>患者信息服务：HisPatientService接口及实现类，患者CRUD、就诊历史、过敏史管理</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/register" title="挂号服务">
-        <description>挂号服务：挂号处理、退号处理、挂号查询</description>
+        <description>挂号服务：OpRegisterService接口及实现类，挂号处理、退号处理、挂号查询</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/appointment" title="预约服务">
-        <description>预约服务：预约处理、号源管理、预约提醒</description>
+        <description>预约服务：OpAppointmentService接口及实现类，预约处理、号源管理、预约提醒</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/schedule" title="排班服务">
-        <description>排班服务：排班计划、号源生成、排班调整</description>
+        <description>排班服务：OpScheduleService接口及实现类，排班计划、号源生成、排班调整</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/admission" title="入院服务">
-        <description>入院服务：入院登记、床位分配、医保登记</description>
+        <description>入院服务：IpAdmissionService接口及实现类，入院登记、床位分配、医保登记</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/discharge" title="出院服务">
-        <description>出院服务：出院申请、出院结算、病案归档</description>
+        <description>出院服务：IpDischargeService接口及实现类，出院申请、出院结算、病案归档</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/bed" title="床位服务">
-        <description>床位服务：床位状态管理、床位分配、转床处理</description>
+        <description>床位服务：IpBedService接口及实现类，床位状态管理、床位分配、转床处理</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/ward" title="病区服务">
-        <description>病区服务：病区信息管理、病房配置</description>
+        <description>病区服务：IpWardService接口及实现类，病区信息管理、病房配置</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/preAdmission" title="预住院服务">
-        <description>预住院服务：预住院登记、预住院评估</description>
+        <description>预住院服务：IpPreAdmissionService接口及实现类，预住院登记、预住院评估</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/prepayment" title="预交金服务">
-        <description>预交金服务：预交金缴纳、余额管理、预警通知</description>
+        <description>预交金服务：IpPrepaymentService接口及实现类，预交金缴纳、余额管理、预警通知</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/settlement" title="结算服务">
-        <description>结算服务：费用汇总、医保结算、个人结算</description>
+        <description>结算服务：HisSettlementService接口及实现类，费用汇总、医保结算、个人结算</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/fee" title="费用服务">
-        <description>费用服务：费用录入、费用查询、退费处理</description>
+        <description>费用服务：HisFeeDetailService接口及实现类，费用录入、费用查询、退费处理</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/prescription" title="处方服务">
-        <description>处方服务：处方开立、处方审核、处方查询</description>
+        <description>处方服务：OpPrescriptionService接口及实现类，处方开立、处方审核、处方查询</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/order" title="医嘱服务">
-        <description>医嘱服务：医嘱开立、医嘱执行、医嘱停止</description>
+        <description>医嘱服务：IpOrderService接口及实现类，医嘱开立、医嘱执行、医嘱停止</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/orderTemplate" title="医嘱模板服务">
-        <description>医嘱模板服务：模板管理、模板应用</description>
+        <description>医嘱模板服务：IpOrderTemplateService接口及实现类，模板管理、模板应用</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/diagnosis" title="诊断服务">
-        <description>诊断服务：诊断录入、诊断查询、ICD-10编码</description>
+        <description>诊断服务：HisDiagnosisService接口及实现类，诊断录入、诊断查询、ICD-10编码</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/exam" title="检查服务">
-        <description>检查服务：检查申请、检查安排、报告查询</description>
+        <description>检查服务：HisExamApplyService接口及实现类，检查申请、检查安排、报告查询</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/lab" title="检验服务">
-        <description>检验服务：检验申请、标本管理、结果查询</description>
+        <description>检验服务：HisLabApplyService接口及实现类，检验申请、标本管理、结果查询</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/drug" title="药品服务">
-        <description>药品服务：药品信息、库存管理、效期预警</description>
+        <description>药品服务：DrugInfoService、DrugStockService接口及实现类，药品信息、库存管理、效期预警</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/dispense" title="发药服务">
-        <description>发药服务：处方接收、药品调配、发药确认</description>
+        <description>发药服务：OpDispenseService接口及实现类，处方接收、药品调配、发药确认</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/drugreturn" title="退药服务">
-        <description>退药服务：退药申请、退药审核、退药入库</description>
+        <description>退药服务：OpDrugReturnService接口及实现类，退药申请、退药审核、退药入库</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/nursing" title="护理服务">
-        <description>护理服务：护理记录、护理评估、护理计划</description>
+        <description>护理服务：IpNursingRecordService接口及实现类，护理记录、护理评估、护理计划</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/vital" title="生命体征服务">
-        <description>生命体征服务：体温记录、血压脉搏、出入量统计</description>
+        <description>生命体征服务：IpVitalSignService接口及实现类，体温记录、血压脉搏、出入量统计</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/medication" title="给药服务">
-        <description>给药服务：给药记录、给药核对、输液巡视</description>
+        <description>给药服务：IpMedicationService接口及实现类，给药记录、给药核对、输液巡视</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/service/assess" title="评估服务">
-        <description>评估服务：跌倒评估、压疮评估、疼痛评估</description>
+        <description>评估服务：IpAssessService接口及实现类，跌倒评估、压疮评估、疼痛评估</description>
     </tree>
 
     <!-- HIS-biz DAL层 -->
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal" title="HIS数据访问层">
         <description>HIS模块数据访问层，包含DO实体和Mapper</description>
     </tree>
+
+    <!-- HIS-biz DAL - DO实体类 -->
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject" title="DO实体类">
         <description>数据库实体对象(DO)，对应数据库表结构</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/patient" title="患者DO">
-        <description>患者实体：his_patient_info、his_patient_card等</description>
+        <description>患者实体：HisPatientInfoDO、HisPatientCardDO、HisAllergyRecordDO</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/register" title="挂号DO">
-        <description>挂号实体：op_register、op_register_queue等</description>
+        <description>挂号实体：OpRegisterDO、OpRegisterQueueDO</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/appointment" title="预约DO">
+        <description>预约实体：OpAppointmentDO、OpAppointmentSlotDO</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/schedule" title="排班DO">
+        <description>排班实体：OpScheduleDO、OpScheduleRuleDO</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/admission" title="入院DO">
-        <description>入院实体：ip_admission、ip_admission_record等</description>
+        <description>入院实体：IpAdmissionDO、IpAdmissionRecordDO</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/discharge" title="出院DO">
+        <description>出院实体：IpDischargeDO、IpDischargeSummaryDO</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/bed" title="床位DO">
-        <description>床位实体：ip_bed、ip_bed_record等</description>
+        <description>床位实体：IpBedDO、IpBedRecordDO</description>
     </tree>
-    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/order" title="医嘱DO">
-        <description>医嘱实体：ip_order、ip_order_execute等</description>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/ward" title="病区DO">
+        <description>病区实体：IpWardDO、IpRoomDO</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/preAdmission" title="预住院DO">
+        <description>预住院实体：IpPreAdmissionDO</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/prepayment" title="预交金DO">
+        <description>预交金实体：IpPrepaymentDO、IpPrepaymentRecordDO</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/settlement" title="结算DO">
+        <description>结算实体：OpSettlementDO、IpSettlementDO、HisSettlementDetailDO</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/fee" title="费用DO">
+        <description>费用实体：HisFeeDetailDO、HisFeeItemDO、OpRefundItemDO</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/prescription" title="处方DO">
-        <description>处方实体：op_prescription、op_prescription_item等</description>
+        <description>处方实体：OpPrescriptionDO、OpPrescriptionItemDO</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/order" title="医嘱DO">
+        <description>医嘱实体：IpOrderDO、IpOrderItemDO、IpOrderExecuteDO</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/orderTemplate" title="医嘱模板DO">
+        <description>医嘱模板实体：IpOrderTemplateDO、IpOrderTemplateItemDO</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/diagnosis" title="诊断DO">
+        <description>诊断实体：HisDiagnosisRecordDO、HisIcd10DictDO</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/exam" title="检查DO">
+        <description>检查实体：HisExamApplyDO、HisExamReportDO</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/lab" title="检验DO">
+        <description>检验实体：HisLabApplyDO、HisLabReportDO、HisLabResultDO</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/drug" title="药品DO">
-        <description>药品实体：drug_info、drug_stock、drug_batch等</description>
+        <description>药品实体：DrugInfoDO、DrugStockDO、DrugBatchDO、DrugInboundDO、DrugOutboundDO</description>
     </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/dispense" title="发药DO">
+        <description>发药实体：OpDispenseDO、OpDispenseItemDO</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/drugreturn" title="退药DO">
+        <description>退药实体：OpDrugReturnDO、OpDrugReturnItemDO</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/nursing" title="护理DO">
+        <description>护理实体：IpNursingRecordDO、IpNursingPlanDO</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/vital" title="生命体征DO">
+        <description>生命体征实体：IpVitalSignDO、IpIntakeOutputDO</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/medication" title="给药DO">
+        <description>给药实体：IpMedicationRecordDO、IpInfusionPatrolDO</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/dataobject/assess" title="评估DO">
+        <description>评估实体：IpFallAssessDO、IpPressureUlcerAssessDO、IpPainAssessDO、IpNutritionAssessDO</description>
+    </tree>
+
+    <!-- HIS-biz DAL - Mapper接口 -->
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/mysql" title="Mapper接口">
         <description>MyBatis Mapper接口，数据库操作方法</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/mysql/patient" title="患者Mapper">
+        <description>患者Mapper：HisPatientInfoMapper、HisPatientCardMapper</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/mysql/register" title="挂号Mapper">
+        <description>挂号Mapper：OpRegisterMapper、OpRegisterQueueMapper</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/mysql/appointment" title="预约Mapper">
+        <description>预约Mapper：OpAppointmentMapper、OpAppointmentSlotMapper</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/mysql/schedule" title="排班Mapper">
+        <description>排班Mapper：OpScheduleMapper、OpScheduleRuleMapper</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/mysql/admission" title="入院Mapper">
+        <description>入院Mapper：IpAdmissionMapper、IpAdmissionRecordMapper</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/mysql/discharge" title="出院Mapper">
+        <description>出院Mapper：IpDischargeMapper、IpDischargeSummaryMapper</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/mysql/bed" title="床位Mapper">
+        <description>床位Mapper：IpBedMapper、IpBedRecordMapper</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/mysql/ward" title="病区Mapper">
+        <description>病区Mapper：IpWardMapper、IpRoomMapper</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/mysql/preAdmission" title="预住院Mapper">
+        <description>预住院Mapper：IpPreAdmissionMapper</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/mysql/prepayment" title="预交金Mapper">
+        <description>预交金Mapper：IpPrepaymentMapper、IpPrepaymentRecordMapper</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/mysql/settlement" title="结算Mapper">
+        <description>结算Mapper：OpSettlementMapper、IpSettlementMapper、HisSettlementDetailMapper</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/mysql/fee" title="费用Mapper">
+        <description>费用Mapper：HisFeeDetailMapper、HisFeeItemMapper、OpRefundItemMapper</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/mysql/prescription" title="处方Mapper">
+        <description>处方Mapper：OpPrescriptionMapper、OpPrescriptionItemMapper</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/mysql/order" title="医嘱Mapper">
+        <description>医嘱Mapper：IpOrderMapper、IpOrderItemMapper、IpOrderExecuteMapper</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/mysql/orderTemplate" title="医嘱模板Mapper">
+        <description>医嘱模板Mapper：IpOrderTemplateMapper、IpOrderTemplateItemMapper</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/mysql/diagnosis" title="诊断Mapper">
+        <description>诊断Mapper：HisDiagnosisRecordMapper、HisIcd10DictMapper</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/mysql/exam" title="检查Mapper">
+        <description>检查Mapper：HisExamApplyMapper、HisExamReportMapper</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/mysql/lab" title="检验Mapper">
+        <description>检验Mapper：HisLabApplyMapper、HisLabReportMapper、HisLabResultMapper</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/mysql/drug" title="药品Mapper">
+        <description>药品Mapper：DrugInfoMapper、DrugStockMapper、DrugBatchMapper、DrugInboundMapper、DrugOutboundMapper</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/mysql/dispense" title="发药Mapper">
+        <description>发药Mapper：OpDispenseMapper、OpDispenseItemMapper</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/mysql/drugreturn" title="退药Mapper">
+        <description>退药Mapper：OpDrugReturnMapper、OpDrugReturnItemMapper</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/mysql/nursing" title="护理Mapper">
+        <description>护理Mapper：IpNursingRecordMapper、IpNursingPlanMapper</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/mysql/vital" title="生命体征Mapper">
+        <description>生命体征Mapper：IpVitalSignMapper、IpIntakeOutputMapper</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/mysql/medication" title="给药Mapper">
+        <description>给药Mapper：IpMedicationRecordMapper、IpInfusionPatrolMapper</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/dal/mysql/assess" title="评估Mapper">
+        <description>评估Mapper：IpFallAssessMapper、IpPressureUlcerAssessMapper、IpPainAssessMapper、IpNutritionAssessMapper</description>
     </tree>
 
     <!-- HIS-biz 转换层 -->
     <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/convert" title="对象转换器">
         <description>DO与VO对象转换器，基于MapStruct</description>
+    </tree>
+
+    <!-- HIS-biz 定时任务 -->
+    <tree path="/yudao-module-his/yudao-module-his-biz/src/main/java/cn/iocoder/yudao/module/his/job" title="定时任务">
+        <description>HIS模块定时任务：预约提醒、库存预警、账单生成等</description>
     </tree>
 
     <!-- ==================== M01 门诊管理模块 ==================== -->
@@ -229,11 +495,20 @@
     <tree path="/yudao-module-his/yudao-module-his-op/src/main/java/cn/iocoder/yudao/module/his/op/controller" title="门诊控制器">
         <description>门诊模块REST API控制器</description>
     </tree>
+    <tree path="/yudao-module-his/yudao-module-his-op/src/main/java/cn/iocoder/yudao/module/his/op/controller/admin" title="门诊管理端控制器">
+        <description>门诊管理端REST API控制器</description>
+    </tree>
     <tree path="/yudao-module-his/yudao-module-his-op/src/main/java/cn/iocoder/yudao/module/his/op/service" title="门诊服务层">
         <description>门诊模块业务逻辑层</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-op/src/main/java/cn/iocoder/yudao/module/his/op/dal" title="门诊数据访问层">
         <description>门诊模块数据访问层</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-op/src/main/java/cn/iocoder/yudao/module/his/op/dal/dataobject" title="门诊DO实体">
+        <description>门诊模块数据库实体对象</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-op/src/main/java/cn/iocoder/yudao/module/his/op/dal/mysql" title="门诊Mapper">
+        <description>门诊模块MyBatis Mapper接口</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-op/src/main/java/cn/iocoder/yudao/module/his/op/enums" title="门诊枚举">
         <description>门诊模块枚举类型定义</description>
@@ -253,11 +528,20 @@
     <tree path="/yudao-module-his/yudao-module-his-ip/src/main/java/cn/iocoder/yudao/module/his/ip/controller" title="住院控制器">
         <description>住院模块REST API控制器</description>
     </tree>
+    <tree path="/yudao-module-his/yudao-module-his-ip/src/main/java/cn/iocoder/yudao/module/his/ip/controller/admin" title="住院管理端控制器">
+        <description>住院管理端REST API控制器</description>
+    </tree>
     <tree path="/yudao-module-his/yudao-module-his-ip/src/main/java/cn/iocoder/yudao/module/his/ip/service" title="住院服务层">
         <description>住院模块业务逻辑层</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-ip/src/main/java/cn/iocoder/yudao/module/his/ip/dal" title="住院数据访问层">
         <description>住院模块数据访问层</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-ip/src/main/java/cn/iocoder/yudao/module/his/ip/dal/dataobject" title="住院DO实体">
+        <description>住院模块数据库实体对象</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-ip/src/main/java/cn/iocoder/yudao/module/his/ip/dal/mysql" title="住院Mapper">
+        <description>住院模块MyBatis Mapper接口</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-ip/src/main/java/cn/iocoder/yudao/module/his/ip/enums" title="住院枚举">
         <description>住院模块枚举类型定义</description>
@@ -276,11 +560,20 @@
     <tree path="/yudao-module-his/yudao-module-his-drug/src/main/java/cn/iocoder/yudao/module/his/drug/controller" title="药品控制器">
         <description>药品模块REST API控制器</description>
     </tree>
+    <tree path="/yudao-module-his/yudao-module-his-drug/src/main/java/cn/iocoder/yudao/module/his/drug/controller/admin" title="药品管理端控制器">
+        <description>药品管理端REST API控制器</description>
+    </tree>
     <tree path="/yudao-module-his/yudao-module-his-drug/src/main/java/cn/iocoder/yudao/module/his/drug/service" title="药品服务层">
         <description>药品模块业务逻辑层</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-drug/src/main/java/cn/iocoder/yudao/module/his/drug/dal" title="药品数据访问层">
         <description>药品模块数据访问层</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-drug/src/main/java/cn/iocoder/yudao/module/his/drug/dal/dataobject" title="药品DO实体">
+        <description>药品模块数据库实体对象</description>
+    </tree>
+    <tree path="/yudao-module-his/yudao-module-his-drug/src/main/java/cn/iocoder/yudao/module/his/drug/dal/mysql" title="药品Mapper">
+        <description>药品模块MyBatis Mapper接口</description>
     </tree>
     <tree path="/yudao-module-his/yudao-module-his-drug/src/main/java/cn/iocoder/yudao/module/his/drug/enums" title="药品枚举">
         <description>药品模块枚举类型定义</description>
