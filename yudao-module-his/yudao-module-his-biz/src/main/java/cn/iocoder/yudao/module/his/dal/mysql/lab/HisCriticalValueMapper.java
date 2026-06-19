@@ -2,6 +2,7 @@ package cn.iocoder.yudao.module.his.dal.mysql.lab;
 
 import cn.iocoder.yudao.framework.mybatis.core.mapper.BaseMapperX;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
+import cn.iocoder.yudao.framework.mybatis.core.query.LambdaQueryWrapperX;
 import cn.iocoder.yudao.module.his.dal.dataobject.lab.HisCriticalValueDO;
 import cn.iocoder.yudao.module.his.controller.admin.lab.vo.HisCriticalValuePageReqVO;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -19,7 +20,7 @@ public interface HisCriticalValueMapper extends BaseMapperX<HisCriticalValueDO> 
      * 分页查询危急值
      */
     default PageResult<HisCriticalValueDO> selectPage(HisCriticalValuePageReqVO reqVO) {
-        return selectPage(reqVO, new LambdaQueryWrapper<HisCriticalValueDO>()
+        return selectPage(reqVO, new LambdaQueryWrapperX<HisCriticalValueDO>()
                 .eqIfPresent(HisCriticalValueDO::getPatientId, reqVO.getPatientId())
                 .eqIfPresent(HisCriticalValueDO::getDeptId, reqVO.getDeptId())
                 .eqIfPresent(HisCriticalValueDO::getStatus, reqVO.getStatus())

@@ -5,6 +5,7 @@ import cn.iocoder.yudao.module.his.dal.dataobject.drug.HisDrugInteractionDO;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -54,7 +55,7 @@ public interface HisDrugInteractionMapper extends BaseMapperX<HisDrugInteraction
      */
     default List<HisDrugInteractionDO> selectByDrugIds(List<Long> drugIds) {
         if (drugIds == null || drugIds.isEmpty()) {
-            return List.of();
+            return new ArrayList<>();
         }
         return selectList(new LambdaQueryWrapper<HisDrugInteractionDO>()
                 .eq(HisDrugInteractionDO::getStatus, 1)
