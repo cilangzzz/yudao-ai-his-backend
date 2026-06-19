@@ -53,8 +53,7 @@ public class HisCriticalValueController {
     }
 
     @GetMapping("/list-unconfirmed")
-    @Operation(summary = "获得未确认的危急值列表")
-    @Operation(description = "获取状态为已通知(未确认)的危急值列表，用于临床科室确认处理")
+    @Operation(summary = "获得未确认的危急值列表", description = "获取状态为已通知(未确认)的危急值列表，用于临床科室确认处理")
     @PreAuthorize("@ss.hasPermission('his:critical-value:query')")
     public CommonResult<List<HisCriticalValueRespVO>> getUnconfirmedList() {
         List<HisCriticalValueDO> list = criticalValueService.getUnconfirmedList();
@@ -62,8 +61,7 @@ public class HisCriticalValueController {
     }
 
     @GetMapping("/list-detected")
-    @Operation(summary = "获得待通知的危急值列表")
-    @Operation(description = "获取状态为检出(待通知)的危急值列表，用于检验科通知")
+    @Operation(summary = "获得待通知的危急值列表", description = "获取状态为检出(待通知)的危急值列表，用于检验科通知")
     @PreAuthorize("@ss.hasPermission('his:critical-value:query')")
     public CommonResult<List<HisCriticalValueRespVO>> getDetectedList() {
         List<HisCriticalValueDO> list = criticalValueService.getDetectedList();
@@ -71,8 +69,7 @@ public class HisCriticalValueController {
     }
 
     @PostMapping("/notify")
-    @Operation(summary = "通知危急值")
-    @Operation(description = "检验科通知临床科室危急值")
+    @Operation(summary = "通知危急值", description = "检验科通知临床科室危急值")
     @Parameter(name = "id", description = "危急值ID", required = true)
     @PreAuthorize("@ss.hasPermission('his:critical-value:notify')")
     public CommonResult<Boolean> notifyCriticalValue(@RequestParam("id") Long id) {
@@ -81,8 +78,7 @@ public class HisCriticalValueController {
     }
 
     @PostMapping("/confirm")
-    @Operation(summary = "确认危急值")
-    @Operation(description = "临床科室确认接收危急值")
+    @Operation(summary = "确认危急值", description = "临床科室确认接收危急值")
     @Parameter(name = "id", description = "危急值ID", required = true)
     @PreAuthorize("@ss.hasPermission('his:critical-value:confirm')")
     public CommonResult<Boolean> confirmCriticalValue(@RequestParam("id") Long id) {
@@ -91,8 +87,7 @@ public class HisCriticalValueController {
     }
 
     @PostMapping("/process")
-    @Operation(summary = "处理危急值")
-    @Operation(description = "临床科室处理危急值，填写处理结果")
+    @Operation(summary = "处理危急值", description = "临床科室处理危急值，填写处理结果")
     @PreAuthorize("@ss.hasPermission('his:critical-value:process')")
     public CommonResult<Boolean> processCriticalValue(@Valid @RequestBody HisCriticalValueProcessReqVO reqVO) {
         criticalValueService.processCriticalValue(reqVO.getId(), reqVO.getProcessResult());
