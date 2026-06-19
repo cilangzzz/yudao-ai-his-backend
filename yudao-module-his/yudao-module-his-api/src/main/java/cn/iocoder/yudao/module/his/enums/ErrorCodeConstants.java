@@ -13,6 +13,21 @@ import cn.iocoder.yudao.framework.common.exception.ErrorCode;
  */
 public interface ErrorCodeConstants {
 
+    // ========== 基础数据管理 1_014_000_XXX ==========
+
+    // 科室管理
+    ErrorCode DEPARTMENT_NOT_EXISTS = new ErrorCode(1_014_000_000, "科室不存在");
+    ErrorCode DEPARTMENT_CODE_DUPLICATE = new ErrorCode(1_014_000_001, "科室编码已存在");
+    ErrorCode DEPARTMENT_HAS_CHILDREN = new ErrorCode(1_014_000_002, "科室存在子科室，无法删除");
+
+    // 医护人员管理
+    ErrorCode STAFF_NOT_EXISTS = new ErrorCode(1_014_001_000, "医护人员不存在");
+    ErrorCode STAFF_CODE_DUPLICATE = new ErrorCode(1_014_001_001, "人员编码已存在");
+
+    // 收费项目管理
+    ErrorCode CHARGE_ITEM_NOT_EXISTS = new ErrorCode(1_014_002_000, "收费项目不存在");
+    ErrorCode CHARGE_ITEM_CODE_DUPLICATE = new ErrorCode(1_014_002_001, "项目编码已存在");
+
     // ========== M01 门诊管理 1_015_000_XXX ==========
 
     // 患者管理

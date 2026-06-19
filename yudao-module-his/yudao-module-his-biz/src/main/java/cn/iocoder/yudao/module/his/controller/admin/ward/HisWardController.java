@@ -26,7 +26,7 @@ import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
  */
 @Tag(name = "管理后台 - HIS病区管理")
 @RestController
-@RequestMapping("/his/ward")
+@RequestMapping("/his/basic/ward")
 @Validated
 public class HisWardController {
 
