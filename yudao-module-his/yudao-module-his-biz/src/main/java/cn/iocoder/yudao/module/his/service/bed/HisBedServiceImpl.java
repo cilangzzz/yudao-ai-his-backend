@@ -2,18 +2,23 @@ package cn.iocoder.yudao.module.his.service.bed;
 
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.common.util.object.BeanUtils;
+import cn.iocoder.yudao.module.his.controller.admin.bed.vo.HisBedOverviewRespVO;
 import cn.iocoder.yudao.module.his.controller.admin.bed.vo.HisBedPageReqVO;
 import cn.iocoder.yudao.module.his.controller.admin.bed.vo.HisBedSaveReqVO;
 import cn.iocoder.yudao.module.his.dal.dataobject.bed.HisBedDO;
 import cn.iocoder.yudao.module.his.dal.dataobject.ward.HisWardDO;
 import cn.iocoder.yudao.module.his.dal.mysql.bed.HisBedMapper;
+import cn.iocoder.yudao.module.his.enums.BedTypeEnum;
 import cn.iocoder.yudao.module.his.service.ward.HisWardService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
 import static cn.iocoder.yudao.module.his.enums.ErrorCodeConstants.*;
@@ -195,6 +200,110 @@ public class HisBedServiceImpl implements HisBedService {
         }
         if (!bed.getId().equals(id)) {
             throw exception(BED_NOT_EXISTS); // TODO: 添加具体错误码
+        }
+    }
+
+    @Override
+    public HisBedOverviewRespVO getBedOverview(Long wardId) {
+        HisBedOverviewRespVO overview = new HisBedOverviewRespVO();
+
+        List<HisBedDO> beds;
+        if (wardId != null) {
+            // 按病区统计
+            HisWardDO ward = wardService.validateWardExists(wardId);
+            overview.setWardId(wardId);
+            overview.setWardName(ward.getWardName());
+            beds = bedMapper.selectListByWardId(wardId);
+        } else {
+            // 全院统计
+            overview.setWardName("全院");
+            beds = bedMapper.selectList();
+        }
+
+        // 计算各项统计数据
+        int totalBeds = beds.size();
+        int emptyBeds = 0;
+        int occupiedBeds = 0;
+        int cleaningBeds = 0;
+        int maintenanceBeds = 0;
+        int reservedBeds = 0;
+
+        for (HisBedDO bed : beds) {
+            switch (bed.getBedStatus()) {
+                case 1: // 空床
+                    emptyBeds++;
+                    break;
+                case 2: // 占用
+                    occupiedBeds++;
+                    break;
+                case 3: // 清洁中
+                    cleaningBeds++;
+                    break;
+                case 4: // 维修
+                    maintenanceBeds++;
+                    break;
+                case 5: // 预留
+                    reservedBeds++;
+                    break;
+            }
+        }
+
+        overview.setTotalBeds(totalBeds);
+        overview.setEmptyBeds(emptyBeds);
+        overview.setOccupiedBeds(occupiedBeds);
+        overview.setCleaningBeds(cleaningBeds);
+        overview.setMaintenanceBeds(maintenanceBeds);
+        overview.setReservedBeds(reservedBeds);
+
+        // 计算使用率
+        if (totalBeds > 0) {
+            double usageRate = (occupiedBeds * 100.0) / totalBeds;
+            overview.setUsageRate(Math.round(usageRate * 100) / 100.0); // 保留两位小数
+        } else {
+            overview.setUsageRate(0.0);
+        }
+
+        // 按床位类型统计
+        Map<Integer, List<HisBedDO>> bedsByType = beds.stream()
+                .collect(Collectors.groupingBy(HisBedDO::getBedType));
+
+        List<HisBedOverviewRespVO.BedTypeStats> bedTypeStats = new ArrayList<>();
+        for (Map.Entry<Integer, List<HisBedDO>> entry : bedsByType.entrySet()) {
+            HisBedOverviewRespVO.BedTypeStats stats = new HisBedOverviewRespVO.BedTypeStats();
+            stats.setBedType(entry.getKey());
+            stats.setBedTypeName(BedTypeEnum.getNameByCode(entry.getKey()));
+            stats.setTotal(entry.getValue().size());
+            stats.setEmpty((int) entry.getValue().stream().filter(b -> b.getBedStatus() == 1).count());
+            stats.setOccupied((int) entry.getValue().stream().filter(b -> b.getBedStatus() == 2).count());
+            bedTypeStats.add(stats);
+        }
+        overview.setBedTypeStats(bedTypeStats);
+
+        return overview;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void transferBed(Long fromBedId, Long toBedId, Long patientId, String patientName, Long admissionId, String reason) {
+        // 1. 校验原床位存在且被占用
+        HisBedDO fromBed = validateBedExists(fromBedId);
+        if (!fromBed.isOccupied()) {
+            throw exception(BED_NOT_EXISTS); // TODO: 原床位未被占用
+        }
+
+        // 2. 校验目标床位存在且可用
+        HisBedDO toBed = validateBedAvailable(toBedId);
+
+        // 3. 释放原床位
+        bedMapper.releaseBed(fromBedId, "system");
+
+        // 4. 占用目标床位
+        bedMapper.occupyBed(toBedId, patientId, patientName, admissionId, "system");
+
+        // 5. 更新两个病区的床位统计
+        wardService.updateWardBedStat(fromBed.getWardId());
+        if (!fromBed.getWardId().equals(toBed.getWardId())) {
+            wardService.updateWardBedStat(toBed.getWardId());
         }
     }
 }

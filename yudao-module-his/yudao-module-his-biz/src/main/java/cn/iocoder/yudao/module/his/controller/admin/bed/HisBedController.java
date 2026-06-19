@@ -142,6 +142,25 @@ public class HisBedController {
         return success(true);
     }
 
+    @GetMapping("/overview")
+    @Operation(summary = "获得床位总览统计")
+    @Parameter(name = "wardId", description = "病区ID（可选，为空则统计全部）", example = "1")
+    @PreAuthorize("@ss.hasPermission('his:bed:query')")
+    public CommonResult<HisBedOverviewRespVO> getBedOverview(
+            @RequestParam(value = "wardId", required = false) Long wardId) {
+        return success(bedService.getBedOverview(wardId));
+    }
+
+    @PostMapping("/transfer")
+    @Operation(summary = "转床")
+    @PreAuthorize("@ss.hasPermission('his:bed:transfer')")
+    public CommonResult<Boolean> transferBed(@Valid @RequestBody HisBedTransferReqVO reqVO) {
+        bedService.transferBed(reqVO.getFromBedId(), reqVO.getToBedId(),
+                reqVO.getPatientId(), reqVO.getPatientName(),
+                reqVO.getAdmissionId(), reqVO.getReason());
+        return success(true);
+    }
+
     /**
      * 转换为响应VO
      */

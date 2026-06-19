@@ -2,6 +2,7 @@
 
 > 日期: 2026-06-19
 > 分析范围: 前端 API (`yudao-ai-his-admin-ui/apps/web-antd/src/api/his`) vs 后端 Controller (`yudao-module-his`)
+> **更新**: 已实现部分缺失接口
 
 ---
 
@@ -9,40 +10,40 @@
 
 ### 类型 A：后端 Controller 完全缺失（P0 - 最高优先级）
 
-| 前端文件 | 前端路径 | 缺失的后端接口 | 影响功能 |
-|---------|---------|---------------|---------|
-| `op/cds/index.ts` | `/his/cds/*` | **全部接口缺失** | CDS 合理用药校验 |
-| `op/medicalRecord/index.ts` | `/his/medical-record/*` | **全部接口缺失** | 电子病历管理 |
-| `op/examination/index.ts` | `/his/examination/*` | **全部接口缺失** | 检查申请（旧路径） |
-| `op/diagnosis/index.ts` | `/his/op/visit/diagnosis/*` | **诊断接口路径不匹配** | 门诊诊断（旧路径） |
-| `op/diagnosis/index.ts` | `/his/icd10/*` | **ICD-10字典接口缺失** | ICD-10 编码查询 |
-| `outpatient/payment/index.ts` | `/his/payment/*` | **支付接口缺失** | 门诊支付（非op-payment） |
-| `pharmacy/stock/index.ts` | `/his/pharmacy/stock/*` | **库存接口路径不匹配** | 药品库存（旧路径） |
-| `pharmacy/outbound/index.ts` | `/his/pharmacy/outbound/*` | **出库接口路径不匹配** | 药品出库（旧路径） |
-| `pharmacy/inventory/index.ts` | `/his/pharmacy/inventory/*` | **盘点接口路径不匹配** | 药品盘点（旧路径） |
-| `pharmacy/inbound/index.ts` | `/his/pharmacy/inbound/*` | **入库接口路径不匹配** | 药品入库（旧路径） |
-| `pharmacy/purchase/index.ts` | `/his/pharmacy/purchase/*` | **采购接口路径不匹配** | 药品采购（旧路径） |
-| `pharmacy/supplier/index.ts` | `/his/pharmacy/supplier/*` | **供应商接口路径不匹配** | 供应商管理（旧路径） |
-| `pharmacy/drug-return/index.ts` | `/his/pharmacy/drug-return/*` | **退药接口路径不匹配** | 退药管理（旧路径） |
-| `outpatient/dispense/index.ts` | `/his/op-pharmacy/*` | **门诊药房接口缺失** | 门诊药房发药 |
-| `lab/labRequest/index.ts` | `/his/lab/request/*` | **检验申请路径不匹配** | 检验申请（旧路径） |
-| `lab/labItem/index.ts` | `/his/lab/item/*` | **检验项目接口缺失** | 检验项目字典 |
-| `lab/criticalValue/index.ts` | `/his/lab/critical-value/*` | **危急值接口缺失** | 危急值管理 |
-| `inpatient/nursing/index.ts` | `/his/nursing-assessment/*` | **护理评估路径不匹配** | 护理评估（双重路径） |
-| `inpatient/nursing/index.ts` | `/his/handover/*` | **交接班路径不匹配** | 护理交接班（旧路径） |
-| `inpatient/nursing/index.ts` | `/his/intake-output/*` | **出入量接口缺失** | 入出量记录 |
-| `inpatient/nursing/index.ts` | `/his/vital-signs/*` | **生命体征路径不匹配** | 生命体征（旧路径） |
-| `inpatient/ward/index.ts` | `/his/ward/*` | **病区路径不匹配** | 病区管理（旧路径） |
-| `inpatient/bed/index.ts` | `/his/bed/available` | **路径不匹配** | 空闲床位查询 |
-| `inpatient/bed/index.ts` | `/his/bed/overview` | **接口缺失** | 床位总览统计 |
-| `inpatient/bed/index.ts` | `/his/bed/transfer` | **接口缺失** | 转床功能 |
-| `inpatient/bed/index.ts` | `/his/bed/assign` | **路径不匹配** | 分配床位 |
-| `outpatient/exam-request/index.ts` | `/his/exam-request/*` | **大部分接口已实现，record-result缺失** | 检查申请结果录入 |
-| `outpatient/exam-item/index.ts` | `/his/exam-item/*` | **启用/禁用接口缺失** | 检查项目字典 |
-| `outpatient/refund/index.ts` | `/his/refund/*` | **退费路径不匹配** | 门诊退费（旧路径） |
-| `nursing-assessment/index.ts` | `/his/nursing-assessment/*` | **部分接口缺失** | 护理评估管理 |
-| `nursing-record/index.ts` | `/his/nursing-record/*` | **审核/模板接口缺失** | 护理记录管理 |
-| `vital-sign/index.ts` | `/his/vital-sign/*` | **统计接口缺失** | 生命体征管理 |
+| 前端文件 | 前端路径 | 后端状态 | 影响功能 |
+|---------|---------|---------|---------|
+| `op/cds/index.ts` | `/his/cds/*` | ✅ **已实现** HisCdsController | CDS 合理用药校验 |
+| `op/medicalRecord/index.ts` | `/his/medical-record/*` | ❌ 缺失 | 电子病历管理 |
+| `op/examination/index.ts` | `/his/examination/*` | ❌ 缺失 | 检查申请（旧路径） |
+| `op/diagnosis/index.ts` | `/his/op/visit/diagnosis/*` | ⚠️ 路径不匹配 | 门诊诊断（旧路径） |
+| `op/diagnosis/index.ts` | `/his/icd10/*` | ❌ 缺失 | ICD-10 编码查询 |
+| `outpatient/payment/index.ts` | `/his/payment/*` | ⚠️ 路径不匹配 | 门诊支付（非op-payment） |
+| `pharmacy/stock/index.ts` | `/his/pharmacy/stock/*` | ⚠️ 路径不匹配 | 药品库存（旧路径） |
+| `pharmacy/outbound/index.ts` | `/his/pharmacy/outbound/*` | ⚠️ 路径不匹配 | 药品出库（旧路径） |
+| `pharmacy/inventory/index.ts` | `/his/pharmacy/inventory/*` | ⚠️ 路径不匹配 | 药品盘点（旧路径） |
+| `pharmacy/inbound/index.ts` | `/his/pharmacy/inbound/*` | ⚠️ 路径不匹配 | 药品入库（旧路径） |
+| `pharmacy/purchase/index.ts` | `/his/pharmacy/purchase/*` | ⚠️ 路径不匹配 | 药品采购（旧路径） |
+| `pharmacy/supplier/index.ts` | `/his/pharmacy/supplier/*` | ⚠️ 路径不匹配 | 供应商管理（旧路径） |
+| `pharmacy/drug-return/index.ts` | `/his/pharmacy/drug-return/*` | ⚠️ 路径不匹配 | 退药管理（旧路径） |
+| `outpatient/dispense/index.ts` | `/his/op-pharmacy/*` | ❌ 缺失 | 门诊药房发药 |
+| `lab/labRequest/index.ts` | `/his/lab/request/*` | ⚠️ 路径不匹配 | 检验申请（旧路径） |
+| `lab/labItem/index.ts` | `/his/lab/item/*` | ❌ 缺失 | 检验项目字典 |
+| `lab/criticalValue/index.ts` | `/his/lab/critical-value/*` | ✅ **已实现** HisCriticalValueController | 危急值管理 |
+| `inpatient/nursing/index.ts` | `/his/nursing-assessment/*` | ⚠️ 路径不匹配 | 护理评估（双重路径） |
+| `inpatient/nursing/index.ts` | `/his/handover/*` | ⚠️ 路径不匹配 | 护理交接班（旧路径） |
+| `inpatient/nursing/index.ts` | `/his/intake-output/*` | ❌ 缺失 | 入出量记录 |
+| `inpatient/nursing/index.ts` | `/his/vital-signs/*` | ⚠️ 路径不匹配 | 生命体征（旧路径） |
+| `inpatient/ward/index.ts` | `/his/ward/*` | ⚠️ 路径不匹配 | 病区管理（旧路径） |
+| `inpatient/bed/index.ts` | `/his/bed/available` | ⚠️ 接口名不同 | 空闲床位查询 |
+| `inpatient/bed/index.ts` | `/his/bed/overview` | ✅ **已实现** | 床位总览统计 |
+| `inpatient/bed/index.ts` | `/his/bed/transfer` | ✅ **已实现** | 转床功能 |
+| `inpatient/bed/index.ts` | `/his/bed/assign` | ⚠️ 接口名不同 | 分配床位 |
+| `outpatient/exam-request/index.ts` | `/his/exam-request/*` | ⚠️ 大部分匹配，record-result缺失 | 检查申请结果录入 |
+| `outpatient/exam-item/index.ts` | `/his/exam-item/*` | ⚠️ 启用/禁用缺失 | 检查项目字典 |
+| `outpatient/refund/index.ts` | `/his/refund/*` | ⚠️ 路径不匹配 | 门诊退费（旧路径） |
+| `nursing-assessment/index.ts` | `/his/nursing-assessment/*` | ⚠️ 部分接口缺失 | 护理评估管理 |
+| `nursing-record/index.ts` | `/his/nursing-record/*` | ⚠️ 审核/模板接口缺失 | 护理记录管理 |
+| `vital-sign/index.ts` | `/his/vital-sign/*` | ⚠️ 统计接口缺失 | 生命体征管理 |
 
 ---
 

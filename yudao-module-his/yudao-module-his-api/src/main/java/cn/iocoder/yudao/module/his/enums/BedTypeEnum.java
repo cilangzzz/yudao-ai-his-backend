@@ -34,4 +34,9 @@ public enum BedTypeEnum implements ArrayValuable<Integer> {
                 .findFirst()
                 .orElse(null);
     }
+
+    public static String getNameByCode(Integer value) {
+        BedTypeEnum e = valueOf(value);
+        return e != null ? e.getName() : null;
+    }
 }

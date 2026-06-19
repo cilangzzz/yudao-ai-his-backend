@@ -123,4 +123,24 @@ public interface HisBedService {
      * @return 床位
      */
     HisBedDO validateBedAvailable(Long id);
+
+    /**
+     * 获得床位总览统计
+     *
+     * @param wardId 病区ID（可选，为空则统计全部）
+     * @return 床位总览
+     */
+    cn.iocoder.yudao.module.his.controller.admin.bed.vo.HisBedOverviewRespVO getBedOverview(Long wardId);
+
+    /**
+     * 转床
+     *
+     * @param fromBedId  原床位ID
+     * @param toBedId    目标床位ID
+     * @param patientId  患者ID
+     * @param patientName 患者姓名
+     * @param admissionId 住院ID
+     * @param reason     转床原因
+     */
+    void transferBed(Long fromBedId, Long toBedId, Long patientId, String patientName, Long admissionId, String reason);
 }
